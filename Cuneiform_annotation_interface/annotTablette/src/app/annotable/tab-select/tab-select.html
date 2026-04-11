@@ -1,0 +1,44 @@
+<!-- Menu des tablettes à gauche -->
+<div>
+  <br>
+  <strong>Tablette</strong>
+  <div class="autocomplete">
+    <input 
+      type="text" 
+      placeholder="ID de tablette..." 
+      [(ngModel)]="searchId" 
+      (keydown.enter)="selectId(searchId)"
+      id="selectionId"
+    />
+  </div>
+  
+  <strong>{{ images.length ? "Images":"'"}}</strong>
+  <ul class="images">
+    @for(image of images; track image) {
+      <li 
+          [class.selected]="image === selectedImageValue"
+          (click)="selectImage(image)">
+        {{ image }}
+      </li>
+    }
+  </ul>
+
+
+<div class="menu-chargement" (clickOutside)="showSauvegardes=false">
+  <button class="boutton_chargement"
+    (click)="ouvertureChargement()">Charger une sauvegarde ▼</button>
+
+  @if(showSauvegardes){
+    <ul class="sauvegardes">
+      <button class="close-button" (click)="showSauvegardes=false">✖</button>
+      <strong>Sauvegardes enregistrées :</strong>
+      @for(s of sauvegardes; track s) {
+        <li>
+          <button (click)="chargerSauvegarde(s)">
+            🗂 tablette {{ s.id }} : <small>image {{ s.img }}</small>
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</div>

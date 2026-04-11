@@ -1,0 +1,10 @@
+{
+  "/api-archibab": {
+    "target": "https://archibab.fr",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api-archibab": ""
+    }
+  }
+}

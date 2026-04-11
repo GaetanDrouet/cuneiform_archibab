@@ -1,0 +1,228 @@
+<div class="conteneur" [style.height.px]="height-2">
+  <!-- selection de l'affichage -->
+  <div class="toolbar-lignes">
+    <div class="toolbar">
+      <button (click)="goTexte()" class="ref" title="voir le texte {{selectedId}}">{{ selectedRef }}</button>&nbsp;
+      <div>
+        <label>Afficher : 
+        <select class="mode" [(ngModel)]="modeAffichage" (ngModelChange)="onModeChange()" id="modeAffichage">
+          <option value="signe">Signe</option>
+          <option value="unicode">Unicode</option>
+          <option value="borger">Borger</option>
+          <option value="valeurphon">Valeur phonétique</option>
+        </select></label>
+        <label> .
+        <select class="mode" [(ngModel)]="modeAffichage2" (ngModelChange)="onMode2Change()" id="modeAffichage2">
+          <option value=""></option>
+          <option value="signe">Signe</option>
+          <option value="unicode">Unicode</option>
+          <option value="borger">Borger</option>
+          <option value="valeurphon">Valeur phonétique</option>
+        </select></label>
+      </div>
+    </div>
+
+    <div class="lignes" [style.height.px]="height-44">
+      <!-- Liste des lignes -->
+      @for (ligne of lignes; track ligne.id_ligne) {
+        <div class="ligne">
+          <i class="indiqligne">{{ ligne?.clone ? "clone" : ligne.enveloppe ? 'Enveloppe ':" "+ligne.emplacement+" "+ligne.colonne+" "+ligne.colonne_prime+" "+ligne.ligne+" "+ligne.ligne_prime }} : </i> 
+          @for (signe of ligne.transliteration; track signe.id_signe){
+            <span class="signe-wrapper">{{ this.lienSigne(signe)
+              }}</span> @if (!signe.nonsigne){<span 
+                [id]="signe.id_signe"
+                class="signe" 
+                [class.selected]="signe === selectedSigne"
+                [class.survoled]="signe === survoledSigne"
+                [class.casse]="signe.casse"
+                [class.determinatif]="signe.determinatif"
+                [class.cursor]="signe === cursorSigne"
+                [class.attributed]="signe?.attributed"
+                [class.clone]="signe?.clonesigne || signe?.cloneligne"
+                [class.achoisir]="signe.signe_Borger.includes('?')"
+                (click)="selectSigne(signe)"
+                  >{{ this.baliseDebutSigne(signe) 
+                  }}<span
+                    [class.unicode]="modeAffichage === 'unicode'"
+                    >{{ this.formatSigne(signe,modeAffichage) 
+                  }}</span>{{ modeAffichage2===""? "":"."}}<span
+                    [class.unicode]="modeAffichage2 === 'unicode'"
+                    class="signebonus"
+                    >{{ this.formatSigne(signe,modeAffichage2) 
+                  }}</span>{{ this.baliseFinSigne(signe) 
+                  }}</span>}@else {/}
+                  <span>
+            </span>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Détails du signe sélectionné -->
+  <ul class="details">
+    @if(selectedSigne){
+      <span class="btn-annuler" (click)="resetSigne(selectedSigne) "title="réinitialiser le signe">⟳</span>
+      <li>
+        @if(!signesChoices){<strong>Signe :</strong> {{ selectedSigne.signe }} / <span class="unicode">{{ selectedSigne.signe_Unicode }}</span> / {{ selectedSigne.signe_Borger }}}
+        @if(signesChoices){
+          <strong> Quel signe ?</strong> <br>
+          @for (choice of signesChoices; track $index){
+            <span>
+              <button (click)="choisirSigne(choice)">
+                {{ choice.signe }} / <span class="unicode">{{ choice.signe_Unicode }}</span> / {{ choice.signe_Borger }}
+              </button>
+              @if($index < signesChoices.length - 1){ ou }
+            </span>
+          }
+        }
+      </li>
+      <li><strong>Valeur phonétique :</strong> {{ selectedSigne.valeurphon }}</li>
+      <li><strong>Mot :</strong> {{ selectedSigne.mot }}</li>
+      <li class="buttons">  
+        <button class="small" 
+        [class.activated]="selectedSigne.semicasse"
+        [class.active]="selectedSigne.semicasse" (click)="selectedSigne.semicasse = !selectedSigne.semicasse; updateValue(selectedSigne)">
+        ⸢semicassé⸣
+        </button>
+        <button class="small" 
+        [class.activated]="selectedSigne.enmarge"
+        [class.active]="selectedSigne.enmarge" (click)="selectedSigne.enmarge = !selectedSigne.enmarge; updateValue(selectedSigne)">
+          ⟨sur bord⟩
+        </button>
+        <button class="small" 
+        [class.activated]="selectedSigne.efface"
+        [class.active]="selectedSigne.efface" (click)="selectedSigne.efface = !selectedSigne.efface; updateValue(selectedSigne)">
+          {{ '{effacé}' }}
+        </button>
+      </li>
+      <li class="buttons">  
+        <button class="small" 
+        [class.activated]="selectedSigne.bizarre"
+        [class.active]="selectedSigne.bizarre" (click)="selectedSigne.bizarre = !selectedSigne.bizarre; updateValue(selectedSigne)">
+          {{ '⧛graphie non-standard⧚' }}
+        </button>
+      </li>
+      <!--<li><strong> Determinatif () :</strong> <input type="checkbox" [checked]="selectedSigne?.determinatif" disabled /></li>-->
+      <!--<li><strong> Cassé [] :</strong> <input type="checkbox" [checked]="selectedSigne?.casse" disabled /></li>-->
+      <!--<li><strong> Semicassé ⸢⸣ :</strong> <input type="checkbox" [(ngModel)]="selectedSigne.semicasse" (ngModelChange)="sauvegarderLocal()" /></li>-->
+      <!--<li><strong> Sur bord ⟨⟩ :</strong> <input type="checkbox" [(ngModel)]="selectedSigne.enmarge" (ngModelChange)="sauvegarderLocal()" /></li>-->
+      <!--<li><strong> Effacé {{ '{}' }} :</strong> <input type="checkbox" [(ngModel)]="selectedSigne.efface" (ngModelChange)="sauvegarderLocal()" /></li>-->
+      <!--<li><strong> Ajouté ≤≥ :</strong> <input type="checkbox" [checked]="selectedSigne?.ajoute" disabled /></li>-->
+      <!--<li><strong> À ignorer ≤≤≥≥ :</strong> <input type="checkbox" [checked]="selectedSigne?.supprime" disabled /></li>-->
+      <!--<li><strong> Corrigé (!) :</strong> <input type="checkbox" [checked]="selectedSigne?.corrige" disabled /></li>-->
+      <!--<li><strong> Douteux (?) :</strong> <input type="checkbox" [checked]="selectedSigne?.douteux" disabled /></li>-->
+      <!--<li><strong> Erroné (sic) :</strong> <input type="checkbox" [checked]="selectedSigne?.errone" disabled /></li>-->
+      <li class="buttons">
+        <button
+          [disabled]="selectedSigne.clonedsigne || selectedSigne.ligatureforce"
+          [class.clone]="selectedSigne.clonesigne"
+          [class.cloned]="selectedSigne.clonedsigne"
+          (click)="selectedSigne.clonesigne ? supprimerSigneClone() : cloneSigne(this.selectedSigne)"
+        >
+          {{ selectedSigne.clonedsigne ? "Signe déjà doublé" : (selectedSigne.clonesigne ? 'Supprimer le doublon' : 'Doubler le signe') }}
+        </button>
+        <button
+          [disabled]="selectedSigne.clonedligne"
+          [class.clone]="selectedSigne.cloneligne"
+          [class.cloned]="selectedSigne.clonedligne"
+          (click)="selectedSigne.cloneligne ? supprimerLigneClone() : cloneLigne(this.selectedSigne)"
+        >
+          {{ selectedSigne.clonedligne ? "Ligne déjà doublée" : (selectedSigne.cloneligne ? 'Supprimer la ligne' : 'Doubler la ligne') }}
+        </button>
+      </li>
+      <li class="buttons">
+        <button
+          [disabled]="!selectedSigne.signe_Borger.includes('₊')"
+          (click)=deligaturer(selectedSigne)
+        >
+          Déligaturer
+        </button>
+        <button
+          [disabled]="!selectedSigne.dansmot ||  
+                      signeprecedent(selectedSigne).deligaturede!=selectedSigne.deligaturede || 
+                      selectedSigne.attributed || 
+                      signeprecedent(selectedSigne).clonesigne!=selectedSigne.clonesigne || 
+                      signeprecedent(selectedSigne).clonedsigne!=selectedSigne.clonedsigne"
+          (click)=ligature(selectedSigne)
+        >
+          Ligaturer au signe précédent
+        </button>
+      </li>
+      <li style="position: relative; display: flex;">
+          <button
+          (click)="insertSpecialSignShow=!insertSpecialSignShow">{{ insertSpecialSignShow ? '×':'Š'}}</button><input
+            #inputSigneCorrection
+            class="correction"
+            type="text"
+            placeholder="Corriger le signe..."
+            [(ngModel)]="queryCorrection"
+            (input)="rechercherSignesCorrection()"
+            id="CorrectionSigne"
+          />
+        <!-- Overlay des signes spéciaux -->
+        @if(insertSpecialSignShow){
+          <div class="special-signs-overlay" [style.height.px]="height-2">
+            <div class="special-signs-overlay_table">
+              <div class="special-signs-overlay_col">
+                <div class="special-signs-overlay_row">
+                  <button type="button"(click)="insertSpecialSign('Š', inputSigneCorrection)">Š</button>
+                  <button type="button"(click)="insertSpecialSign('Ṣ', inputSigneCorrection)">Ṣ</button>
+                  <button type="button"(click)="insertSpecialSign('Ṭ', inputSigneCorrection)">Ṭ</button>
+                </div>
+                <div class="special-signs-overlay_row">
+                  <button type="button"(click)="insertSpecialSign('Á', inputSigneCorrection)">Á</button>
+                  <button type="button"(click)="insertSpecialSign('É', inputSigneCorrection)">É</button>
+                  <button type="button"(click)="insertSpecialSign('Í', inputSigneCorrection)">Í</button>
+                  <button type="button"(click)="insertSpecialSign('Ú', inputSigneCorrection)">Ú</button>
+                </div>
+                <div class="special-signs-overlay_row">
+                  <button type="button"(click)="insertSpecialSign('À', inputSigneCorrection)">À</button>
+                  <button type="button"(click)="insertSpecialSign('È', inputSigneCorrection)">È</button>
+                  <button type="button"(click)="insertSpecialSign('Ì', inputSigneCorrection)">Ì</button>
+                  <button type="button"(click)="insertSpecialSign('Ù', inputSigneCorrection)">Ù</button>
+                </div>
+                <div class="special-signs-overlay_row">
+                  <button type="button"(click)="insertSpecialSign('’', inputSigneCorrection)">’</button>
+                </div>
+              </div>
+              <div class="special-signs-overlay_col">
+                <div class="special-signs-overlay_row">
+                  <button type="button"(click)="insertSpecialSign('₁', inputSigneCorrection)">₁</button>
+                  <button type="button"(click)="insertSpecialSign('₂', inputSigneCorrection)">₂</button>
+                  <button type="button"(click)="insertSpecialSign('₃', inputSigneCorrection)">₃</button>
+                </div>
+                <div class="special-signs-overlay_row">
+                  <button type="button"(click)="insertSpecialSign('₄', inputSigneCorrection)">₄</button>
+                  <button type="button"(click)="insertSpecialSign('₅', inputSigneCorrection)">₅</button>
+                  <button type="button"(click)="insertSpecialSign('₆', inputSigneCorrection)">₆</button>
+                </div>
+                <div class="special-signs-overlay_row">
+                  <button type="button"(click)="insertSpecialSign('₇', inputSigneCorrection)">₇</button>
+                  <button type="button"(click)="insertSpecialSign('₈', inputSigneCorrection)">₈</button>
+                  <button type="button"(click)="insertSpecialSign('₉', inputSigneCorrection)">₉</button>
+                </div>
+                <div class="special-signs-overlay_row">
+                  <button type="button"(click)="insertSpecialSign('₀', inputSigneCorrection)">₀</button>
+                </div>
+              </div>
+            </div>
+            
+            <ul class="suggestions">
+              @for (s of suggestionsCorrection; track s) {
+                <li
+                  (click)="selectionnerSigneCorrection(s)">
+                  <strong>{{ s.signe }}</strong> / 
+                  <span class="suggestionssignesdetails"><span class="unicode">{{ s.signe_Unicode }}</span> /
+                  {{ s.signe_Borger }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </li>
+    }
+
+  </ul>
+  
+</div>

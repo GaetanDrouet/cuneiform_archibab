@@ -1,0 +1,83 @@
+/* Menu à gauche */
+.menu {
+  position: relative;
+  width: 130px;
+  border-right: 1px solid hsla(0, 0%, 50%, 0.32);
+  padding-right: 0.5rem;
+  background-color: hsla(0, 0%, 50%, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.autocomplete input {
+  width: 100%;
+  padding: 6px 8px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+
+.images {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex:1;
+  height: 160px;
+  overflow-y: auto;
+}
+
+.images li {
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+}
+.images li:hover {
+  background-color: hsla(0, 0%, 50%, 0.1);
+}
+.images li.selected {
+  background-color: hsla(0, 0%, 50%, 0.2);
+  font-weight: bold;
+}
+
+.menu-chargement {
+  position: relative;
+  display: inline-block;
+}
+.boutton_chargement {
+  cursor: pointer;
+  border: 1px solid hsla(0, 0%, 50%, 0.62);
+  font-size: 1em;
+  font-weight: bold;
+}
+.boutton_chargement:hover{
+  background-color: hsla(0, 0%, 50%, 0.2);
+}
+.sauvegardes {  
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: hsl(0, 0%, 50%);
+  border: 1px solid ;
+  z-index: 10000;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sauvegardes .close-button {
+  position: absolute;
+  text-align: right;
+  padding: 0.2rem 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+}
+.sauvegardes button {
+  display: block;
+  width: 100%;
+  margin: 0.2rem 0;
+}

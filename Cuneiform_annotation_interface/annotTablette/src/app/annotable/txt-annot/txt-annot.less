@@ -1,0 +1,255 @@
+.conteneur {
+  margin-left: 1rem;
+  display: flex;
+  gap: 1rem;
+  overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 2px;
+}
+
+.toolbar-lignes {
+  flex: 1;
+}
+.ref {
+  font-weight: bold;
+  flex: 1;
+}
+.toolbar {
+  position: sticky;
+  display: flex;
+  right:25%;
+  margin-bottom: 0.5em;
+}
+
+/* Lignes au centre */
+#id-select {
+  font-size: 1.5rem;     
+  padding: 0.3rem 0.5rem; 
+  min-width: 100px;       
+  font-weight: bold;
+}
+
+.lignes {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.ligne {
+  margin-bottom: 0.1rem;
+}
+
+.indiqligne {
+  color: hsla(0, 0%, 50%, 1);
+  text-transform: capitalize;
+}
+
+.signe {
+  display: inline-block;
+  margin-right: 0rem;
+  padding: 0.2rem 0rem;
+  cursor: pointer;
+}
+.signebonus {
+  vertical-align: middle;
+  font-size: 0.75em;
+}
+
+@font-face {
+  font-family: OBFreie-L;
+  src: url('/assets/fonts/OBFreie-Light.ttf');
+}
+@font-face {
+  font-family: OBFreie-R;
+  src: url('/assets/fonts/OBFreie-Regular.ttf');
+}
+@font-face {
+  font-family: OBFreie-B;
+  src: url('/assets/fonts/OBFreie-Bold.ttf');
+}
+.unicode {
+  font-family: "OBFreie-R", serif;
+  font-size: 150%;
+}
+.signe.casse {
+  color: hsla(0, 0%, 50%, 1);
+}
+.signe.cursor {
+  border: 1px dashed hsl(350, 100%, 50%);
+  border-radius: 10px;
+  margin: -1px;
+}
+.signe.attributed {
+  color: hsl(350, 100%, 50%);
+}
+.signe.determinatif {
+  vertical-align: super;
+  font-size: 0.75em;
+}
+.signe.clone {
+  font-size: 0.9em;
+  font-style: italic;
+}
+.signe.achoisir {
+  font-size: 0.9em;
+  text-decoration: underline red;
+}
+
+.signe:hover {
+  background-color: hsla(0, 0%, 50%, 0.25);
+}
+.signe.selected {
+  background-color: hsla(0, 0%, 50%, 0.40);
+}
+.signe.survoled {
+  background-color: hsla(45, 100%, 50%, 0.32);
+}
+.signe.survoled.selected {
+  background-color: hsla(45, 50%, 50%, 0.60);
+}
+
+/* Détails à droite */
+.details {
+  width: 250px;
+  position: sticky;
+  top: 1rem;
+  align-self: flex-start;
+  margin-left: 20px;
+  overflow-y: auto;
+  
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  height: 100%;
+  border-left: 1px solid hsla(0, 0%, 50%, 0.32);
+  padding-left: 1rem;
+  background-color: hsla(0, 0%, 50%, 0.05);
+}
+.btn-annuler {
+  position: absolute;
+  cursor: pointer;
+  top:0;
+  right: 0;
+  font-size: xx-large;
+  color:red;
+}
+.details li {
+  padding: 0.2rem 0.5rem;
+}
+
+li.buttons {
+  display: flex;
+  gap:10px;
+}
+button.small {
+  border: 1px solid hsla(0, 0%, 50%, 0.32);
+  padding: 3px 3px;
+  border-radius: 4px;
+  font-size: 0.75em;
+  flex: 1
+}
+button.activated {
+  background-color: hsla(350, 100%, 50%, 0.5); 
+  color: white;
+}
+button.activated:hover {
+  background-color: hsla(350, 40%, 50%, 0.5); 
+}
+
+button {
+  border: 1px solid hsla(0, 0%, 50%, 0.32);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+button.clone {
+  background-color: hsla(0, 50%, 50%, 0.2);
+}
+button.clone:hover {
+  background-color: hsla(0, 50%, 50%, 0.32);
+}
+button:disabled {
+  color: hsla(0, 0, 50%, 1);
+  cursor: not-allowed;
+}
+button:disabled:hover {
+  background-color: hsla(0, 0%, 50%, 0.0);
+}
+button:hover{
+  background-color: hsla(0, 0%, 50%, 0.32);
+}
+
+input.correction::placeholder {
+  font-weight: bold;
+}
+.special-signs-overlay {
+  position: fixed;
+  right: 252px;
+  top:0;
+  background-color: hsl(0, 0%, 50%);
+  border: 1px solid hsla(0, 0%, 50%, 0.32);
+  padding: 5px;
+  border-radius: 4px;
+  z-index: 1000;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.special-signs-overlay_table {
+  display:flex; 
+  gap:10px;
+}
+.special-signs-overlay_col {
+  display:flex; 
+  flex-direction: column;
+  gap:2px;
+}
+.special-signs-overlay_row {
+  display:flex; 
+  justify-content: center;
+}
+.special-signs-overlay button {
+  font-size: 0.8rem;
+  margin: 2px 0;
+  padding: 2px 6px;
+  cursor: pointer;
+  background-color: hsl(45, 100%, 50%);
+  border: 1px solid hsla(0, 0%, 50%, 0.62);
+  border-radius: 3px;
+  margin-right: 2px;
+}
+.special-signs-overlay button:hover {
+  background-color: hsla(45, 100%, 50%, 0.8);
+}
+.special-signs-overlay_row button:last-child {
+  margin-right: 0;
+}
+
+.suggestions {
+  background-color: hsl(45, 100%, 50%);
+  border: 1px solid hsla(0, 0%, 50%, 0.32);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex: 1;
+  overflow-y: auto;   
+  z-index: 1000;  
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.suggestions li {
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background-color: hsla(0, 0%, 50%, 0.32);
+}
+
+.suggestionssignesdetails {
+  margin-left: 8px;
+  color: hsla(0, 0%, 50%, 1);
+}
+

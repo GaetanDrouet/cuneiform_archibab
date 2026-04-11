@@ -1,0 +1,2114 @@
+{
+  "001": {
+    "name": "AŠ",
+    "unicode": "𒀸"
+  },
+  "002": {
+    "name": "AŠ-AŠ",
+    "unicode": "𒐀"
+  },
+  "003": {
+    "name": "HAL",
+    "unicode": "𒄬"
+  },
+  "004": {
+    "name": "EŠ₆",
+    "unicode": "𒐁"
+  },
+  "005": {
+    "name": "BAL",
+    "unicode": "𒁄"
+  },
+  "006": {
+    "name": "GÍR",
+    "unicode": "𒄈"
+  },
+  "007": {
+    "name": "GÍRgunû",
+    "unicode": "𒄉"
+  },
+  "008": {
+    "name": "BÚR",
+    "unicode": "𒁔"
+  },
+  "009": {
+    "name": "TAR",
+    "unicode": "𒋻"
+  },
+  "010": {
+    "name": "AN",
+    "unicode": "𒀭"
+  },
+  "010₊164": {
+    "name": "AN-EN",
+    "unicode": "𒀭𒂗"
+  },
+  "011": {
+    "name": "AŠ-ŠUR",
+    "unicode": "𒀸𒋩"
+  },
+  "012": {
+    "name": "MUG",
+    "unicode": "𒈮"
+  },
+  "013": {
+    "name": "ZADIM",
+    "unicode": "𒈯"
+  },
+  "014": {
+    "name": "BA",
+    "unicode": "𒁀"
+  },
+  "015": {
+    "name": "ZU",
+    "unicode": "𒍪"
+  },
+  "016": {
+    "name": "SU",
+    "unicode": "𒋢"
+  },
+  "017": {
+    "name": "ŠEN",
+    "unicode": "𒊿"
+  },
+  "018": {
+    "name": "ARAD",
+    "unicode": "𒀴"
+  },
+  "019": {
+    "name": "ÁRAD",
+    "unicode": "𒀵"
+  },
+  "020": {
+    "name": "ITI",
+    "unicode": "𒌗"
+  },
+  "022": {
+    "name": "ŠUBUR",
+    "unicode": "𒋚"
+  },
+  "023": {
+    "name": "ŠAH",
+    "unicode": "𒋚"
+  },
+  "024": {
+    "name": "KA",
+    "unicode": "𒅗"
+  },
+  "026": {
+    "name": "TU₆",
+    "unicode": "𒅲"
+  },
+  "029": {
+    "name": "UŠ₁₁",
+    "unicode": "𒅜"
+  },
+  "030": {
+    "name": "KAxBAR",
+    "unicode": "𒅞"
+  },
+  "031": {
+    "name": "NUNDUM",
+    "unicode": "𒅻"
+  },
+  "032": {
+    "name": "SU₆",
+    "unicode": "𒅾"
+  },
+  "033": {
+    "name": "PÙ",
+    "unicode": "𒅤"
+  },
+  "049": {
+    "name": "ŠÙDU",
+    "unicode": "𒆃"
+  },
+  "054": {
+    "name": "BÚN",
+    "unicode": "𒅮"
+  },
+  "061": {
+    "name": "EME",
+    "unicode": "𒅴"
+  },
+  "062": {
+    "name": "KAxŠÈ",
+    "unicode": "𒅡"
+  },
+  "064": {
+    "name": "NAG",
+    "unicode": "𒅘"
+  },
+  "065": {
+    "name": "GU₇",
+    "unicode": "𒅥"
+  },
+  "071": {
+    "name": "URU",
+    "unicode": "𒌷"
+  },
+  "073": {
+    "name": "UKKIN",
+    "unicode": "𒌺"
+  },
+  "074": {
+    "name": "URUxKÁR",
+    "unicode": "𒌾"
+  },
+  "075": {
+    "name": "BANŠUR",
+    "unicode": "𒍎"
+  },
+  "076": {
+    "name": "ŠÀKIR",
+    "unicode": "𒌼"
+  },
+  "077": {
+    "name": "ÚRU",
+    "unicode": "𒍍"
+  },
+  "079": {
+    "name": "ASARI",
+    "unicode": "𒍂"
+  },
+  "080": {
+    "name": "GIŠGAL",
+    "unicode": "𒍇"
+  },
+  "083": {
+    "name": "ÈRIM",
+    "unicode": "𒌿"
+  },
+  "084": {
+    "name": "URUxGU",
+    "unicode": "𒍀"
+  },
+  "085": {
+    "name": "LI",
+    "unicode": "𒇷"
+  },
+  "086": {
+    "name": "TU",
+    "unicode": "𒌅"
+  },
+  "087": {
+    "name": "KU₄",
+    "unicode": "𒆭"
+  },
+  "088": {
+    "name": "GUR₈",
+    "unicode": "𒋽"
+  },
+  "089": {
+    "name": "LA",
+    "unicode": "𒆷"
+  },
+  "090": {
+    "name": "APIN",
+    "unicode": "𒀳"
+  },
+  "091": {
+    "name": "MAH",
+    "unicode": "𒈤"
+  },
+  "092": {
+    "name": "PAB",
+    "unicode": "𒉽"
+  },
+  "093": {
+    "name": "PÚŠ",
+    "unicode": "𒉽𒄬"
+  },
+  "094": {
+    "name": "BÙLUG",
+    "unicode": "𒉽𒉽"
+  },
+  "097": {
+    "name": "GÀM",
+    "unicode": "𒆛"
+  },
+  "098": {
+    "name": "MU",
+    "unicode": "𒈬"
+  },
+  "099": {
+    "name": "SÌLA",
+    "unicode": "𒋡"
+  },
+  "102": {
+    "name": "NÚMUN",
+    "unicode": "𒍤𒆸"
+  },
+  "105": {
+    "name": "GIL",
+    "unicode": "𒄃"
+  },
+  "106": {
+    "name": "KÍD",
+    "unicode": "𒋺"
+  },
+  "108": {
+    "name": "KÁD",
+    "unicode": "𒆐"
+  },
+  "109": {
+    "name": "KÀD",
+    "unicode": "𒆑"
+  },
+  "110": {
+    "name": "NA",
+    "unicode": "𒈾"
+  },
+  "111": {
+    "name": "RU",
+    "unicode": "𒊒"
+  },
+  "112": {
+    "name": "NU",
+    "unicode": "𒉡"
+  },
+  "113": {
+    "name": "BAD",
+    "unicode": "𒁁"
+  },
+  "114": {
+    "name": "ÈŠE",
+    "unicode": "𒌀"
+  },
+  "115": {
+    "name": "ŠIR",
+    "unicode": "𒉢"
+  },
+  "117": {
+    "name": "NUMUN",
+    "unicode": "𒆰"
+  },
+  "118": {
+    "name": "TI",
+    "unicode": "𒋾"
+  },
+  "119": {
+    "name": "DIN",
+    "unicode": "𒁷"
+  },
+  "120": {
+    "name": "MAŠ",
+    "unicode": "𒈦"
+  },
+  "121": {
+    "name": "BAR",
+    "unicode": "𒁇"
+  },
+  "122": {
+    "name": "BÁN",
+    "unicode": "𒑏"
+  },
+  "124": {
+    "name": "IDIGNA",
+    "unicode": "𒈦𒄘𒃼"
+  },
+  "125": {
+    "name": "GÍDIM",
+    "unicode": "𒈦𒌋"
+  },
+  "127": {
+    "name": "AG",
+    "unicode": "𒀝"
+  },
+  "129": {
+    "name": "MÈ",
+    "unicode": "𒀞"
+  },
+  "130": {
+    "name": "MÁŠ",
+    "unicode": "𒈧"
+  },
+  "131": {
+    "name": "KUN",
+    "unicode": "𒆲"
+  },
+  "132": {
+    "name": "HU",
+    "unicode": "𒄷"
+  },
+  "133": {
+    "name": "U₅",
+    "unicode": "𒄷𒋛"
+  },
+  "134": {
+    "name": "NAM",
+    "unicode": "𒉆"
+  },
+  "135": {
+    "name": "BURU₅",
+    "unicode": "𒉅"
+  },
+  "136": {
+    "name": "IG",
+    "unicode": "𒅅"
+  },
+  "137": {
+    "name": "MUD",
+    "unicode": "𒄷𒄭"
+  },
+  "138": {
+    "name": "SA₄",
+    "unicode": "𒄷𒈿"
+  },
+  "139": {
+    "name": "ŠÌTA",
+    "unicode": "𒋥"
+  },
+  "140": {
+    "name": "ZI",
+    "unicode": "𒍣"
+  },
+  "141": {
+    "name": "GI",
+    "unicode": "𒄀"
+  },
+  "142": {
+    "name": "RI",
+    "unicode": "𒊑"
+  },
+  "143": {
+    "name": "NUN",
+    "unicode": "𒉣"
+  },
+  "145": {
+    "name": "TÙR",
+    "unicode": "𒉣𒇬"
+  },
+  "147": {
+    "name": "ŠILAM",
+    "unicode": "𒉧"
+  },
+  "148": {
+    "name": "KAB",
+    "unicode": "𒆏"
+  },
+  "149": {
+    "name": "HÚB",
+    "unicode": "𒄸"
+  },
+  "150": {
+    "name": "HUB",
+    "unicode": "𒄽"
+  },
+  "151": {
+    "name": "SUR",
+    "unicode": "𒋩"
+  },
+  "152": {
+    "name": "MÚŠ",
+    "unicode": "𒈽"
+  },
+  "153": {
+    "name": "MÙŠ",
+    "unicode": "𒈹"
+  },
+  "155": {
+    "name": "SED",
+    "unicode": "𒈻"
+  },
+  "157": {
+    "name": "GAD",
+    "unicode": "𒃰"
+  },
+  "159": {
+    "name": "AKKIL",
+    "unicode": "𒃰𒋺𒋛"
+  },
+  "160": {
+    "name": "UMBIN",
+    "unicode": "𒌢"
+  },
+  "162": {
+    "name": "ŠINIG",
+    "unicode": "𒋒"
+  },
+  "163": {
+    "name": "KINDA",
+    "unicode": "𒃱"
+  },
+  "164": {
+    "name": "EN",
+    "unicode": "𒂗"
+  },
+  "165": {
+    "name": "BURU₁₄",
+    "unicode": "𒂘"
+  },
+  "166": {
+    "name": "DÀR",
+    "unicode": "𒁰"
+  },
+  "167": {
+    "name": "DIM",
+    "unicode": "𒁴"
+  },
+  "168": {
+    "name": "MUN",
+    "unicode": "𒁵"
+  },
+  "169": {
+    "name": "BULUG",
+    "unicode": "𒁑"
+  },
+  "170": {
+    "name": "LÀL",
+    "unicode": "𒋭"
+  },
+  "171": {
+    "name": "KU₇",
+    "unicode": "𒆯"
+  },
+  "172": {
+    "name": "SA",
+    "unicode": "𒊓"
+  },
+  "173": {
+    "name": "AŠGAB",
+    "unicode": "𒀿"
+  },
+  "174": {
+    "name": "GÁN",
+    "unicode": "𒃷"
+  },
+  "175": {
+    "name": "KÁR",
+    "unicode": "𒃸"
+  },
+  "176": {
+    "name": "GÚ",
+    "unicode": "𒄘"
+  },
+  "177": {
+    "name": "USAN",
+    "unicode": "𒄘𒉣"
+  },
+  "178": {
+    "name": "DUR",
+    "unicode": "𒄙"
+  },
+  "179": {
+    "name": "GUN",
+    "unicode": "𒄘𒌦"
+  },
+  "180": {
+    "name": "GUR",
+    "unicode": "𒄥"
+  },
+  "181": {
+    "name": "SI",
+    "unicode": "𒋛"
+  },
+  "182": {
+    "name": "SU₄",
+    "unicode": "𒋜"
+  },
+  "183": {
+    "name": "DAR",
+    "unicode": "𒁯"
+  },
+  "184": {
+    "name": "SAG",
+    "unicode": "𒊕"
+  },
+  "191": {
+    "name": "DÌLIB",
+    "unicode": "𒊠"
+  },
+  "201": {
+    "name": "MÁ",
+    "unicode": "𒈣"
+  },
+  "202": {
+    "name": "DIMGUL",
+    "unicode": "𒈣𒈮"
+  },
+  "203": {
+    "name": "ÙZ",
+    "unicode": "𒍚"
+  },
+  "205": {
+    "name": "SUR₉",
+    "unicode": "𒋪"
+  },
+  "207": {
+    "name": "DIR",
+    "unicode": "𒋛𒀀"
+  },
+  "209": {
+    "name": "TAB",
+    "unicode": "𒋰"
+  },
+  "210": {
+    "name": "EŠ₂₁",
+    "unicode": "𒐻"
+  },
+  "212": {
+    "name": "GEŠTIN",
+    "unicode": "𒃾"
+  },
+  "215": {
+    "name": "LÍMMU",
+    "unicode": "𒇹"
+  },
+  "216": {
+    "name": "IA₇",
+    "unicode": "𒐃"
+  },
+  "217": {
+    "name": "AŠ₄",
+    "unicode": "𒐄"
+  },
+  "218": {
+    "name": "ÍMIN",
+    "unicode": "𒐅"
+  },
+  "219": {
+    "name": "ÚSSU",
+    "unicode": "𒐆"
+  },
+  "220": {
+    "name": "ÍLIMMU",
+    "unicode": "𒐇"
+  },
+  "221": {
+    "name": "TAG",
+    "unicode": "𒋳"
+  },
+  "222": {
+    "name": "KÁ",
+    "unicode": "𒆍"
+  },
+  "223": {
+    "name": "AB",
+    "unicode": "𒀊"
+  },
+  "228": {
+    "name": "URUGAL",
+    "unicode": "𒀍"
+  },
+  "230": {
+    "name": "URUDU",
+    "unicode": "𒍏"
+  },
+  "232": {
+    "name": "UNUG",
+    "unicode": "𒀔"
+  },
+  "236": {
+    "name": "NINA",
+    "unicode": "𒀏"
+  },
+  "238": {
+    "name": "UM",
+    "unicode": "𒌝"
+  },
+  "242": {
+    "name": "DUB",
+    "unicode": "𒁾"
+  },
+  "246": {
+    "name": "NAB",
+    "unicode": "𒀮"
+  },
+  "247": {
+    "name": "MUL",
+    "unicode": "𒀯"
+  },
+  "248": {
+    "name": "TA",
+    "unicode": "𒋫"
+  },
+  "252": {
+    "name": "I",
+    "unicode": "𒄿"
+  },
+  "253": {
+    "name": "GAN",
+    "unicode": "𒃶"
+  },
+  "254": {
+    "name": "KÁM",
+    "unicode": ""
+  },
+  "255": {
+    "name": "TUR",
+    "unicode": "𒌉"
+  },
+  "258": {
+    "name": "AD",
+    "unicode": "𒀜"
+  },
+  "259": {
+    "name": "ZÍ",
+    "unicode": "𒍢"
+  },
+  "260": {
+    "name": "IA",
+    "unicode": "𒅀"
+  },
+  "261": {
+    "name": "IN",
+    "unicode": "𒅔"
+  },
+  "262": {
+    "name": "RAB",
+    "unicode": "𒊐"
+  },
+  "264": {
+    "name": "DÌM",
+    "unicode": "𒊐𒃵"
+  },
+  "266": {
+    "name": "LUGAL",
+    "unicode": "𒈗"
+  },
+  "270": {
+    "name": "HAŠHUR",
+    "unicode": "𒈢"
+  },
+  "271": {
+    "name": "EZEN",
+    "unicode": "𒂡"
+  },
+  "275": {
+    "name": "BÀD",
+    "unicode": "𒂦"
+  },
+  "277": {
+    "name": "UBARA",
+    "unicode": "𒂬"
+  },
+  "285": {
+    "name": "ASILAL",
+    "unicode": "𒂰"
+  },
+  "288": {
+    "name": "ÀSILAL",
+    "unicode": "𒂢"
+  },
+  "292": {
+    "name": "SUM",
+    "unicode": "𒋧"
+  },
+  "293": {
+    "name": "NAGA",
+    "unicode": "𒉀"
+  },
+  "296": {
+    "name": "UG",
+    "unicode": "𒊌"
+  },
+  "297": {
+    "name": "AZ",
+    "unicode": "𒊍"
+  },
+  "298": {
+    "name": "GAB",
+    "unicode": "𒂃"
+  },
+  "300": {
+    "name": "EDIN",
+    "unicode": "𒂔"
+  },
+  "301": {
+    "name": "TAH",
+    "unicode": "𒈭"
+  },
+  "302": {
+    "name": "KASKAL",
+    "unicode": "𒆜"
+  },
+  "304": {
+    "name": "ILLAT",
+    "unicode": "𒆜𒆳"
+  },
+  "309": {
+    "name": "AM",
+    "unicode": "𒄠"
+  },
+  "311": {
+    "name": "UZU",
+    "unicode": "𒍜"
+  },
+  "312": {
+    "name": "BÍL",
+    "unicode": "𒉋"
+  },
+  "313": {
+    "name": "NE",
+    "unicode": "𒉈"
+  },
+  "316": {
+    "name": "NÍNDA",
+    "unicode": "𒉒"
+  },
+  "320": {
+    "name": "ŠÀM",
+    "unicode": "𒉓"
+  },
+  "324": {
+    "name": "AZU",
+    "unicode": "𒉙"
+  },
+  "326": {
+    "name": "ÁG",
+    "unicode": "𒉘"
+  },
+  "333": {
+    "name": "ŠÁM",
+    "unicode": "𒉒x𒊺𒀀𒀭"
+  },
+  "336": {
+    "name": "ZIG",
+    "unicode": "𒍨"
+  },
+  "338": {
+    "name": "GALAM",
+    "unicode": "𒃴"
+  },
+  "339": {
+    "name": "KUM",
+    "unicode": "𒄣"
+  },
+  "340": {
+    "name": "GAZ",
+    "unicode": "𒄤"
+  },
+  "341": {
+    "name": "ÚR",
+    "unicode": "𒌫"
+  },
+  "348": {
+    "name": "IL",
+    "unicode": "𒅋"
+  },
+  "350": {
+    "name": "DU",
+    "unicode": "𒁺"
+  },
+  "350|350": {
+    "name": "LAH₄",
+    "unicode": "𒁻"
+  },
+  "351": {
+    "name": "SUHUŠ",
+    "unicode": "𒁼"
+  },
+  "352": {
+    "name": "KAŠ₄",
+    "unicode": "𒁽"
+  },
+  "353": {
+    "name": "ANŠE",
+    "unicode": "𒀲"
+  },
+  "354": {
+    "name": "TUM",
+    "unicode": "𒌈"
+  },
+  "356": {
+    "name": "EGIR",
+    "unicode": "𒂕"
+  },
+  "357": {
+    "name": "IŠ",
+    "unicode": "𒅖"
+  },
+  "358": {
+    "name": "BI",
+    "unicode": "𒁉"
+  },
+  "362": {
+    "name": "ŠIM",
+    "unicode": "𒋆"
+  },
+  "373": {
+    "name": "ŠIMxNÍG",
+    "unicode": "𒋋"
+  },
+  "376": {
+    "name": "GISAL",
+    "unicode": "𒄐"
+  },
+  "378": {
+    "name": "KIB",
+    "unicode": "𒄒"
+  },
+  "379": {
+    "name": "GAG",
+    "unicode": "𒆕"
+  },
+  "380": {
+    "name": "NI",
+    "unicode": "𒉌"
+  },
+  "381": {
+    "name": "UŠ",
+    "unicode": "𒍑"
+  },
+  "384": {
+    "name": "KÀŠ",
+    "unicode": "𒍒"
+  },
+  "385": {
+    "name": "NA₄",
+    "unicode": "𒉌𒌓"
+  },
+  "386": {
+    "name": "DÀG",
+    "unicode": "𒉌𒂟"
+  },
+  "387": {
+    "name": "GÁ",
+    "unicode": "𒂷"
+  },
+  "388": {
+    "name": "ŠITA",
+    "unicode": "𒋖"
+  },
+  "392": {
+    "name": "AMA",
+    "unicode": "𒂼"
+  },
+  "397": {
+    "name": "GANUN",
+    "unicode": "𒃠"
+  },
+  "408": {
+    "name": "SILA₄",
+    "unicode": "𒃢"
+  },
+  "411": {
+    "name": "ÙR",
+    "unicode": "𒃡"
+  },
+  "418": {
+    "name": "ÉSAG",
+    "unicode": "𒂒"
+  },
+  "424": {
+    "name": "ITIMA",
+    "unicode": "𒂐"
+  },
+  "427": {
+    "name": "MEN",
+    "unicode": "𒃞"
+  },
+  "431": {
+    "name": "GALGA",
+    "unicode": "𒂏"
+  },
+  "432": {
+    "name": "ARHUŠ",
+    "unicode": "𒂑"
+  },
+  "434": {
+    "name": "ŠÍTA",
+    "unicode": "𒋖𒄑"
+  },
+  "435": {
+    "name": "KISAL",
+    "unicode": "𒆦"
+  },
+  "437": {
+    "name": "IR",
+    "unicode": "𒅕"
+  },
+  "438": {
+    "name": "DAG",
+    "unicode": "𒁖"
+  },
+  "440": {
+    "name": "KIŠI₈",
+    "unicode": "𒁞"
+  },
+  "453": {
+    "name": "KIŠI₉",
+    "unicode": "𒁬"
+  },
+  "455": {
+    "name": "UBUR",
+    "unicode": "𒁛"
+  },
+  "459": {
+    "name": "ÚBUR",
+    "unicode": "𒁥"
+  },
+  "460": {
+    "name": "AMAŠ",
+    "unicode": "𒁦"
+  },
+  "464": {
+    "name": "PA",
+    "unicode": "𒉺"
+  },
+  "465": {
+    "name": "BANMIN",
+    "unicode": "𒑐"
+  },
+  "466": {
+    "name": "ŠAB",
+    "unicode": "𒉺𒅁"
+  },
+  "467": {
+    "name": "NUSKA",
+    "unicode": "𒉺𒌆"
+  },
+  "468": {
+    "name": "SIPA",
+    "unicode": "𒉺𒇻"
+  },
+  "469": {
+    "name": "GIŠ",
+    "unicode": "𒄑"
+  },
+  "470": {
+    "name": "GUR₁₇",
+    "unicode": "𒄕"
+  },
+  "471": {
+    "name": "GIŠxBAD",
+    "unicode": "𒄓"
+  },
+  "472": {
+    "name": "GU₄",
+    "unicode": "𒄞"
+  },
+  "474": {
+    "name": "AL",
+    "unicode": "𒀠"
+  },
+  "483": {
+    "name": "MAR",
+    "unicode": "𒈥"
+  },
+  "484": {
+    "name": "KID",
+    "unicode": "𒆤"
+  },
+  "485": {
+    "name": "ŠID",
+    "unicode": "𒋃"
+  },
+  "486": {
+    "name": "MES",
+    "unicode": "𒈩"
+  },
+  "489": {
+    "name": "ÚMBISAG",
+    "unicode": "𒋄"
+  },
+  "490": {
+    "name": "Ú",
+    "unicode": "𒌑"
+  },
+  "491": {
+    "name": "GA",
+    "unicode": "𒂵"
+  },
+  "493": {
+    "name": "ÍL",
+    "unicode": "𒅍"
+  },
+  "494": {
+    "name": "LUH",
+    "unicode": "𒈛"
+  },
+  "495": {
+    "name": "É",
+    "unicode": "𒂍"
+  },
+  "496": {
+    "name": "KAL",
+    "unicode": "𒆗"
+  },
+  "498": {
+    "name": "E",
+    "unicode": "𒂊"
+  },
+  "499": {
+    "name": "DUG",
+    "unicode": "𒁊"
+  },
+  "500": {
+    "name": "KALAM",
+    "unicode": "𒌦"
+  },
+  "501": {
+    "name": "UN",
+    "unicode": "𒌦"
+  },
+  "502": {
+    "name": "NIR",
+    "unicode": "𒉪"
+  },
+  "503": {
+    "name": "GURUN",
+    "unicode": "𒄧"
+  },
+  "504": {
+    "name": "UB",
+    "unicode": "𒌒"
+  },
+  "505": {
+    "name": "EŠ₁₆",
+    "unicode": "𒀼"
+  },
+  "506": {
+    "name": "LIMMU₄",
+    "unicode": "𒐽"
+  },
+  "507": {
+    "name": "GI₄",
+    "unicode": "𒄄"
+  },
+  "511": {
+    "name": "RA",
+    "unicode": "𒊏"
+  },
+  "512": {
+    "name": "DÙL",
+    "unicode": "𒊨"
+  },
+  "514": {
+    "name": "LÚ",
+    "unicode": "𒇽"
+  },
+  "535": {
+    "name": "ŠEŠ",
+    "unicode": "𒋀"
+  },
+  "536": {
+    "name": "AŠ₉",
+    "unicode": "𒑀"
+  },
+  "537": {
+    "name": "ÌMIN",
+    "unicode": "𒑁"
+  },
+  "538": {
+    "name": "ÙSSU",
+    "unicode": "𒑅"
+  },
+  "539": {
+    "name": "ÌLIMMU",
+    "unicode": "𒑇"
+  },
+  "540": {
+    "name": "ZAG",
+    "unicode": "𒍠"
+  },
+  "541": {
+    "name": "SAR",
+    "unicode": "𒊬"
+  },
+  "543": {
+    "name": "GÀR",
+    "unicode": "𒃼"
+  },
+  "544": {
+    "name": "LIL",
+    "unicode": "𒇸"
+  },
+  "545": {
+    "name": "MÚRU",
+    "unicode": "𒌘"
+  },
+  "546": {
+    "name": "SAG₅",
+    "unicode": "𒉠"
+  },
+  "547": {
+    "name": "DÉ",
+    "unicode": "𒌣"
+  },
+  "548": {
+    "name": "ÁŠ",
+    "unicode": "𒀾"
+  },
+  "549": {
+    "name": "BANEŠ",
+    "unicode": "𒑑"
+  },
+  "550": {
+    "name": "BANLIMMU",
+    "unicode": "𒑓"
+  },
+  "551": {
+    "name": "BANIA",
+    "unicode": "𒑕"
+  },
+  "552": {
+    "name": "MA",
+    "unicode": "𒈠"
+  },
+  "553": {
+    "name": "GAL",
+    "unicode": "𒃲"
+  },
+  "554": {
+    "name": "BÁRA",
+    "unicode": "𒁈"
+  },
+  "555": {
+    "name": "GÚG",
+    "unicode": "𒈖"
+  },
+  "556": {
+    "name": "MIR",
+    "unicode": "𒂆"
+  },
+  "557": {
+    "name": "DUN₄",
+    "unicode": "𒂈"
+  },
+  "558": {
+    "name": "GIR",
+    "unicode": "𒄫"
+  },
+  "559": {
+    "name": "BUR",
+    "unicode": "𒁓"
+  },
+  "560": {
+    "name": "Á",
+    "unicode": "𒀉"
+  },
+  "561": {
+    "name": "DA",
+    "unicode": "𒁕"
+  },
+  "562": {
+    "name": "GAŠAN",
+    "unicode": "𒃽"
+  },
+  "564": {
+    "name": "SIG₇",
+    "unicode": "𒅊"
+  },
+  "565": {
+    "name": "DÚB",
+    "unicode": "𒁆"
+  },
+  "566": {
+    "name": "ŠA",
+    "unicode": "𒊭"
+  },
+  "567": {
+    "name": "ŠU",
+    "unicode": "𒋗"
+  },
+  "567₊755": {
+    "name": "ŠUNIGIN₂",
+    "unicode": "𒋗𒆸"
+  },
+  "567₊804": {
+    "name": "ŠUNIGIN",
+    "unicode": "𒋗𒆸𒆸"
+  },
+  "568": {
+    "name": "KAD₄",
+    "unicode": "𒆒"
+  },
+  "569": {
+    "name": "KAD₅",
+    "unicode": "𒆓"
+  },
+  "570": {
+    "name": "LUL",
+    "unicode": "𒈜"
+  },
+  "571": {
+    "name": "SA₆",
+    "unicode": "𒊷"
+  },
+  "573": {
+    "name": "ALAM",
+    "unicode": "𒀩"
+  },
+  "574": {
+    "name": "URI",
+    "unicode": "𒌵"
+  },
+  "575": {
+    "name": "GE₂₃",
+    "unicode": "𒀹"
+  },
+  "576": {
+    "name": "GAM",
+    "unicode": "𒃵"
+  },
+  "577": {
+    "name": "ILIMMU₄",
+    "unicode": "𒑈"
+  },
+  "578": {
+    "name": "KUR",
+    "unicode": "𒆳"
+  },
+  "579": {
+    "name": "ŠE",
+    "unicode": "𒊺"
+  },
+  "580": {
+    "name": "BU",
+    "unicode": "𒁍"
+  },
+  "582": {
+    "name": "SIRSIR",
+    "unicode": "𒁎"
+  },
+  "583": {
+    "name": "UZ",
+    "unicode": "𒊻"
+  },
+  "584": {
+    "name": "SUD",
+    "unicode": "𒋤"
+  },
+  "585": {
+    "name": "MUŠ",
+    "unicode": "𒈲"
+  },
+  "586": {
+    "name": "RI₈",
+    "unicode": "𒈶"
+  },
+  "587": {
+    "name": "TIR",
+    "unicode": "𒌁"
+  },
+  "588": {
+    "name": "GÀRADIN",
+    "unicode": "𒊼"
+  },
+  "589": {
+    "name": "TE",
+    "unicode": "𒋼"
+  },
+  "590": {
+    "name": "KAR",
+    "unicode": "𒋼𒀀"
+  },
+  "591": {
+    "name": "LIŠ",
+    "unicode": "𒇺"
+  },
+  "594": {
+    "name": "1/4",
+    "unicode": "𒑢"
+  },
+  "595": {
+    "name": "KAM*",
+    "unicode": "𒄰"
+  },
+  "596": {
+    "name": "UD",
+    "unicode": "𒌓"
+  },
+  "598": {
+    "name": "PI",
+    "unicode": "𒉿"
+  },
+  "599": {
+    "name": "ŠÀ",
+    "unicode": "𒊮"
+  },
+  "608": {
+    "name": "PEŠ₄",
+    "unicode": "𒊯"
+  },
+  "610": {
+    "name": "UD-MUNUS-HÚB",
+    "unicode": "𒌓𒊩𒄸"
+  },
+  "611": {
+    "name": "ÚH",
+    "unicode": "𒌔"
+  },
+  "612": {
+    "name": "ERIM",
+    "unicode": "𒂟"
+  },
+  "613": {
+    "name": "PÍR",
+    "unicode": "𒂟"
+  },
+  "614": {
+    "name": "NUNUZ",
+    "unicode": "𒉭"
+  },
+  "616": {
+    "name": "LAHTAN",
+    "unicode": "𒉴"
+  },
+  "619": {
+    "name": "ÙSAN",
+    "unicode": "𒉮"
+  },
+  "628": {
+    "name": "ZIB",
+    "unicode": "𒍦"
+  },
+  "630": {
+    "name": "1/6",
+    "unicode": "𒑡"
+  },
+  "631": {
+    "name": "HI",
+    "unicode": "𒄭"
+  },
+  "631₊839": {
+    "name": "HÁ",
+    "unicode": "𒄭𒀀"
+  },
+  "632": {
+    "name": "ŠÁR",
+    "unicode": "𒊹"
+  },
+  "633": {
+    "name": "TÍ",
+    "unicode": "𒊹"
+  },
+  "634": {
+    "name": "SÙR",
+    "unicode": "𒄮"
+  },
+  "635": {
+    "name": "A’",
+    "unicode": "𒀪"
+  },
+  "636": {
+    "name": "AH",
+    "unicode": "𒄴"
+  },
+  "638": {
+    "name": "AH-ME",
+    "unicode": "𒄴𒈨"
+  },
+  "640": {
+    "name": "KAM",
+    "unicode": "𒄭𒁁"
+  },
+  "641": {
+    "name": "IM",
+    "unicode": "𒅎"
+  },
+  "643": {
+    "name": "BIR",
+    "unicode": "𒄵"
+  },
+  "644": {
+    "name": "HAR",
+    "unicode": "𒄯"
+  },
+  "645": {
+    "name": "HUŠ",
+    "unicode": "𒄭𒄊"
+  },
+  "646": {
+    "name": "SUHUR",
+    "unicode": "𒋦"
+  },
+  "659": {
+    "name": "ŠAR₂xDIŠ",
+    "unicode": "𒄱"
+  },
+  "661": {
+    "name": "U",
+    "unicode": "𒌋"
+  },
+  "663": {
+    "name": "UGU",
+    "unicode": "𒌋𒅗"
+  },
+  "665": {
+    "name": "UDUN",
+    "unicode": "𒌋𒈬"
+  },
+  "666": {
+    "name": "ŠIBIR",
+    "unicode": "𒌋𒂘"
+  },
+  "667": {
+    "name": "GÀKKUL",
+    "unicode": "𒌋𒁴"
+  },
+  "668": {
+    "name": "GAKKUL",
+    "unicode": "𒌋𒁵"
+  },
+  "670": {
+    "name": "U-DAR",
+    "unicode": "𒌋𒁯"
+  },
+  "671": {
+    "name": "SAGŠU",
+    "unicode": "𒌋𒊕"
+  },
+  "672": {
+    "name": "ÁB",
+    "unicode": "𒀖"
+  },
+  "674": {
+    "name": "KIR₆",
+    "unicode": "𒀘"
+  },
+  "675": {
+    "name": "GIRI₁₆",
+    "unicode": "𒄌"
+  },
+  "676": {
+    "name": "LILIZ",
+    "unicode": "𒀗"
+  },
+  "677": {
+    "name": "LIBIŠ",
+    "unicode": "𒀚"
+  },
+  "678": {
+    "name": "KIŠ",
+    "unicode": "𒆧"
+  },
+  "681": {
+    "name": "MI",
+    "unicode": "𒈪"
+  },
+  "682": {
+    "name": "GUL",
+    "unicode": "𒄢"
+  },
+  "683": {
+    "name": "GIR₄",
+    "unicode": "𒌋𒀜"
+  },
+  "684": {
+    "name": "ŠAGAN",
+    "unicode": "𒌋𒃶"
+  },
+  "685": {
+    "name": "PAN",
+    "unicode": "𒉼"
+  },
+  "686": {
+    "name": "GIM",
+    "unicode": "𒁶"
+  },
+  "688": {
+    "name": "DÚBUR",
+    "unicode": "𒄶"
+  },
+  "689": {
+    "name": "NÁ",
+    "unicode": "𒈿"
+  },
+  "690": {
+    "name": "NIM",
+    "unicode": "𒉏"
+  },
+  "691": {
+    "name": "TÙM",
+    "unicode": "𒉐"
+  },
+  "692": {
+    "name": "KIR₇",
+    "unicode": "𒉑"
+  },
+  "693": {
+    "name": "LAM",
+    "unicode": "𒇴"
+  },
+  "694": {
+    "name": "LAMxKUR",
+    "unicode": "𒇵"
+  },
+  "695": {
+    "name": "AMAR",
+    "unicode": "𒀫"
+  },
+  "696": {
+    "name": "SISKUR",
+    "unicode": "𒀬"
+  },
+  "698": {
+    "name": "UL",
+    "unicode": "𒌌"
+  },
+  "699": {
+    "name": "ŠITA₄",
+    "unicode": "𒌋𒆤"
+  },
+  "700": {
+    "name": "ÚTU",
+    "unicode": "𒌋𒂵"
+  },
+  "701": {
+    "name": "GÌR",
+    "unicode": "𒄊"
+  },
+  "702": {
+    "name": "LULIM",
+    "unicode": "𒄎"
+  },
+  "703": {
+    "name": "ALIM",
+    "unicode": "𒄋"
+  },
+  "704": {
+    "name": "DUGUD",
+    "unicode": "𒂂"
+  },
+  "705": {
+    "name": "GIG",
+    "unicode": "𒈪𒉭"
+  },
+  "706": {
+    "name": "NIGIN₄",
+    "unicode": "𒌋𒌓"
+  },
+  "707": {
+    "name": "NÌGIN",
+    "unicode": "𒌋𒌓𒆤"
+  },
+  "708": {
+    "name": "MAN",
+    "unicode": "𒌋𒌋"
+  },
+  "710": {
+    "name": "KUŠU",
+    "unicode": "𒌋𒄊"
+  },
+  "711": {
+    "name": "EŠ",
+    "unicode": "𒌍"
+  },
+  "712": {
+    "name": "NIMIN",
+    "unicode": "𒐏"
+  },
+  "714": {
+    "name": "NINNU",
+    "unicode": "𒐐"
+  },
+  "715": {
+    "name": "LX",
+    "unicode": "𒐑"
+  },
+  "719": {
+    "name": "LAGAR",
+    "unicode": "𒇬"
+  },
+  "720": {
+    "name": "DUL",
+    "unicode": "𒌋𒌆"
+  },
+  "721": {
+    "name": "DU₆",
+    "unicode": "𒇯"
+  },
+  "722": {
+    "name": "SU₇",
+    "unicode": "𒇭"
+  },
+  "723": {
+    "name": "LAGARxŠE-SUM",
+    "unicode": "𒇮"
+  },
+  "724": {
+    "name": "IGI",
+    "unicode": "𒅆"
+  },
+  "725": {
+    "name": "PÀD",
+    "unicode": "𒅆𒊒"
+  },
+  "726": {
+    "name": "AR",
+    "unicode": "𒅈"
+  },
+  "727": {
+    "name": "AGRIG",
+    "unicode": "𒅆𒁾"
+  },
+  "728": {
+    "name": "U₆",
+    "unicode": "𒅆𒂍"
+  },
+  "729": {
+    "name": "SIG₅",
+    "unicode": "𒅆𒂟"
+  },
+  "730": {
+    "name": "KURUM₇",
+    "unicode": "𒅆𒂟"
+  },
+  "731": {
+    "name": "Ù",
+    "unicode": "𒅇"
+  },
+  "732": {
+    "name": "LIBIR",
+    "unicode": "𒅆𒂠"
+  },
+  "733": {
+    "name": "HUL",
+    "unicode": "𒅆𒌨"
+  },
+  "736": {
+    "name": "DI",
+    "unicode": "𒁲"
+  },
+  "737": {
+    "name": "KI",
+    "unicode": "𒆠"
+  },
+  "738": {
+    "name": "HABRUD",
+    "unicode": "𒆡"
+  },
+  "740": {
+    "name": "KIxU",
+    "unicode": "𒆢"
+  },
+  "741": {
+    "name": "PÉŠ",
+    "unicode": "𒉾"
+  },
+  "742": {
+    "name": "KIMIN",
+    "unicode": "𒆠𒈫"
+  },
+  "743": {
+    "name": "KIŠI₄",
+    "unicode": "𒊔"
+  },
+  "744": {
+    "name": "ŠUL",
+    "unicode": "𒂄"
+  },
+  "745": {
+    "name": "KUG",
+    "unicode": "𒆬"
+  },
+  "746": {
+    "name": "PAD",
+    "unicode": "𒉻"
+  },
+  "748": {
+    "name": "DIŠ",
+    "unicode": "𒁹"
+  },
+  "750": {
+    "name": "LAL",
+    "unicode": "𒇲"
+  },
+  "751": {
+    "name": "LÁL",
+    "unicode": "𒇳"
+  },
+  "753": {
+    "name": "ME",
+    "unicode": "𒈨"
+  },
+  "754": {
+    "name": "MEŠ",
+    "unicode": "𒈨𒌍"
+  },
+  "755": {
+    "name": "LAGAB",
+    "unicode": "𒆸"
+  },
+  "756": {
+    "name": "ENGUR",
+    "unicode": "𒇉"
+  },
+  "760": {
+    "name": "GIGIR",
+    "unicode": "𒇀"
+  },
+  "761": {
+    "name": "ÉSIR",
+    "unicode": "𒇒"
+  },
+  "763": {
+    "name": "LAGABxGI",
+    "unicode": "𒆸x𒄀"
+  },
+  "766": {
+    "name": "U₈",
+    "unicode": "𒇇"
+  },
+  "767": {
+    "name": "ZAR",
+    "unicode": "𒇡"
+  },
+  "772": {
+    "name": "LAGABxGU₄",
+    "unicode": "𒇆"
+  },
+  "776": {
+    "name": "ŠÁRA",
+    "unicode": "𒇋"
+  },
+  "785": {
+    "name": "LAGABxIM",
+    "unicode": "𒇌"
+  },
+  "786": {
+    "name": "TÚL",
+    "unicode": "𒇥"
+  },
+  "788": {
+    "name": "BUL",
+    "unicode": "𒇧"
+  },
+  "790": {
+    "name": "GARIM",
+    "unicode": "𒇑"
+  },
+  "795": {
+    "name": "SUG",
+    "unicode": "𒆹"
+  },
+  "801": {
+    "name": "LAGABxNÍG",
+    "unicode": "𒇅"
+  },
+  "804": {
+    "name": "NIGIN",
+    "unicode": "𒆸𒆸"
+  },
+  "806": {
+    "name": "NENNI",
+    "unicode": "𒇧𒇧"
+  },
+  "807": {
+    "name": "IB",
+    "unicode": "𒅁"
+  },
+  "808": {
+    "name": "KU",
+    "unicode": "𒂉"
+  },
+  "809": {
+    "name": "TÚG",
+    "unicode": "𒉇"
+  },
+  "810": {
+    "name": "ŠÈ",
+    "unicode": "𒍥"
+  },
+  "811": {
+    "name": "DIŠ+ŠU",
+    "unicode": "𒁹+𒋗"
+  },
+  "812": {
+    "name": "LU",
+    "unicode": "𒇻"
+  },
+  "813": {
+    "name": "DIB",
+    "unicode": "𒁳"
+  },
+  "814": {
+    "name": "ÀD",
+    "unicode": "𒇼"
+  },
+  "815": {
+    "name": "KIN",
+    "unicode": "𒆥"
+  },
+  "816": {
+    "name": "SÍG",
+    "unicode": "𒋠"
+  },
+  "817": {
+    "name": "DARA₄",
+    "unicode": "𒁱"
+  },
+  "818": {
+    "name": "EREN",
+    "unicode": "𒂞"
+  },
+  "819": {
+    "name": "GUR₇",
+    "unicode": "𒄦"
+  },
+  "820": {
+    "name": "MUNŠUB",
+    "unicode": "𒈰"
+  },
+  "821": {
+    "name": "ŠÉŠ",
+    "unicode": "𒋁"
+  },
+  "823": {
+    "name": "MÚNŠUB",
+    "unicode": "𒋁𒋦"
+  },
+  "824": {
+    "name": "DIŠ-U",
+    "unicode": "𒁹𒌋"
+  },
+  "825": {
+    "name": "MIN",
+    "unicode": "𒈫"
+  },
+  "826": {
+    "name": "ŠUŠANA",
+    "unicode": "𒑚"
+  },
+  "827": {
+    "name": "TUK",
+    "unicode": "𒌇"
+  },
+  "828": {
+    "name": "UR",
+    "unicode": "𒌨"
+  },
+  "830": {
+    "name": "GIDIM",
+    "unicode": "𒄇"
+  },
+  "831": {
+    "name": "2.30",
+    "unicode": "𒈫𒌍"
+  },
+  "832": {
+    "name": "ŠANABI",
+    "unicode": "𒑛"
+  },
+  "833": {
+    "name": "UDUG",
+    "unicode": "𒌜"
+  },
+  "834": {
+    "name": "EŠ₅",
+    "unicode": "𒐈"
+  },
+  "835": {
+    "name": "UR₄",
+    "unicode": "𒌴"
+  },
+  "836": {
+    "name": "GÍN",
+    "unicode": "𒂅"
+  },
+  "837": {
+    "name": "IŠŠEBU",
+    "unicode": "𒐈𒌋𒌋"
+  },
+  "838": {
+    "name": "KINGUSILA",
+    "unicode": "𒑜"
+  },
+  "839": {
+    "name": "A",
+    "unicode": "𒀀"
+  },
+  "845": {
+    "name": "EDURU",
+    "unicode": "𒀀𒀁"
+  },
+  "846": {
+    "name": "ZÀH",
+    "unicode": "𒀄"
+  },
+  "847": {
+    "name": "DIŠ|DIŠ",
+    "unicode": "𒑖"
+  },
+  "848": {
+    "name": "NIGIDAMIN",
+    "unicode": "𒑖"
+  },
+  "850": {
+    "name": "NIGIDAEŠ",
+    "unicode": "𒑗"
+  },
+  "851": {
+    "name": "ZA",
+    "unicode": "𒍝"
+  },
+  "854": {
+    "name": "AD₄",
+    "unicode": "𒍞"
+  },
+  "856": {
+    "name": "HA",
+    "unicode": "𒄩"
+  },
+  "858": {
+    "name": "GUG",
+    "unicode": "𒍝𒄢"
+  },
+  "859": {
+    "name": "NÍG",
+    "unicode": "𒃻"
+  },
+  "860": {
+    "name": "LIMMU",
+    "unicode": "𒐼"
+  },
+  "861": {
+    "name": "IÁ",
+    "unicode": "𒐊"
+  },
+  "862": {
+    "name": "ÀŠ",
+    "unicode": "𒐋"
+  },
+  "863": {
+    "name": "IMIN",
+    "unicode": "𒅓"
+  },
+  "864": {
+    "name": "USSU",
+    "unicode": "𒐍"
+  },
+  "865": {
+    "name": "DIŠ|DIŠ|DIŠ",
+    "unicode": "𒑉"
+  },
+  "866": {
+    "name": "IMIN",
+    "unicode": "𒑂"
+  },
+  "867": {
+    "name": "USSU",
+    "unicode": "𒑄"
+  },
+  "868": {
+    "name": "ILIMMU",
+    "unicode": "𒑆"
+  },
+  "869": {
+    "name": "ŠÚ",
+    "unicode": "𒋙"
+  },
+  "870": {
+    "name": "ÉN",
+    "unicode": "𒁇𒀭"
+  },
+  "871": {
+    "name": "KÈŠ",
+    "unicode": "𒋙𒀭𒄲"
+  },
+  "872": {
+    "name": "KUNGA",
+    "unicode": "𒋙𒀯"
+  },
+  "875": {
+    "name": "GÍBIL",
+    "unicode": "𒋙𒀾"
+  },
+  "876": {
+    "name": "ŠUDUN",
+    "unicode": "𒋙𒂈"
+  },
+  "877": {
+    "name": "HÚL",
+    "unicode": "𒄾"
+  },
+  "878": {
+    "name": "ŠEG₉",
+    "unicode": "𒊾"
+  },
+  "881": {
+    "name": "SIG",
+    "unicode": "𒋝"
+  },
+  "882": {
+    "name": "PÉŠ",
+    "unicode": "𒋝𒋙𒁷"
+  },
+  "883": {
+    "name": "MUNUS",
+    "unicode": "𒊩"
+  },
+  "884": {
+    "name": "ZUM",
+    "unicode": "𒍮"
+  },
+  "886": {
+    "name": "NIN₉",
+    "unicode": "𒊩𒆪"
+  },
+  "887": {
+    "name": "NIN",
+    "unicode": "𒊩𒌆"
+  },
+  "889": {
+    "name": "DAM",
+    "unicode": "𒁮"
+  },
+  "890": {
+    "name": "GÉME",
+    "unicode": "𒊩𒆳"
+  },
+  "891": {
+    "name": "GU",
+    "unicode": "𒄖"
+  },
+  "892": {
+    "name": "SÙH",
+    "unicode": "𒄗"
+  },
+  "893": {
+    "name": "NAGAR",
+    "unicode": "𒉄"
+  },
+  "894": {
+    "name": "TUGUL",
+    "unicode": "𒉄𒍞"
+  },
+  "895": {
+    "name": "MUNUS-LAGAR",
+    "unicode": "𒊩𒇬"
+  },
+  "896": {
+    "name": "KÚŠU",
+    "unicode": "𒆵"
+  },
+  "897": {
+    "name": "ÉGI",
+    "unicode": "𒊩𒂠"
+  },
+  "898": {
+    "name": "NIG",
+    "unicode": "𒊩𒌨"
+  },
+  "899": {
+    "name": "EL",
+    "unicode": "𒂖"
+  },
+  "900": {
+    "name": "LUM",
+    "unicode": "𒈝"
+  },
+  "901": {
+    "name": "MÚRGU",
+    "unicode": "𒈱"
+  },
+  "903": {
+    "name": "LUM|LUM-ŠÚ",
+    "unicode": "𒈞𒋙"
+  },
+  "905": {
+    "name": "SIG₄",
+    "unicode": "𒋞"
+  },
+  "906": {
+    "name": "MURGU",
+    "unicode": "𒋞"
+  },
+  "907": {
+    "name": "SIG₄|SIG₄-ŠÚ",
+    "unicode": "𒋟"
+  }
+}

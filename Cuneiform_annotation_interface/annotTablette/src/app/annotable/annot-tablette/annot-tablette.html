@@ -1,0 +1,146 @@
+<main class="main">
+  <div class="menu">
+    <app-tabselect
+    (selectedId)="onIdSelected($event)"
+    (selectedIdJson)="transliterTranscription($event)" 
+    (selectedImage)="onImageSelected($event)" 
+    (selectedRef)="onRefSelected($event)"></app-tabselect><br>
+  
+    <!-- Boutton de sauvegarde et de suppression et de téléchargement -->
+    <div class="buttonlist">
+      <!--<button (click)="buttonsauvegarde()">
+        Sauvegarder localement la tablette
+      </button>-->
+      <button (click)="confirmerResetAnnotations()"
+        [disabled]="!selectedImage || !hasAnnotations()">Réinitialiser la tablette 💀</button>
+      <button (click)="exporterAnnotations()"
+        [disabled]="!selectedImage || !hasAnnotations()">Exporter les annotations 💾</button>
+      <button (click)="confirmerImportAnnotations()"
+        [disabled]="!selectedImage">Importer des annotations 📁</button>
+        <input type="file" accept=".json" #inputFile style="display:none" (change)="importerAnnotations($event)" />
+      @if(creatorIsEditable){
+        <button (click)="openAnnotateurModal()">Changer d'annotateur 🖋️</button>
+      }
+      <button (click)="guideActive=true">Guide 💪</button>
+      @if(this.imgAnnot){
+        <button 
+          [disabled]="disableChangeMode"
+          [ngStyle]="{'background-color': this.modeEdition ? 'hsla(350, 100%, 50%, 50%)' : 'hsla(45, 100%, 50%, 50%)'}"
+          (click)="this.basculerModeEdition()">
+          {{ this.modeEdition ? "✍🏼Passer du mode Ajout au mode Edition📝" : "📝Passer du mode Edition au mode Ajout✍🏼" }}
+        </button><!--Ne pas mettre this.imgAnnot?.modeEdition ? sinon warning-->
+      }
+    </div>
+  </div>
+  <div class="annotateur">
+  <div  #topPanel class="panel top">
+    <app-txt-annot  
+      [height]="topHeight"
+      [selectedId]="selectedId"
+      [receivedLignes]="lignestranscription"
+      [selectedImg]="selectedImage"
+      [selectedRef]="selectedRef"
+      (annotationSupprimee)="annotationSupprimee($event)"
+      (annotationAttributedSelected)="annotationImgSelect($event)"
+      (annotationValueUpdate)="annotationValueUpdate($event)"
+      #txtAnnot></app-txt-annot>
+  </div>
+  <div class="resizer"
+       [style.height.px]="resizerHeight"
+       (mousedown)="startResize($event)">
+  </div>
+  <div class="panel bottom">
+    <app-img-annot
+    [img_id]="selectedImage"
+    [tab_id]="selectedId"
+    [height]="bottomHeight"
+    [selectedCreator]="selectedCreator"
+    (annotationCree)="annotationCree($event)"
+    (annotationSupprimee)="annotationSupprimee($event)"
+    (annotationSurvolee)="annotationSurvolee($event)"
+    (annotationSelected)="annotationTxtSelect($event)"
+    #imgAnnot>
+    </app-img-annot>
+  </div>
+  </div>
+</main>
+<!-- Message de sauvegarde et de suppresion -->
+@if(messageSauvegarde){
+  <div class="toast">
+    ✔️ Sauvegarde effectuée<br>
+    <small>(données stockées dans le cache local du navigateur)</small>
+  </div>
+}
+<!-- MODALE -->
+@if(showAnnotateurModal){
+  <div class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <span>Annotateur</span>
+        <span class="close" (click)="closeAnnotateurModal()">✖</span>
+      </div>
+
+      <div class="modal-body">
+        <label>
+          Nom :
+          <input [(ngModel)]="tempCreator.name" />
+        </label>
+
+        <label>
+          ID :
+          <input [(ngModel)]="tempCreator.id" />
+        </label>
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="validerAnnotateur()">Valider</button>
+        <button (click)="closeAnnotateurModal()">Annuler</button>
+      </div>
+    </div>
+  </div>
+}
+
+@if(guideActive){
+  <div class="guide-overlay" (click)="guideActive = false">
+    <div class="guide-bubble" style="top:0;left:0;width:130px;max-height:325px;">
+      Choisir ici votre tablette (appuyez sur entrée), puis l'image que vous souhaitez annoter,<br>
+      ou alors charger un travail que vous avez déjà commencé.
+    </div>
+    <div class="guide-bubble" style="left:0;top:325px;width:130px;">
+      Ces boutons vous permettent différentes actions sur vos annotations.
+    </div>
+    <div class="guide-bubble" style="top:0;right:0;max-width:250px;">
+      Dans ce panneau, vous pouvez voir les informations du caractère que vous avez sélectioné. <br>
+      Vous pouvez aussi le modifier, en faire un doublon ou corriger son signe.<br>
+      La ⟳ rouge en haut vous permet de réinitialiser ces modifications. <br>
+      Raccourcis clavier : s = semicassé ; b = sur bord ; e = effacé ; g = graphie non-conventionelle ; d = doubler le signe ; l = doubler la ligne
+    </div>
+    <div class="guide-bubble" style="top:0;left:170px;right:270px;text-align: center;" [style.max-height.px]="topHeight">
+      Ici, vous pouvez voir les signes du texte que vous annotez.<br>
+      Vous pouvez vous déplacer dans le texte avec comme raccourci : les flèches ← ↑ → ↓.<br>
+      Vous pouvez changer comment ils sont affichés en haut.<br>
+      En <span style="color:hsl(350, 100%, 50%);text-shadow: 0 0 10px white;">rouge</span>, sont les signes que vous avez déjà annotés.<br>
+      Le signe avec le <span style="border: 1px dashed hsl(350, 100%, 50%);border-radius: 10px;text-shadow: 0 0 10px white;">cadre arrondi</span> sera le prochain à être annoté.<br>
+      En cliquant sur un signe déjà annoté, vous pouvez le modifier.<br>
+      Si vous cliquez sur un signe non annoté, il sera le prochain à l'être.<br>
+      <small>Si vous ne voyez rien, veuillez sélectionner une tablette et une image.</small>
+    </div>
+    <div class="guide-bubble" style="left:170px;right: 0;" [style.top.px]="topHeight-10">
+      Vous pouvez régler l'écart entre le texte et l'image au moyen de cette barre grise.
+    </div>
+    <div class="guide-bubble" style="bottom:10px;left:170px;right:0;">
+      Ici, vous pouvez voir l'image à annoter.<br>
+      Vous pouvez vous déplacer dessus avec un Drag and Drop (cliquer et rester appuyé en bougeant).<br>
+      Dans le mode dessin, vous pouvez annoter un signe avec un rectangle en cliquant au début puis cliquant à la fin (click gauche ou click droit).<br>
+      Dans le mode édition, vous pouvez modifier des rectangles déjà faits en les sélectionnant.<br>
+      Vous pouvez supprimer un rectangle s'il est sélectionné en appuyant sur : Suppr ou Delete ou Backspace.<br><br>
+
+      Pour passer en mode dessin, appuyez sur le signe à annoter en haut.<br>
+      Pour passer en mode édition, appuyez sur le signe déjà annoté à modifier en haut.<br>
+      Sinon, pour changer de mode, appuyez sur le bouton coloré à gauche. Raccourci clavier : M.<br>
+      <small>Si l'image est noire, veuillez sélectionner une image.</small>
+    </div>
+    <button class="guide-close" (click)="guideActive = false">✕</button>
+  </div>
+}
+
