@@ -13,8 +13,7 @@ import {
   input
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-//import * as OpenSeadragon from 'openseadragon'; // Avec Archibab
-import OpenSeadragon from 'openseadragon'; // Local
+import OpenSeadragon from 'openseadragon';
 import { createOSDAnnotator } from '@annotorious/openseadragon';
 
 @Component({

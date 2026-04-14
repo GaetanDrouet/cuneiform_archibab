@@ -1160,7 +1160,7 @@
     "unicode": "𒈖"
   },
   "556": {
-    "name": "MIR",
+    "name": "NIMGIR",
     "unicode": "𒂆"
   },
   "557": {
@@ -1793,7 +1793,8 @@
   },
   "808": {
     "name": "KU",
-    "unicode": "𒂉"
+    "unicode": "𒆪",
+    "commentaire": "𒆪 au lieu de 𒂉, dû à Freie. À rétablir si on change de police"
   },
   "809": {
     "name": "TÚG",
