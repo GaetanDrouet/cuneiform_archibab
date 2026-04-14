@@ -3,6 +3,5 @@ Dans le cas où vous faites un usage local de cette application, elle est entiè
 Pour l'intégration à Archibab, seul AnnotTablette/src/app/annotabl est nécessaire.
 De plus, il faudra opérer quelques modification : 
 - changer le chargement de onLocal par le chargement de onArchibab dans annot-tablette.ts et dans tab-select.ts, et le changer aussi dans le constructor
-- enlever Archibab des annotations qui annulent son effet
-- changer l'import d'OpenseaDragon dans img-annot.ts
-- vérifier que les noms et adressent correspondent avec le reste du site.
+- enlever Archibab des commentaires qui annulent son effet
+- vérifier que les noms et adresses correspondent avec le reste du site.
