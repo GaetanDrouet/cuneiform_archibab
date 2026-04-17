@@ -154,7 +154,11 @@ export class TxtAnnot {
     if (saved && this.selectedImg!=="") {
       // 🔁 Chargement depuis le localStorage
       this.lignes = JSON.parse(saved);
-        this.initialiserSelection();
+      if (this.lignes.length && this.lignes[0].transliteration[0].dansmot) {
+        this.lignes=this.correctionCoupureMot(this.lignes)
+        this.sauvegarderLocal()
+      }
+      this.initialiserSelection();
       console.debug('Tablette chargée depuis localStorage');
     } else if (this.receivedLignes!==undefined) {
         this.lignes=structuredClone(this.receivedLignes)
@@ -171,6 +175,24 @@ export class TxtAnnot {
     if (changes['selectedImg'] || changes['selectedId']) {
       this.chargerFichier();
     }
+  }
+
+  correctionCoupureMot(lignes:Ligne[]):Ligne[] { //Fonction pour corriger les précédentes sauvegarde
+    let transf=true
+    for(let i = 0; i < lignes.length; i++) {
+      transf=true
+      for (let j = 0; j < lignes[i].transliteration.length; j++) {
+        if (lignes[i].transliteration[j].dansmot==false && transf) {
+        } else if (transf) {
+          lignes[i].transliteration[j].dansmot=false
+          transf=false
+        } else if (lignes[i].transliteration[j].dansmot==false) {
+          lignes[i].transliteration[j].dansmot=true
+          transf=true
+        }
+      }
+    }
+    return lignes
   }
 
   signeDepuisId(id: string) {
@@ -223,46 +245,49 @@ export class TxtAnnot {
     return parts.join('_');
   }
   cloneSigne(ancienSigne:Transliteration) {
-    if (!ancienSigne) return; // rien à cloner
-    // Crée un clone basé sur selectedSigne
-    const nouveauSigne: Transliteration = {
-      ...ancienSigne,              // copie toutes les propriétés
-      id_signe: this.incrementLastId(ancienSigne.id_signe,-1,1),         // nouveau id unique
-      clonesigne: true,                          // marque ce signe comme clone
-      attributed: false                     // il apparaît non-attribué
-    };
-    // Indiquer le signe sélectionné comme cloné pour empêcher de le refaire
-    ancienSigne.clonedsigne=true
-    // Cherche la ligne où se trouve selectedSigne
-    const ligne = this.lignes.find(l => l.transliteration.includes(ancienSigne!))!;
-    const signes = ligne.transliteration
-    const i = signes.indexOf(ancienSigne);
-  // Paramètres pour règles sur le positionnement du clone : 
-    const avant = signes[i - 1] ?? null;
-    const apres = signes[i + 1] ?? null;
-    const isClone = (s: Transliteration | null) => s?.clonesigne === true;
-    const isCloned = (s: Transliteration | null) => s?.clonedsigne === true
-    let j = i + 1;
-  // Suite de règles sur le positionnement du clone : 
-    // 🔹 Cloné après -> déplacer le placement du clone
-    if (isCloned(apres)) {
-      while (j < signes.length && isCloned(signes[j])) j++;
-      // 🔹 Clones avant -> Déplacer les clones avant, et modifier le placement du clone en fonction
-    if (isClone(avant)) {
-        // 1️⃣ récupérer les clones immédiatement avant
-        let start = i - 1;
-        while (start >= 0 && isClone(signes[start])) start--;
-        start++;
-        const clonesAvant = signes.splice(start, i - start);
-        // 2️⃣ réinsérer les clones avant
-        signes.splice(j - clonesAvant.length, 0, ...clonesAvant);
-    }
-    //Rajouter le clone
-    signes.splice(j, 0, nouveauSigne);
-    // Selectionner le clone
-    this.selectSigne(nouveauSigne)
-    this.sauvegarderLocal()
-    }
+  if (!ancienSigne) return; // rien à cloner
+  // Crée un clone basé sur selectedSigne
+  const nouveauSigne: Transliteration = {
+    ...ancienSigne,              // copie toutes les propriétés
+    id_signe: this.incrementLastId(ancienSigne.id_signe,-1,1),  // nouveau id unique
+    clonesigne: true,  // marque ce signe comme clone
+    attributed: false, // il apparaît non-attribué
+    dansmot: true,     // il n'ouvre pas de nouveau mot
+  };
+  // Indiquer le signe sélectionné comme cloné pour empêcher de le refaire
+  ancienSigne.clonedsigne=true
+  // Cherche la ligne où se trouve selectedSigne
+  const ligne = this.lignes.find(l => l.transliteration.includes(ancienSigne!))!;
+  const signes = ligne.transliteration
+  const i = signes.indexOf(ancienSigne);
+// Paramètres pour règles sur le positionnement du clone : 
+  const avant = signes[i - 1] ?? null;
+  const apres = signes[i + 1] ?? null;
+  const isClone = (s: Transliteration | null) => s?.clonesigne === true;
+  const isCloned = (s: Transliteration | null) => s?.clonedsigne === true
+  let j = i + 1;
+// Suite de règles sur le positionnement du clone : 
+  // 🔹 Cloné après -> déplacer le placement du clone
+  console.log(isCloned(apres))
+  if (isCloned(apres)) {
+    while (j < signes.length && isCloned(signes[j])) j++;
+  }
+    // 🔹 Clones avant -> Déplacer les clones avant, et modifier le placement du clone en fonction
+  if (isClone(avant)) {
+      // 1️⃣ récupérer les clones immédiatement avant
+      let start = i - 1;
+      while (start >= 0 && isClone(signes[start])) start--;
+      start++;
+      const clonesAvant = signes.splice(start, i - start);
+      // 2️⃣ réinsérer les clones avant
+      signes.splice(j - clonesAvant.length, 0, ...clonesAvant);
+  }
+  //Rajouter le clone
+  console.log(j, 0, nouveauSigne)
+  signes.splice(j, 0, nouveauSigne);
+  // Selectionner le clone
+  this.selectSigne(nouveauSigne)
+  this.sauvegarderLocal()
   }
   supprimerSigneClone() {
     if (!this.selectedSigne || !this.selectedSigne.clonesigne) return;
@@ -639,6 +664,7 @@ export class TxtAnnot {
     if (deligature) {ideff=deligature}
     if (signe.clonesigne||signe.cloneligne) {
       idindex=signe.id_signe.slice(0, signe.id_signe.lastIndexOf("_") + 1) + "0"
+      if (signe.clonesigne) {signe.dansmot=true}
     }else{
       idindex=ideff
     }
