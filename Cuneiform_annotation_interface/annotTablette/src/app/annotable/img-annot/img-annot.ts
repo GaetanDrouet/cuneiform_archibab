@@ -1,18 +1,14 @@
 import {
   Component,
-  Input,
-  Output,
+  input,
+  output,
   ViewChild,
   ElementRef,
   OnInit,
   NgZone,
-  OnChanges,
-  SimpleChanges,
-  AfterViewInit ,
-  EventEmitter,
-  input
+  effect,
+  afterNextRender,
 } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import OpenSeadragon from 'openseadragon';
 import { createOSDAnnotator } from '@annotorious/openseadragon';
 
@@ -21,42 +17,43 @@ import { createOSDAnnotator } from '@annotorious/openseadragon';
   templateUrl: './img-annot.html',
   styleUrl: './img-annot.less'
 })
-export class ImgAnnot implements OnInit, OnChanges, AfterViewInit {
+export class ImgAnnot implements OnInit {
 
   @ViewChild('openseadragon_viewer', { read: ElementRef }) osd_container!: ElementRef;
 
   viewer: any;
   anno: any;
 
-  @Input() img_id!: string;
-  @Input() tab_id!: string;
-  @Input() height!: number;
-  @Input() selectedCreator!:{id:string,name:string}
-  @Output() annotationCree = new EventEmitter<void>();
-  @Output() annotationSupprimee = new EventEmitter<string>();
-  @Output() annotationSurvolee = new EventEmitter<string>();
-  @Output() annotationSelected = new EventEmitter<string>();
+  img_id = input("");
+  tab_id = input("");
+  height = input(100);
+  selectedCreator = input({id:"0000",name:"PlaceHolder"});
+  annotationCree = output<void>();
+  annotationSupprimee = output<string>();
+  annotationSurvolee = output<string>();
+  annotationSelected = output<string>();
 
 
   private storageKey(): string {
-    return `annot-tablette_${this.tab_id}_${this.img_id}_img`;
+    return `annot-tablette_${this.tab_id()}_${this.img_id()}_img`;
   }
 
-  constructor(private ngZone: NgZone, private http: HttpClient) {}
+  constructor(
+    private ngZone: NgZone, 
+  ) {
+    afterNextRender(() => {
+      this.initViewer();
+      this.loadImage();
+    });
+    
+    effect(() => {
+      this.img_id();
+      this.loadImage();
+    });
+  }
 
   ngOnInit() {
     // ngOnInit reste pour charger les images si besoin
-  }
-
-  ngAfterViewInit() {
-    this.initViewer();
-    this.loadImage();
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['img_id'] && !changes['img_id'].firstChange) {
-      this.loadImage();
-    }
   }
 
   private initViewer() {
@@ -97,7 +94,7 @@ export class ImgAnnot implements OnInit, OnChanges, AfterViewInit {
       this.anno.setStyle({fill: '#FFC107',fillOpacity: 0.15,stroke: '#ff002b',strokeOpacity: 1,strokeWidth: 1});
       this.anno.setDrawingTool('rectangle');
       this.anno.setDrawingEnabled(true);
-      this.anno.setUser(this.selectedCreator);
+      this.anno.setUser(this.selectedCreator());
 
       this.anno.on('mouseEnterAnnotation', (annotation: any, evt: any) => {
         this.showAnnotationValue(this.annotation_label(annotation), annotation.target.selector);
@@ -113,7 +110,7 @@ export class ImgAnnot implements OnInit, OnChanges, AfterViewInit {
         }
       });
       this.anno.on('createAnnotation', (annotation: any) => {
-        if (!annotation.id.startsWith(this.tab_id)) {
+        if (!annotation.id.startsWith(this.tab_id())) {
           this.anno.cancelSelected();
           this.annotationCree.emit(annotation); // Notifie le parent / TxtAnnot
           this.anno.addAnnotation(annotation);
@@ -132,9 +129,6 @@ export class ImgAnnot implements OnInit, OnChanges, AfterViewInit {
 
   pointAnnotation(annotation:any){
     const item = this.viewer.world.getItemAt(0);
-    const imageWidth  = item.getContentSize().x;
-    const imageHeight = item.getContentSize().y;
-    const mire = imageWidth*this.height/this.osd_container.nativeElement.clientWidth/2; //milieu Y du view centré sur le haut de l'image
     let pointY = 0;
     const bounds = annotation.target?.selector?.geometry?.bounds; //Etablissement de l'Y du dernier rectangle sur le viewer
     if (bounds){
@@ -154,8 +148,8 @@ export class ImgAnnot implements OnInit, OnChanges, AfterViewInit {
   }
 
   private loadImage() {
-    if (this.img_id && this.img_id!=="") {
-      const imgUrl = `https://archibab.fr/img/${this.img_id}.jpg`;
+    if (this.img_id()) {
+      const imgUrl = `https://archibab.fr/img/${this.img_id()}.jpg`;
       
       this.ngZone.runOutsideAngular(() => {
         if (this.anno) this.anno.clearAnnotations();
@@ -316,7 +310,7 @@ export class ImgAnnot implements OnInit, OnChanges, AfterViewInit {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${this.tab_id.toString().padStart(6, '0')}_${this.img_id}.json`;
+    a.download = `${this.tab_id().toString().padStart(6, '0')}_${this.img_id()}.json`;
     a.click();
     URL.revokeObjectURL(url);
     console.debug('Téléchargement des annotations lancé');
@@ -349,7 +343,7 @@ export class ImgAnnot implements OnInit, OnChanges, AfterViewInit {
       annotation[propriete] = contenu;// 🔁 remplacement
       this.anno.updateAnnotation(annotation)
       if (annotation.target.updatedBy){
-          annotation.target.updatedBy=this.selectedCreator
+          annotation.target.updatedBy=this.selectedCreator()
       }
     } else {
       console.error("Il n'y a d'annotation avec cette id");// Si absent : erreur

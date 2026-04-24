@@ -34,6 +34,9 @@ export class OnLocal {
       return Promise.resolve({id: "",name: ""});
     }
   }
+  goTexte(id:string) { // aller au texte / sa page Archibab
+    window.location.href = `https://archibab.fr/texte/${id}`;
+  }
 
   adjustScreen=2
   creatorIsEditable=true

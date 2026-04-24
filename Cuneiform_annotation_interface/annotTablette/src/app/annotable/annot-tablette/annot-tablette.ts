@@ -1,5 +1,4 @@
 import { Component, signal, ViewChild, ElementRef, ChangeDetectorRef, Input, HostListener  } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TabSelect } from '../tab-select/tab-select' ;
 import { ImgAnnot } from '../img-annot/img-annot' ;
 import { TxtAnnot } from '../txt-annot/txt-annot' ;
@@ -10,7 +9,7 @@ import { OnLocal } from '../on-local/on-local';
 
 @Component({
   selector: 'annotTablette',
-  imports: [CommonModule,TabSelect,TxtAnnot,ImgAnnot,FormsModule],
+  imports: [TabSelect,TxtAnnot,ImgAnnot,FormsModule],
   templateUrl: './annot-tablette.html',
   styleUrl: './annot-tablette.less'
 })

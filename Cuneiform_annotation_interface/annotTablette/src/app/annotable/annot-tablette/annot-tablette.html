@@ -25,7 +25,7 @@
       @if(this.imgAnnot){
         <button 
           [disabled]="disableChangeMode"
-          [ngStyle]="{'background-color': this.modeEdition ? 'hsla(350, 100%, 50%, 50%)' : 'hsla(45, 100%, 50%, 50%)'}"
+          [style]="{'background-color': this.modeEdition ? 'hsla(350, 100%, 50%, 50%)' : 'hsla(45, 100%, 50%, 50%)'}"
           (click)="this.basculerModeEdition()">
           {{ this.modeEdition ? "✍🏼Passer du mode Ajout au mode Edition📝" : "📝Passer du mode Edition au mode Ajout✍🏼" }}
         </button><!--Ne pas mettre this.imgAnnot?.modeEdition ? sinon warning-->

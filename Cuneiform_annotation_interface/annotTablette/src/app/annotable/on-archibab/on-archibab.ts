@@ -45,6 +45,9 @@ export class OnArchibab {
       });
     }
   }
+  goTexte(id:string) { // aller au texte / sa page Archibab
+    this.router.navigate(['texte', id]);
+  }
 
   adjustScreen=70
   creatorIsEditable=false

@@ -1,28 +1,28 @@
 type ModeAffichage = 'signe' | 'unicode' | 'borger' | 'valeurphon';
 type ModeAffichage2 = '' | 'signe' | 'unicode' | 'borger' | 'valeurphon';
 
-import { Component, Input, Output,EventEmitter, ChangeDetectorRef, OnChanges, SimpleChanges  } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, input, output, ChangeDetectorRef, effect  } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Transliteration,Signe,Ligne } from '../data.model';
 import { TransliterationService } from '../transliteration-service/transliteration-service';
+import { OnLocal } from '../on-local/on-local';
 
 @Component({
   selector: 'app-txt-annot',
-  imports: [CommonModule,FormsModule],
+  imports: [FormsModule],
   templateUrl: './txt-annot.html',
   styleUrl: './txt-annot.less',
 })
 export class TxtAnnot {
-  @Input() height: number = 100;
-  @Input() selectedId!: string;
-  @Input() receivedLignes!: Ligne[];
-  @Input() selectedImg!: string;
-  @Input() selectedRef!: string;
-  @Output() annotationSupprimee = new EventEmitter<string>();
-  @Output() annotationAttributedSelected = new EventEmitter<string>();
-  @Output() annotationValueUpdate = new EventEmitter<Transliteration>();
+  height = input(100);
+  selectedId = input("");
+  selectedImg = input("");
+  selectedRef = input("");
+  receivedLignes = input<Ligne[]>([])
+  annotationSupprimee = output<string>();
+  annotationAttributedSelected = output<string>();
+  annotationValueUpdate = output<Transliteration>();
   lignes: Ligne[] = [];
   selectedSigne: Transliteration | null = null;
   survoledSigne: Transliteration | undefined ;
@@ -36,14 +36,20 @@ export class TxtAnnot {
   archibab=true;
 
   private storageKey(): string {
-    return `annot-tablette_${this.selectedId}_${this.selectedImg}_txt`;
+    return `annot-tablette_${this.selectedId()}_${this.selectedImg()}_txt`;
   }
 
   constructor(
     private cd: ChangeDetectorRef,
-    private router: Router,
     private transliterationService: TransliterationService,
-  ) {}
+    private LOCALorARCHIBAB: OnLocal,
+  ) {
+    effect(() => {
+      this.selectedImg();
+      this.selectedId();
+      this.chargerFichier(); //S'active si un des deux est changé
+    });
+  }
 
   ngOnInit() {
     this.transliterationService.loadDictionaries()  
@@ -76,7 +82,7 @@ export class TxtAnnot {
     this.chargerFichier();
   }
   goTexte() { // aller au texte / sa page Archibab
-    this.router.navigate(['texte', this.selectedId]);
+    this.LOCALorARCHIBAB.goTexte(this.selectedId())
   }
   importerSignes(signes:{id:string,value:string}[]) {
     const lignesReclonees:string[]=[]
@@ -151,7 +157,9 @@ export class TxtAnnot {
     const key = this.storageKey();
     const saved = localStorage.getItem(key);
 
-    if (saved && this.selectedImg!=="") {
+    if (!this.selectedId() && !this.selectedImg()) return
+
+    if (saved) {
       // 🔁 Chargement depuis le localStorage
       this.lignes = JSON.parse(saved);
       if (this.lignes.length && this.lignes[0].transliteration[0].dansmot) {
@@ -160,8 +168,8 @@ export class TxtAnnot {
       }
       this.initialiserSelection();
       console.debug('Tablette chargée depuis localStorage');
-    } else if (this.receivedLignes!==undefined) {
-        this.lignes=structuredClone(this.receivedLignes)
+    } else if (this.receivedLignes()!==undefined) {
+        this.lignes=structuredClone(this.receivedLignes())
         this.initialiserSelection();
         console.debug('Tablette chargée depuis Archibab');
     }
@@ -169,12 +177,6 @@ export class TxtAnnot {
       this.selectSigne(this.getPremierSigneValide()!)
     }
     return;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedImg'] || changes['selectedId']) {
-      this.chargerFichier();
-    }
   }
 
   correctionCoupureMot(lignes:Ligne[]):Ligne[] { //Fonction pour corriger les précédentes sauvegarde
@@ -668,7 +670,7 @@ export class TxtAnnot {
     }else{
       idindex=ideff
     }
-    let original  = this.receivedLignes
+    let original  = this.receivedLignes()
       .flatMap(ligne => ligne.transliteration)
       .find(translit => translit.id_signe === idindex);
     if (!original) return;

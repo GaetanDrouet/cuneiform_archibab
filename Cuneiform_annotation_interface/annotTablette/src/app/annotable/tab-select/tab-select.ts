@@ -1,13 +1,13 @@
 // file: id-selector.component.ts
-import { Component, Output, EventEmitter } from '@angular/core';
-import { CommonModule,Location } from '@angular/common';
+import { Component, output } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { OnLocal } from '../on-local/on-local';
 
 @Component({
   selector: 'app-tabselect',
-  imports: [CommonModule,FormsModule],
+  imports: [FormsModule],
   templateUrl: './tab-select.html',
   styleUrl: './tab-select.less',
 })
@@ -15,10 +15,10 @@ import { OnLocal } from '../on-local/on-local';
 export class TabSelect {
   selectedIdValue: string =""; 
   selectedImageValue!: string; 
-  @Output() selectedId = new EventEmitter<string>();
-  @Output() selectedIdJson = new EventEmitter<any>();
-  @Output() selectedImage = new EventEmitter<string>();
-  @Output() selectedRef = new EventEmitter<string>();
+  selectedId = output<string>();
+  selectedIdJson = output<any>();
+  selectedImage = output<string>();
+  selectedRef = output<string>();
   texte : any;
   searchId: string = '';
   images: string[] = [];            

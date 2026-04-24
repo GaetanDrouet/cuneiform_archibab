@@ -1,8 +1,8 @@
-<div class="conteneur" [style.height.px]="height-2">
+<div class="conteneur" [style.height.px]="height()-2">
   <!-- selection de l'affichage -->
   <div class="toolbar-lignes">
     <div class="toolbar">
-      <button (click)="goTexte()" class="ref" title="voir le texte {{selectedId}}">{{ selectedRef }}</button>&nbsp;
+      <button (click)="goTexte()" class="ref" title="voir le texte {{selectedId()}}">{{ selectedRef() }}</button>&nbsp;
       <div>
         <label>Afficher : 
         <select class="mode" [(ngModel)]="modeAffichage" (ngModelChange)="onModeChange()" id="modeAffichage">
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="lignes" [style.height.px]="height-44">
+    <div class="lignes" [style.height.px]="height()-44">
       <!-- Liste des lignes -->
       @for (ligne of lignes; track ligne.id_ligne) {
         <div class="ligne">
@@ -162,7 +162,7 @@
           />
         <!-- Overlay des signes spéciaux -->
         @if(insertSpecialSignShow){
-          <div class="special-signs-overlay" [style.height.px]="height-2">
+          <div class="special-signs-overlay" [style.height.px]="height()-2">
             <div class="special-signs-overlay_table">
               <div class="special-signs-overlay_col">
                 <div class="special-signs-overlay_row">
