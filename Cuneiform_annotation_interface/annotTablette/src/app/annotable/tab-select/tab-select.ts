@@ -34,7 +34,6 @@ export class TabSelect {
   ngOnInit() {
     this.route.queryParams.subscribe(// lecture des id texte et images directement par l'URL
       params => {
-        console.debug(params);
         if (params['txt']) {
           this.selectId(params['txt']);
           const img = params['img']
@@ -48,7 +47,6 @@ export class TabSelect {
   async selectId(id: string) {
     this.texte = await this.LOCALorARCHIBAB.findId(id);
     if (this.texte !== null) {
-      console.debug('Tablette sélectionnée :', id);      
       this.location.replaceState(
         '/annot',
         `txt=${id}`
@@ -66,7 +64,6 @@ export class TabSelect {
 
       this.selectedRef.emit(this.texte.ref);
 
-      console.debug(this.images)
       if (this.images.length) {
         let transcriptions_lignes = this.texte.transcriptions_lignes
         if (transcriptions_lignes.length) {

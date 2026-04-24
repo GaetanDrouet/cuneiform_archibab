@@ -115,12 +115,9 @@ export class ImgAnnot implements OnInit {
           this.annotationCree.emit(annotation); // Notifie le parent / TxtAnnot
           this.anno.addAnnotation(annotation);
           this.sauvegarderAnnotationUnique(annotation);
-          console.debug('Annotation créée:', annotation);
-          console.debug('ID :', annotation.id, 'Value :', annotation.value);
         } 
       });
       this.anno.on('updateAnnotation', (annotation: any, previous: any) => {
-        console.debug('Annotation modifiée', annotation);
         this.sauvegarderUpdateAnnotation(annotation.id,'target',annotation.target);
       });
     });
@@ -225,7 +222,6 @@ export class ImgAnnot implements OnInit {
     const emplacement = ann.replace(regexAnn, "$3");
     const colonne = ann.replace(regexAnn, "$4");
     const colonne_prime = primes[ann.replace(regexAnn, "$5")];
-    //console.log("emplacement :", emplacement);
     const ligne = parseInt(ann.replace(regexAnn, "$6"));
     const ligne_prime = primes[parseInt(ann.replace(regexAnn, "$7"))];
     const no_mot = parseInt(ann.replace(regexAnn, "$8"));
@@ -239,39 +235,32 @@ export class ImgAnnot implements OnInit {
     if (this.anno) {
       this.anno.cancelSelected();
       this.anno.setDrawingEnabled(true);
-      console.debug(`Dessin activé, sélection désactivée`);
     }
   }
   desactiverModeEdition() {
     if (this.anno) {
       this.anno.setDrawingEnabled(false);
-      console.debug(`Dessin désactivé, sélection activée`);
     }
   }
 
   // Sauvegarde locale
-  sauvegarderAnnotationsLocal() {
-    return // tant que le bug de this.anno.getAnnotations() qui renvoie le local en plus du visible, ce bouton ne fera rien
+  sauvegarderAnnotationsLocal() { // tant que le bug de this.anno.getAnnotations() qui renvoie le local en plus du visible, ce bouton ne fera rien
     if (!this.anno) return;
     // Récupère toutes les annotations
     const toutesAnnotations = this.anno.getAnnotations()
-    console.debug(toutesAnnotations)
     const key = this.storageKey();
     localStorage.setItem(key, JSON.stringify(toutesAnnotations));
-    console.debug('Annotations sauvegardées localement');
   }
   //Charger la sauvegarde
   chargerAnnotationsLocal() {
     const key = this.storageKey();
     const saved = localStorage.getItem(key);
     if (saved && this.anno) {
-      console.debug('Saved content:', saved);
-      const annotations = JSON.parse(saved);
-      console.debug('Annotations à charger :', annotations);  
+      const annotations = JSON.parse(saved); 
       for (const a of annotations) {
         this.anno.addAnnotation(a);
       }
-      console.debug('Annotations chargées depuis localStorage');
+      //Annotations chargées depuis localStorage
     }
   }
   // supprimer la sauvegarde
@@ -281,7 +270,7 @@ export class ImgAnnot implements OnInit {
     if (this.anno) {
       this.anno.clearAnnotations(); // supprime toutes les annotations affichées
     }
-    console.debug('Annotations locales réinitialisées');
+    //Annotations locales réinitialisées
   }
   // Sauvegarder juste une annotation
   sauvegarderAnnotationUnique(annotation: any) {
@@ -294,7 +283,6 @@ export class ImgAnnot implements OnInit {
     if (exists) return;
     annotations.push(annotation);
     localStorage.setItem(key, JSON.stringify(annotations));
-    console.debug('Annotation sauvegardée:', annotation.id);
   }
   telechargerAnnotations() {
     const key = this.storageKey();
@@ -313,7 +301,6 @@ export class ImgAnnot implements OnInit {
     a.download = `${this.tab_id().toString().padStart(6, '0')}_${this.img_id()}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    console.debug('Téléchargement des annotations lancé');
   }
   chargerAnnotations(json: any) {
     this.resetAnnotationsLocal()
@@ -355,7 +342,6 @@ export class ImgAnnot implements OnInit {
     this.desactiverModeEdition();
     this.anno.cancelSelected();
     this.anno.setSelected(id);
-    console.debug("annotation sélectionnée : ",id)
   }
 
 }

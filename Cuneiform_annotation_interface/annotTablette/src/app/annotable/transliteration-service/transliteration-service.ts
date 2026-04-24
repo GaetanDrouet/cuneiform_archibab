@@ -37,7 +37,6 @@ valeursPhonetiques: Record<string, any> = {};
 private dictionariesLoaded?: Promise<void>;
 async loadDictionaries(): Promise<void> {
   if (!this.dictionariesLoaded) {
-    console.debug("chargement des dictionnaires")
     this.dictionariesLoaded = (async () => {
       const [d1, d2, d3, d4] = await Promise.all([
         firstValueFrom(this.http.get<Record<string, any>>('/assets/dictionnaires/valeurs_phonetiques.json')),

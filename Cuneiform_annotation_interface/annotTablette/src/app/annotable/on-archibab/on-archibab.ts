@@ -1,3 +1,4 @@
+export class OnArchibab {}
 /*import { Injectable } from '@angular/core';
 import { ApiService } from '../../../api.service';
 import { StorageService } from '../../../_services/storage.service'; 
@@ -32,7 +33,6 @@ export class OnArchibab {
   initialCreator(): Promise<{id:string,name: string}> {
     if (this.storageService.isLoggedIn()) {// on est loggé : extraction username pour signer les annotations (creator)^
       const user: { [key: string]: string } = jwtDecode(this.storageService.getUser().access)
-      //console.debug (user);
       return Promise.resolve({
         id: `${user['first_name']} ${user['last_name']}`,
         name: user['username']

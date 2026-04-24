@@ -68,13 +68,10 @@ export class TxtAnnot {
   //Sauvegarde
   sauvegarderLocal() {
     if (!this.lignes.length) return;
-
     localStorage.setItem(
       this.storageKey(),
       JSON.stringify(this.lignes)
     );
-
-    console.debug('Tablette sauvegardée localement');
   }
   //Suppression de sauvegarde
   resetSauvegarde() {
@@ -167,11 +164,9 @@ export class TxtAnnot {
         this.sauvegarderLocal()
       }
       this.initialiserSelection();
-      console.debug('Tablette chargée depuis localStorage');
     } else if (this.receivedLignes()!==undefined) {
         this.lignes=structuredClone(this.receivedLignes())
         this.initialiserSelection();
-        console.debug('Tablette chargée depuis Archibab');
     }
     if (this.lignes.length) {
       this.selectSigne(this.getPremierSigneValide()!)
@@ -270,7 +265,6 @@ export class TxtAnnot {
   let j = i + 1;
 // Suite de règles sur le positionnement du clone : 
   // 🔹 Cloné après -> déplacer le placement du clone
-  console.log(isCloned(apres))
   if (isCloned(apres)) {
     while (j < signes.length && isCloned(signes[j])) j++;
   }
@@ -285,7 +279,6 @@ export class TxtAnnot {
       signes.splice(j - clonesAvant.length, 0, ...clonesAvant);
   }
   //Rajouter le clone
-  console.log(j, 0, nouveauSigne)
   signes.splice(j, 0, nouveauSigne);
   // Selectionner le clone
   this.selectSigne(nouveauSigne)
@@ -349,7 +342,6 @@ export class TxtAnnot {
     //this.selectSigne(clonedTransliterations[0]);
     // Sauvegarder
     this.sauvegarderLocal();
-    console.debug(`Ligne clonée : ${ligneOriginale.ligne} → ${nouvelleLigne.ligne}`);
   }
 
   supprimerLigneClone() {
@@ -379,7 +371,6 @@ export class TxtAnnot {
     }
     // Sauvegarder les changements
     this.sauvegarderLocal();
-    console.debug(`Ligne clonée supprimée : ${ligne.ligne}`);
   }
   signeprecedent(signe:Transliteration):Transliteration {
     const ligne = this.lignes.find(l => l.transliteration.includes(signe!))!;
@@ -449,7 +440,6 @@ export class TxtAnnot {
       return false
     } else {
       signe.attributed=false
-      console.debug(`Signe ${id} marqué comme non attribué`);
       if (!librement) {
         this.selectSigne(signe)
       }

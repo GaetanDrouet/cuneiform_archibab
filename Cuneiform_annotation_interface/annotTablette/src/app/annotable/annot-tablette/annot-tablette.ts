@@ -66,13 +66,11 @@ export class AnnotTablette {
 // Phase d'initialisation des annotateurs après sélection de la tablette dans tab-select
   onIdSelected(id: string) {
     this.selectedId = id;
-    console.debug("ID sélectionné :", id);
     this.undoStack=[]
     this.redoStack=[]
   }
   onImageSelected(image: string) {
     this.selectedImage = image;
-    console.debug("Image sélectionné :", image);
     this.undoStack=[]
     this.redoStack=[]
   }
@@ -95,7 +93,6 @@ export class AnnotTablette {
     annotation.value = value;
     annotation.target.creator = this.selectedCreator;
     this.txtAnnot.attribuerEtAvancer();
-    console.debug('Annotation créée pour le signe :', id, value);
     this.undoStack.push(id)
     this.redoStack=[]
   }
@@ -109,10 +106,8 @@ export class AnnotTablette {
     const pasDejaCree = this.txtAnnot.attribuerLibrement(annotation.id)
     if (pasDejaCree) {
       if (source=="undo") {
-        console.log("y",annotation.id)
         this.redoStack.push(annotation.id)
       } else if (source=="redo") {
-        console.log("z",annotation.id)
         this.undoStack.push(annotation.id)
       }
       this.imgAnnot.anno.addAnnotation(annotation)
@@ -124,10 +119,8 @@ export class AnnotTablette {
     if (pasDejaSupprimee) {
       const annotSupprimee=this.imgAnnot.supprimerAnnotation(id)
       if (source=="undo") {
-        console.log("z",annotSupprimee)
         this.redoStack.push(annotSupprimee)
       } else if (source=="redo") {
-        console.log("y",annotSupprimee)
         this.undoStack.push(annotSupprimee)
       }
     }
@@ -214,7 +207,6 @@ export class AnnotTablette {
       this.topHeight = Math.max(50, startHeight + dy);
       this.recomputeHeights();
       this.cd.detectChanges(); 
-      console.debug(this.bottomHeight)
 
       window.removeEventListener('mousemove', mouseMove);
       window.removeEventListener('mouseup', mouseUp);
@@ -232,7 +224,7 @@ export class AnnotTablette {
   messageSauvegarde = false;
   buttonsauvegarde() {
     this.txtAnnot.sauvegarderLocal()
-    this.imgAnnot.sauvegarderAnnotationsLocal()
+    //this.imgAnnot.sauvegarderAnnotationsLocal()
     this.messageSauvegarde = true;
     setTimeout(() => {
       this.messageSauvegarde = false;
@@ -266,9 +258,7 @@ export class AnnotTablette {
           return;
         }
         this.imgAnnot.chargerAnnotations(json)
-        console.debug(json.map((item: any) => item.id))
         this.txtAnnot.importerSignes(json.map((item: any) => ({id:item.id,value:item.value})))
-        console.debug('Annotations importées avec succès');
       } catch (e) {
         console.error('Erreur lors de la lecture du fichier JSON', e);
       }
@@ -327,7 +317,6 @@ export class AnnotTablette {
   // Raccourcis
   private initKeyboardShortcuts() {
     window.addEventListener('keydown', (e: KeyboardEvent) => {
-      console.log('key:', e.key, 'ctrl:', e.ctrlKey, 'shift:', e.shiftKey);
       const tag = (e.target as HTMLElement).tagName.toLowerCase();
       if (tag === 'input' || tag === 'textarea' || tag === 'select') { // ignorer si l'utilisateur est dans un input, textarea ou select
         return;
