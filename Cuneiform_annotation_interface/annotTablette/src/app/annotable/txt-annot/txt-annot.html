@@ -162,7 +162,9 @@
           />
         <!-- Overlay des signes spéciaux -->
         @if(insertSpecialSignShow){
-          <div class="special-signs-overlay" [style.height.px]="height()-2">
+          <div class="special-signs-overlay" 
+          [style.height.px]="height()-incrementheight()-3"
+          [style.top.px]="incrementheight()">
             <div class="special-signs-overlay_table">
               <div class="special-signs-overlay_col">
                 <div class="special-signs-overlay_row">

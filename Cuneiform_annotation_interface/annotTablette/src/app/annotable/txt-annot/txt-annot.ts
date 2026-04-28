@@ -64,6 +64,9 @@ export class TxtAnnot {
     const str = id.padStart(6, '0');
     return `${str}.json`;
   }
+  incrementheight(): number{
+    return this.LOCALorARCHIBAB.adjustScreen
+  }
 
   //Sauvegarde
   sauvegarderLocal() {

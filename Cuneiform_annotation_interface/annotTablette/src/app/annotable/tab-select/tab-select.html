@@ -26,7 +26,7 @@
 
 <div class="menu-chargement" (clickOutside)="showSauvegardes=false">
   <button class="boutton_chargement"
-    (click)="ouvertureChargement()">Charger une sauvegarde ▼</button>
+    (click)="ouvertureChargement()">Charger une sauvegarde <br> ▼</button>
 
   @if(showSauvegardes){
     <ul class="sauvegardes">
@@ -35,7 +35,7 @@
       @for(s of sauvegardes; track s) {
         <li>
           <button (click)="chargerSauvegarde(s)">
-            🗂 tablette {{ s.id }} : <small>image {{ s.img }}</small>
+            tablette {{ s.id }} <br> <small>image {{ s.img }}</small>
           </button>
         </li>
       }

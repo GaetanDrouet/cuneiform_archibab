@@ -110,12 +110,14 @@
 
 /* Détails à droite */
 .details {
-  width: 250px;
+  width: 265px;
   position: sticky;
   top: 1rem;
   align-self: flex-start;
   margin-left: 20px;
+  scrollbar-gutter: stable;
   overflow-y: auto;
+  overflow-x: hidden;
   
   list-style: none;
   padding: 0;
@@ -181,13 +183,15 @@ button:hover{
   background-color: hsla(0, 0%, 50%, 0.32);
 }
 
+.correction {
+  flex:1;
+}
 input.correction::placeholder {
   font-weight: bold;
 }
 .special-signs-overlay {
   position: fixed;
   right: 252px;
-  top:0;
   background-color: hsl(0, 0%, 50%);
   border: 1px solid hsla(0, 0%, 50%, 0.32);
   padding: 5px;
