@@ -7,7 +7,7 @@ Si aucune image ne s'affiche, aucune image n'est disponible pour ce texte.
 Cliquez sur une image pour le sélectionner.  
 Une fois qu'un texte et une image sont sélectionnés, la transcription et l'image s'affichent au milieu.  
  
-La liste des images que vous aviez commencé d'annoter est aussi disponible en appuyant sur "Charger une sauvegarde".  
+La liste des images que vous aviez commencées à annoter est aussi disponible en appuyant sur "Charger une sauvegarde".  
 Vous pouvez alors continuer vos annotations en appuyant sur l'une de ces sauvegardes.  
  
 L'id du texte et le nom de l'image apparaissent aussi dans la barre d'adresse. Vous pouvez ainsi aisément vous transmettre les liens des textes à annoter.  
@@ -15,7 +15,7 @@ L'id du texte et le nom de l'image apparaissent aussi dans la barre d'adresse. V
  
 ## 2 Annotation  
 En haut du texte, sont affichés les références et les préférences d'affichage.  
-Appuyez sur la référence vous renvoie à la page Archibab du texte.  
+Appuyer sur la référence vous renvoie à la page Archibab du texte.  
 Les préférences d'affichage de la translitération se composent de deux listes déroulantes. Selon vos choix, le texte sera affiché soit en valeurs phonétiques, soit en noms de signe, soit en Unicode de signe, soit en numéros Borger. Vous pouvez afficher jusqu'à 2 apparences pour chaque signe en utilisant les deux listes déroulantes.  
  
 ### 2.a Annoter un signe  
@@ -57,7 +57,7 @@ Appuyez sur les flèches pour faire pivoter l'image vers la droite ou la gauche.
 Vous pouvez faire glisser la barre grise qui délimite le texte et l'image pour accorder plus de place à l'un ou à l'autre.  
  
 ## 3 Modifier un signe  
-Quand vous cliquez sur un signe dans la translitération, il est sélectionné. Son fond apparaît plus clair/sombre.  
+Quand vous cliquez sur un signe dans la translitération, il est sélectionné. Son fond apparaît avec une luminosité un peu différente.  
 Les informations sur le signe sélectionné apparaissent à droite du texte : son Signe, sa valeur phonétique (qu'il a seul ou qu'il partage) et le mot dont il fait partie.  
  
 ### 3.a Modifier les caractéristiques d'un signe  
@@ -74,14 +74,14 @@ Les boutons suivants permettent de doubler le signe sélectionné dans le cas o�
 - le bouton **Doubler la ligne** vous permet d'ajouter un clone d'une ligne entière. Il sert principalement dans le cas où une ligne apparaît sur la tranche haute ou basse en plus d'apparaître sur la face ou le revers. Le raccourci clavier est L.  
 Vous ne pouvez faire qu'un clone de chaque type par signe.  
 Les clones apparaissent en italique.  
-Pour supprimer un clone, appuyez dessus. Le bouton qui servait à cloner est désormais rose et sert à le supprimer le clone.  
+Pour supprimer un clone, appuyez dessus. Le bouton qui servait à cloner est désormais rose et sert à supprimer le clone.  
  
 ### 3.c Ligature d'un signe  
-Dans le cas où deux signes apparaissent fusionnés ensemble dans le texte, vous pouvez les ligaturer en prenant le second signe et en appuyant sur **Ligaturer au signe précédent**. Vous ne pouvez pas ligaturer un signe qui est déjà annoté (rouge), parce que par définition les signes ligaturés ne peuvent pas être différenciés au niveau de l'image. De plus vous ne pouvez pas non plus ligaturer un signe à un autre signe d'un mot différent.  
-Vous pouvez aussi déligaturer deux signes, soit que vous avez ligaturés vous-mêmes, soit qui l'ont été par convention (comme ŠUNIGIN). Pour cela, appuyez sur **Déligaturer**.  
+Dans le cas où deux signes apparaissent fusionnés ensemble sur l'image mais pas dans le texte, vous pouvez les ligaturer dans le texte aussi. Pour cela, prenez le second signe et appuyez sur **Ligaturer au signe précédent**. Vous ne pouvez pas ligaturer un signe qui est déjà annoté (rouge). De plus vous ne pouvez pas non plus ligaturer un signe à un autre signe d'un mot différent.  
+Vous pouvez aussi déligaturer deux signes, soit que vous avez ligaturés vous-mêmes, soit qui l'ont été par convention (comme ŠUNIGIN). Pour cela, appuyez sur **Déligaturer**. 
  
 ## 3.d Corriger un signe  
-La dernière barre vous permet de corriger un signe. Tapez juste le signe par lequel vous souhaitez remplacer celui du signe sélectionné. Une liste de proposition apparaît dans un menu à gauche. Appuyez sur celui souhaité.  
+La dernière barre vous permet de corriger un signe. Tapez juste le signe par lequel vous souhaitez remplacer celui du signe sélectionné. Une liste de suggestions apparaît dans un menu à gauche. Appuyez sur celui souhaité.  
 Les caractères spécieux sont disponibles dans le menu au-dessus des suggestions.  
 Si le menu n'est pas ouvert, vous pouvez forcer son ouverture en appuyant sur le bouton **Š**.  
  
