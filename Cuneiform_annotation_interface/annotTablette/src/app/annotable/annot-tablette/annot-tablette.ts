@@ -85,6 +85,11 @@ export class AnnotTablette {
   // lorsque l'on crée, supprime une BB
   annotationCree(annotation:any) {
     if (!this.txtAnnot.cursorSigne) return;
+    if (this.txtAnnot.cursorSigne.attributed) {
+      this.imgAnnot.anno.removeAnnotation(annotation.id);
+      annotation.id="erreur_a_supprimer"
+      return
+    };
     // On récupère l'ID et la value du signe sélectionné dans TxtAnnot
     const id = this.txtAnnot.cursorSigne.id_signe;
     const value = `${this.txtAnnot.cursorSigne.signe}_${this.txtAnnot.cursorSigne.signe_Borger}_${this.txtAnnot.cursorSigne.signe_Unicode}_${this.txtAnnot.affichageSigne(this.txtAnnot.cursorSigne,this.txtAnnot.cursorSigne.valeurphon)}_${this.txtAnnot.cursorSigne.mot}`;

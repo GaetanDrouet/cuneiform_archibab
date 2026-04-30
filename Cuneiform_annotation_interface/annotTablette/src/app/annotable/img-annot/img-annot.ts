@@ -113,8 +113,10 @@ export class ImgAnnot implements OnInit {
         if (!annotation.id.startsWith(this.tab_id())) {
           this.anno.cancelSelected();
           this.annotationCree.emit(annotation); // Notifie le parent / TxtAnnot
-          this.anno.addAnnotation(annotation);
-          this.sauvegarderAnnotationUnique(annotation);
+          if (annotation.id!="erreur_a_supprimer") {
+            this.anno.addAnnotation(annotation);
+            this.sauvegarderAnnotationUnique(annotation);
+          }
         } 
       });
       this.anno.on('updateAnnotation', (annotation: any, previous: any) => {
