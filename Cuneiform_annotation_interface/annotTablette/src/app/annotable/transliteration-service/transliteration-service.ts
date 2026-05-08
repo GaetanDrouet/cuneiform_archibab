@@ -585,6 +585,7 @@ transcriptionVersTransliterationJSON(
     newSigneDict.errone = signeDict1.errone || signeDict2.errone;
     newSigneDict.enmarge = signeDict1.enmarge || signeDict2.enmarge;
     newSigneDict.bizarre = signeDict1.bizarre || signeDict2.bizarre;
+    newSigneDict.ligatureforce = (signeDict1.ligatureforce ?? []).concat(signeDict2.ligatureforce ?? []);
     newSigneDict.clonedsigne = signeDict1.clonedsigne;
     newSigneDict.clonesigne = signeDict1.clonesigne;
     newSigneDict.clonedligne = signeDict1.clonedligne;

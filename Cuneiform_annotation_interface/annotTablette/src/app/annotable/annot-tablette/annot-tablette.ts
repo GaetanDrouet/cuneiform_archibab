@@ -26,7 +26,7 @@ export class AnnotTablette {
   guideActive:boolean=false;
   showAnnotateurModal:boolean = false; //montrer choix d'annotateur (que si on n'est pas déjà sur Acrhibab)
   creatorIsEditable:boolean=true;
-  modeEdition: boolean = false
+  modeAjout: boolean = false
   disableChangeMode:boolean=false;
   undoStack:any[]=[]
   redoStack:any[]=[]
@@ -85,13 +85,13 @@ export class AnnotTablette {
   // lorsque l'on crée, supprime une BB
   annotationCree(annotation:any) {
     if (!this.txtAnnot.cursorSigne) return;
-    if (this.txtAnnot.cursorSigne.attributed) {
+    const id = this.txtAnnot.cursorSigne.id_signe;
+    if (this.txtAnnot.cursorSigne.attributed || this.imgAnnot.listeIdAttribues.includes(id)) {
       this.imgAnnot.anno.removeAnnotation(annotation.id);
       annotation.id="erreur_a_supprimer"
       return
     };
-    // On récupère l'ID et la value du signe sélectionné dans TxtAnnot
-    const id = this.txtAnnot.cursorSigne.id_signe;
+    if (this.imgAnnot.listeIdAttribues.includes(id)) {return}
     const value = `${this.txtAnnot.cursorSigne.signe}_${this.txtAnnot.cursorSigne.signe_Borger}_${this.txtAnnot.cursorSigne.signe_Unicode}_${this.txtAnnot.affichageSigne(this.txtAnnot.cursorSigne,this.txtAnnot.cursorSigne.valeurphon)}_${this.txtAnnot.cursorSigne.mot}`;
     annotation.id = id;
     annotation.target.annotation = id;
@@ -166,12 +166,12 @@ export class AnnotTablette {
   // Lorsque l'on sélectionne une BB dans l'image ou un signe dans le texte
   annotationImgSelect(id:string) {
     if (id=="") {
-      this.modeEdition=true
-      this.imgAnnot.activerModeEdition()
+      this.modeAjout=true
+      this.imgAnnot.activerModeAjout()
       this.disableChangeMode=false
     } else if (id=="no more") {
-      this.modeEdition=false
-      this.imgAnnot.desactiverModeEdition()
+      this.modeAjout=false
+      this.imgAnnot.desactiverModeAjout()
       this.disableChangeMode=true
     } else {
       this.imgAnnot.selectAnnotationId(id)
@@ -327,7 +327,7 @@ export class AnnotTablette {
         return;
       }
       if (e.key.toLowerCase() === 'm') {
-        this.basculerModeEdition()
+        this.basculerModeAjout()
       }
       if (e.key === 'Backspace' || e.key === 'Delete') {
         if (!this.imgAnnot.anno) return;
@@ -410,13 +410,13 @@ export class AnnotTablette {
     })
   }
   
-  basculerModeEdition() {
-    if (this.modeEdition) {
-      this.modeEdition=false
-      this.imgAnnot.desactiverModeEdition()
+  basculerModeAjout() {
+    if (this.modeAjout) {
+      this.modeAjout=false
+      this.imgAnnot.desactiverModeAjout()
     } else if (!this.disableChangeMode) {
-      this.modeEdition=true
-      this.imgAnnot.activerModeEdition()
+      this.modeAjout=true
+      this.imgAnnot.activerModeAjout()
       const ss = this.txtAnnot.cursorSigne
       if (ss) {
         this.annotationTxtSelect(ss.id_signe)

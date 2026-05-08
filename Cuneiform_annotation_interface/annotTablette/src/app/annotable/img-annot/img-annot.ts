@@ -32,6 +32,7 @@ export class ImgAnnot implements OnInit {
   annotationSupprimee = output<string>();
   annotationSurvolee = output<string>();
   annotationSelected = output<string>();
+  listeIdAttribues:string[] = []
 
 
   private storageKey(): string {
@@ -117,6 +118,7 @@ export class ImgAnnot implements OnInit {
             this.anno.addAnnotation(annotation);
             this.sauvegarderAnnotationUnique(annotation);
           }
+          console.log(this.listeIdAttribues)
         } 
       });
       this.anno.on('updateAnnotation', (annotation: any, previous: any) => {
@@ -165,8 +167,9 @@ export class ImgAnnot implements OnInit {
         });
       });
     }
-    else
-      this.viewer.close();;
+    else if (this.viewer) {
+      this.viewer.close();
+    }
   }
 
   // Pour afficher une tooltip au survol (facultatif)
@@ -233,13 +236,13 @@ export class ImgAnnot implements OnInit {
     + colonne_prime + " " + ligne + ligne_prime + " : m" + no_mot + " c" + no_signe
   }
 
-  activerModeEdition() {
+  activerModeAjout() {
     if (this.anno) {
       this.anno.cancelSelected();
       this.anno.setDrawingEnabled(true);
     }
   }
-  desactiverModeEdition() {
+  desactiverModeAjout() {
     if (this.anno) {
       this.anno.setDrawingEnabled(false);
     }
@@ -262,6 +265,8 @@ export class ImgAnnot implements OnInit {
       for (const a of annotations) {
         this.anno.addAnnotation(a);
       }
+      
+      this.listeIdAttribues=annotations.map((annot:{id:string}) => annot.id);
       //Annotations chargées depuis localStorage
     }
   }
@@ -271,6 +276,8 @@ export class ImgAnnot implements OnInit {
     localStorage.removeItem(key);
     if (this.anno) {
       this.anno.clearAnnotations(); // supprime toutes les annotations affichées
+
+      this.listeIdAttribues=[]
     }
     //Annotations locales réinitialisées
   }
@@ -285,6 +292,8 @@ export class ImgAnnot implements OnInit {
     if (exists) return;
     annotations.push(annotation);
     localStorage.setItem(key, JSON.stringify(annotations));
+    
+    this.listeIdAttribues.push(annotation.id)
   }
   telechargerAnnotations() {
     const key = this.storageKey();
@@ -319,6 +328,10 @@ export class ImgAnnot implements OnInit {
       const lastAnnotation = annotations.find((a: any) => a.id === id);
       const filtered = annotations.filter((a: any) => a.id !== id);
       localStorage.setItem(key, JSON.stringify(filtered));
+
+      const index = this.listeIdAttribues.indexOf(id);
+      if (index >= 0) this.listeIdAttribues.splice(index, 1);
+
       return lastAnnotation
     }
   }
@@ -341,7 +354,7 @@ export class ImgAnnot implements OnInit {
   }
   selectAnnotationId(id: string) {
     if (!this.anno) return;
-    this.desactiverModeEdition();
+    this.desactiverModeAjout();
     this.anno.cancelSelected();
     this.anno.setSelected(id);
   }

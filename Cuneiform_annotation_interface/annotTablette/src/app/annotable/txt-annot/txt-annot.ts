@@ -1,7 +1,7 @@
 type ModeAffichage = 'signe' | 'unicode' | 'borger' | 'valeurphon';
 type ModeAffichage2 = '' | 'signe' | 'unicode' | 'borger' | 'valeurphon';
 
-import { Component, Input, input, output, ChangeDetectorRef, effect  } from '@angular/core';
+import { Component, Input, input, output, ChangeDetectorRef, effect, afterNextRender  } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Transliteration,Signe,Ligne } from '../data.model';
@@ -25,15 +25,14 @@ export class TxtAnnot {
   annotationValueUpdate = output<Transliteration>();
   lignes: Ligne[] = [];
   selectedSigne: Transliteration | null = null;
-  survoledSigne: Transliteration | undefined ;
   cursorSigne: Transliteration | null = null;
+  survoledSigne: Transliteration | undefined ;
+  derniersignemodifie: Transliteration | null = null; //Sert à mettre à jour les modification
   modeAffichage: ModeAffichage = 'signe';
   modeAffichage2: ModeAffichage2 = '';
-  //signesComposes: Record<string, any> = {};
   suggestionsCorrection: Signe[] = [];
   insertSpecialSignShow:boolean=false
   queryCorrection = '';
-  archibab=true;
 
   private storageKey(): string {
     return `annot-tablette_${this.selectedId()}_${this.selectedImg()}_txt`;
@@ -142,12 +141,12 @@ export class TxtAnnot {
 
 
   //chercher le premier signe valide
-  getPremierSigneValide(): Transliteration | null {
+  premierSigneValide(): Transliteration | null {
     const signes = this.lignes.flatMap(l => l.transliteration);
     return signes.find(s => !s.casse && !s.attributed && !s.ajoute) || null;
   } 
   private initialiserSelection() {
-    const premier = this.getPremierSigneValide();
+    const premier = this.premierSigneValide();
     if (premier) {
       this.selectSigne(premier);
       this.cd.detectChanges();
@@ -172,7 +171,7 @@ export class TxtAnnot {
         this.initialiserSelection();
     }
     if (this.lignes.length) {
-      this.selectSigne(this.getPremierSigneValide()!)
+      this.selectSigne(this.premierSigneValide()!)
     }
     return;
   }
@@ -200,6 +199,15 @@ export class TxtAnnot {
       .flatMap(ligne => ligne.transliteration)
       .find(translit => translit.id_signe === id);
   }
+  /*refSigneDepuisId(id:string):[number,number] {
+    const indexLigne = this.lignes.findIndex(ligne =>
+      ligne.transliteration?.some(t => t.id_signe === id)
+    );
+    const indexTranslit = indexLigne !== -1
+      ? this.lignes[indexLigne].transliteration.findIndex(t => t.id_signe === id)
+      : -1;
+    return [indexLigne, indexTranslit];
+  }*/
   selectSigne(signe: Transliteration|null,emission:boolean=true) {
     if (!signe) {
       this.selectedSigne=this.lignes[0].transliteration[0]
@@ -217,7 +225,7 @@ export class TxtAnnot {
       this.cursorSigne = signe
       this.selectedSigne = signe
     } else if (!this.cursorSigne || this.cursorSigne.attributed) {
-      let newsigne = this.getPremierSigneValide()
+      let newsigne = this.prochainSigneValide(signe)
       this.cursorSigne = this.selectedSigne = newsigne
       if (!this.selectedSigne) {
         this.selectedSigne = signe
@@ -243,6 +251,19 @@ export class TxtAnnot {
     const incremented = (parseInt(last, 10) + increment).toString();
     parts[emplacement>=0 ? emplacement : parts.length+emplacement] = incremented;
     return parts.join('_');
+  }
+  prochainSigneValide (signe:Transliteration):Transliteration|null {
+    let oldselection=signe
+    let newselection=this.signesuivant(oldselection)
+    while (newselection!=oldselection && (newselection.casse || newselection.attributed || newselection.ajoute)) {
+      oldselection=newselection
+      newselection=this.signesuivant(oldselection)
+    }
+    if (newselection!=oldselection) {
+      return newselection
+    } else {
+      return this.premierSigneValide()
+    }
   }
   cloneSigne(ancienSigne:Transliteration) {
   if (!ancienSigne) return; // rien à cloner
@@ -415,38 +436,34 @@ export class TxtAnnot {
       return false
     } else {
       signeAttribue.attributed=true
+      this.derniersignemodifie=signeAttribue
       if (this.cursorSigne==signeAttribue) {
-        this.cursorSigne=this.getPremierSigneValide()
-        this.sauvegarderLocal
-        this.cd.detectChanges()
+        this.cursorSigne=this.prochainSigneValide(signeAttribue)
       }
+      this.sauvegarderLocal()
+      this.cd.detectChanges()
       return true
     }
   }
   attribuerEtAvancer() {
     if (!this.cursorSigne) return; // rien à faire si aucun curseur
-    // 1️⃣ Marquer le signe actuel comme attributed
     this.cursorSigne.attributed = true;
     this.sauvegarderLocal();
-    // 2️⃣ Chercher le signe suivant valide
-    let oldselection=this.cursorSigne
-    let newselection=this.signesuivant(oldselection)
-    while (newselection!=oldselection && (newselection.casse || newselection.attributed || newselection.ajoute)) {
-      oldselection=newselection
-      newselection=this.signesuivant(oldselection)
-    }
-    this.selectSigne(newselection,false)
+    this.selectSigne(this.prochainSigneValide(this.cursorSigne),false)
+    this.cd.detectChanges() //Pour forcer le passage au signe suivant si activation depuis annotTablette
   }
   desattribuer(id:string, librement:boolean=false) {
-    let signe=this.signeDepuisId(id)
+    const signe=this.signeDepuisId(id)
     if (!signe || !signe.attributed) {
       return false
     } else {
       signe.attributed=false
+      this.derniersignemodifie=signe
       if (!librement) {
         this.selectSigne(signe)
       }
       this.sauvegarderLocal()
+      this.cd.detectChanges()
       return true
     }
   }
@@ -553,14 +570,27 @@ export class TxtAnnot {
     input.focus();
     this.rechercherSignesCorrection()
   }
-  ligature(signe:Transliteration) {
-    if (signe.deligaturede) {
-      this.religature(signe)
-    } else {
-      this.ligatureforcee(signe)
-    }
+  ligaturableQuestion (signe:Transliteration):boolean {
+    const preced = this.signeprecedent(signe)
+    return !signe.dansmot ||  
+      preced.deligaturede!=signe.deligaturede || 
+      signe.attributed || 
+      preced.clonesigne!=signe.clonesigne || 
+      preced.clonedsigne!=signe.clonedsigne
   }
-  ligatureforcee(signe:Transliteration) {
+  ligature(signe:Transliteration) {
+    let newsigne:Transliteration
+    if (signe.deligaturede) {
+      newsigne=this.religature(signe)
+    } else {
+      newsigne=this.ligatureforcee(signe)
+    }
+    if (this.cursorSigne==signe) {
+      this.cursorSigne=newsigne
+    }
+    this.selectSigne(newsigne)
+  }
+  ligatureforcee(signe:Transliteration):Transliteration {
     let preced=this.signeprecedent(signe)
     const newpreced=this.transliterationService.fusionSignes(preced,signe)
     if (signe.sub_signe=="" || signe.id_signe.split('_')[9]=="0") {
@@ -571,20 +601,25 @@ export class TxtAnnot {
     newpreced.signe=`${preced.signe}-${signe.signe}`
     newpreced.signe_Borger=`${preced.signe_Borger}₊${signe.signe_Borger}`
     newpreced.signe_Unicode=`${preced.signe_Unicode}${signe.signe_Unicode}`;
-    (newpreced.ligatureforce ??= []).push(signe.id_signe);
+    newpreced.ligatureforce = [
+      ...(preced.ligatureforce ?? [preced.id_signe]),
+      ...(signe.ligatureforce ?? [signe.id_signe]),
+    ];
     newpreced.attributed=preced.attributed
     const ligne = this.lignes.find(l => l.transliteration.includes(signe!))!;
     const signes = ligne.transliteration
     const i = signes.indexOf(preced);
     signes[i]=newpreced
     signes.splice(i+1, 1)
+    this.updateValue(newpreced)
+    return newpreced
   }
-  religature(signe:Transliteration) {
+  religature(signe:Transliteration):Transliteration {
     const ligne = this.lignes.find(l => l.transliteration.includes(signe!))!;
     const signes = ligne.transliteration;
     let signesALier=signes.filter(s => s.deligaturede === signe.deligaturede);
     const signes_blocage = signesALier.filter(s => s.attributed && s.id_signe!=signe.deligaturede)
-    if (signes_blocage.length) {return}
+    if (signes_blocage.length) {return signe}
     const trueSigne=signesALier[0]
     signesALier.splice(0,1)
     signesALier.forEach(signe_a_supprime => {
@@ -596,6 +631,7 @@ export class TxtAnnot {
     signes[j]=trueSigne
     this.resetSigne(signes[j])
     this.updateValue(trueSigne)
+    return trueSigne
   }
   deligaturer_siforce(signe:Transliteration) {
     const ligne = this.lignes.find(l => l.transliteration.includes(signe!))!;
@@ -603,7 +639,7 @@ export class TxtAnnot {
     const j = signes.indexOf(signe);
     const signes_a_retablir=signe.ligatureforce!
     signe.ligatureforce=undefined
-    for (let i = 1; i <= signes_a_retablir.length; i++) {
+    for (let i = 2; i <= signes_a_retablir.length; i++) { //On passe le premier, car c'est le signe déjà là
       let signe_retabli={ ...signe};
       signe_retabli.id_signe=signes_a_retablir[i-1];
       signe_retabli.attributed=false
@@ -688,6 +724,7 @@ export class TxtAnnot {
     signe.semicasse=original.semicasse;
     signe.efface=original.efface;
     signe.corrige=original.corrige;
+    signe.dansmot=original.dansmot;
     signe.enmarge=false
     signe.bizarre=false
     signe.ligatureforce=undefined

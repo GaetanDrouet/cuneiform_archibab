@@ -40,6 +40,7 @@
                 [class.attributed]="signe?.attributed"
                 [class.clone]="signe?.clonesigne || signe?.cloneligne"
                 [class.achoisir]="signe.signe_Borger.includes('?')"
+                [class.enmodfication]="signe === derniersignemodifie"
                 (click)="selectSigne(signe)"
                   >{{ this.baliseDebutSigne(signe) 
                   }}<span
@@ -139,11 +140,7 @@
           Déligaturer
         </button>
         <button
-          [disabled]="!selectedSigne.dansmot ||  
-                      signeprecedent(selectedSigne).deligaturede!=selectedSigne.deligaturede || 
-                      selectedSigne.attributed || 
-                      signeprecedent(selectedSigne).clonesigne!=selectedSigne.clonesigne || 
-                      signeprecedent(selectedSigne).clonedsigne!=selectedSigne.clonedsigne"
+          [disabled]="ligaturableQuestion(selectedSigne)"
           (click)=ligature(selectedSigne)
         >
           Ligaturer au signe précédent
