@@ -2,7 +2,7 @@ import {
   Component,
   input,
   output,
-  ViewChild,
+  viewChild,
   ElementRef,
   OnInit,
   NgZone,
@@ -19,7 +19,7 @@ import { createOSDAnnotator } from '@annotorious/openseadragon';
 })
 export class ImgAnnot implements OnInit {
 
-  @ViewChild('openseadragon_viewer', { read: ElementRef }) osd_container!: ElementRef;
+  osd_container = viewChild<ElementRef>('openseadragon_viewer');
 
   viewer: any;
   anno: any;
@@ -59,14 +59,14 @@ export class ImgAnnot implements OnInit {
 
   private initViewer() {
     //Desactive clique droit
-    this.osd_container.nativeElement.addEventListener(
+    this.osd_container()?.nativeElement.addEventListener(
       'contextmenu',
       (e: MouseEvent) => e.preventDefault()
     );
 
     this.ngZone.runOutsideAngular(() => {
       this.viewer = OpenSeadragon({
-        element: this.osd_container.nativeElement,
+        element: this.osd_container()?.nativeElement,
         prefixUrl: "//openseadragon.github.io/openseadragon/images/",
         showNavigator: true,
         showRotationControl: true,
@@ -186,7 +186,7 @@ export class ImgAnnot implements OnInit {
     //const screenPoint = this.viewer.viewport.viewerElementToViewportCoordinates(viewportPoint);
     const screenPoint0 = this.viewer.viewport.viewerElementToViewportCoordinates(viewportPoint0);
     // Récupérer la position absolue du conteneur de la visionneuse
-    const viewerElement = this.osd_container.nativeElement;
+    const viewerElement = this.osd_container()?.nativeElement;
     if (!viewerElement) return;
 
     const viewerRect = viewerElement.getBoundingClientRect();
@@ -198,8 +198,8 @@ export class ImgAnnot implements OnInit {
 
     tooltip.textContent = value;
     tooltip.style.display = 'block';
-    tooltip.style.left = `${tooltipX + 50}px`;
-    tooltip.style.top = `${tooltipY + 50}px`;
+    tooltip.style.left = `${tooltipX + 50*zoom}px`;
+    tooltip.style.top = `${tooltipY + 50*zoom}px`;
   }
   
   hideAnnotationValue() {

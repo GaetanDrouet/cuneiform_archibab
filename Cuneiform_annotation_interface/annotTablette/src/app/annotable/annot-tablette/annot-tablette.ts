@@ -1,4 +1,4 @@
-import { Component, signal, ViewChild, ElementRef, ChangeDetectorRef, Input, HostListener  } from '@angular/core';
+import { Component, signal, viewChild, ElementRef, ChangeDetectorRef, Input, HostListener  } from '@angular/core';
 import { TabSelect } from '../tab-select/tab-select' ;
 import { ImgAnnot } from '../img-annot/img-annot' ;
 import { TxtAnnot } from '../txt-annot/txt-annot' ;
@@ -43,11 +43,11 @@ export class AnnotTablette {
     private LOCALorARCHIBAB: OnLocal,
   ) {}
 
-  @ViewChild('txtAnnot') txtAnnot!: TxtAnnot;
-  @ViewChild('imgAnnot') imgAnnot!: ImgAnnot;
-  @ViewChild('tabSelect') tabSelect!: TabSelect;
-  @ViewChild('inputFile') inputFile!: ElementRef<HTMLInputElement>;
-  @ViewChild('topPanel', { static: true }) topPanel!: ElementRef<HTMLDivElement>;
+  txtAnnot = viewChild.required<TxtAnnot>('txtAnnot');
+  imgAnnot = viewChild.required<ImgAnnot>('imgAnnot');
+  tabSelect = viewChild.required<TabSelect>('tabSelect');
+  inputFile = viewChild<ElementRef<HTMLInputElement>>('inputFile');
+  topPanel = viewChild.required<ElementRef<HTMLDivElement>>('topPanel');
 
   async ngOnInit() {
     this.transliterationService.loadDictionaries();
@@ -84,45 +84,45 @@ export class AnnotTablette {
 
   // lorsque l'on crée, supprime une BB
   annotationCree(annotation:any) {
-    if (!this.txtAnnot.cursorSigne) return;
-    const id = this.txtAnnot.cursorSigne.id_signe;
-    if (this.txtAnnot.cursorSigne.attributed || this.imgAnnot.listeIdAttribues.includes(id)) {
-      this.imgAnnot.anno.removeAnnotation(annotation.id);
+    if (!this.txtAnnot().cursorSigne) return;
+    const id = this.txtAnnot().cursorSigne!.id_signe;
+    if (this.txtAnnot().cursorSigne!.attributed || this.imgAnnot().listeIdAttribues.includes(id)) {
+      this.imgAnnot().anno.removeAnnotation(annotation.id);
       annotation.id="erreur_a_supprimer"
       return
     };
-    if (this.imgAnnot.listeIdAttribues.includes(id)) {return}
-    const value = `${this.txtAnnot.cursorSigne.signe}_${this.txtAnnot.cursorSigne.signe_Borger}_${this.txtAnnot.cursorSigne.signe_Unicode}_${this.txtAnnot.affichageSigne(this.txtAnnot.cursorSigne,this.txtAnnot.cursorSigne.valeurphon)}_${this.txtAnnot.cursorSigne.mot}`;
+    if (this.imgAnnot().listeIdAttribues.includes(id)) {return}
+    const value = `${this.txtAnnot().cursorSigne!.signe}_${this.txtAnnot().cursorSigne!.signe_Borger}_${this.txtAnnot().cursorSigne!.signe_Unicode}_${this.txtAnnot().affichageSigne(this.txtAnnot().cursorSigne!,this.txtAnnot().cursorSigne!.valeurphon)}_${this.txtAnnot().cursorSigne!.mot}`;
     annotation.id = id;
     annotation.target.annotation = id;
     annotation.value = value;
     annotation.target.creator = this.selectedCreator;
-    this.txtAnnot.attribuerEtAvancer();
+    this.txtAnnot().attribuerEtAvancer();
     this.undoStack.push(id)
     this.redoStack=[]
   }
   annotationSupprimee(id: string) {
-    this.txtAnnot.desattribuer(id)
-    const annotSupprimee=this.imgAnnot.supprimerAnnotation(id)
+    this.txtAnnot().desattribuer(id)
+    const annotSupprimee=this.imgAnnot().supprimerAnnotation(id)
     this.undoStack.push(annotSupprimee)
     this.redoStack=[]
   }
   annotationRecree(annotation: any, source:string) {
-    const pasDejaCree = this.txtAnnot.attribuerLibrement(annotation.id)
+    const pasDejaCree = this.txtAnnot().attribuerLibrement(annotation.id)
     if (pasDejaCree) {
       if (source=="undo") {
         this.redoStack.push(annotation.id)
       } else if (source=="redo") {
         this.undoStack.push(annotation.id)
       }
-      this.imgAnnot.anno.addAnnotation(annotation)
-      this.imgAnnot.sauvegarderAnnotationUnique(annotation);
+      this.imgAnnot().anno.addAnnotation(annotation)
+      this.imgAnnot().sauvegarderAnnotationUnique(annotation);
     }
   }
   annotationResupprimee(id: string, source:string="") {
-    const pasDejaSupprimee=this.txtAnnot.desattribuer(id,true)
+    const pasDejaSupprimee=this.txtAnnot().desattribuer(id,true)
     if (pasDejaSupprimee) {
-      const annotSupprimee=this.imgAnnot.supprimerAnnotation(id)
+      const annotSupprimee=this.imgAnnot().supprimerAnnotation(id)
       if (source=="undo") {
         this.redoStack.push(annotSupprimee)
       } else if (source=="redo") {
@@ -151,15 +151,15 @@ export class AnnotTablette {
   annotationValueUpdate(signe:any) {
     if (signe.attributed) {
       const id = signe.id_signe;
-      const value = `${signe.signe}_${signe.signe_Borger}_${signe.signe_Unicode}_${this.txtAnnot.affichageSigne(signe,signe.valeurphon)}_${signe.mot}`;
-      this.imgAnnot.sauvegarderUpdateAnnotation(id,"value",value)
+      const value = `${signe.signe}_${signe.signe_Borger}_${signe.signe_Unicode}_${this.txtAnnot().affichageSigne(signe,signe.valeurphon)}_${signe.mot}`;
+      this.imgAnnot().sauvegarderUpdateAnnotation(id,"value",value)
     }
   }
   annotationSurvolee(id: string) {
     if (id!==""){
-      this.txtAnnot.survoledSigne=this.txtAnnot.signeDepuisId(id)
+      this.txtAnnot().survoledSigne=this.txtAnnot().signeDepuisId(id)
     } else {
-      this.txtAnnot.survoledSigne=undefined
+      this.txtAnnot().survoledSigne=undefined
     }
   }
 
@@ -167,21 +167,21 @@ export class AnnotTablette {
   annotationImgSelect(id:string) {
     if (id=="") {
       this.modeAjout=true
-      this.imgAnnot.activerModeAjout()
+      this.imgAnnot().activerModeAjout()
       this.disableChangeMode=false
     } else if (id=="no more") {
       this.modeAjout=false
-      this.imgAnnot.desactiverModeAjout()
+      this.imgAnnot().desactiverModeAjout()
       this.disableChangeMode=true
     } else {
-      this.imgAnnot.selectAnnotationId(id)
-      this.imgAnnot.pointToAnnotation(id)
+      this.imgAnnot().selectAnnotationId(id)
+      this.imgAnnot().pointToAnnotation(id)
     }
   }
   annotationTxtSelect(id:string) {
     if (id!="" && id.startsWith(this.selectedId)) {
-      this.txtAnnot.selectSigne(this.txtAnnot.signeDepuisId(id)!,false)
-      this.txtAnnot.pointToSigne(id)
+      this.txtAnnot().selectSigne(this.txtAnnot().signeDepuisId(id)!,false)
+      this.txtAnnot().pointToSigne(id)
     }
   }
 
@@ -202,7 +202,7 @@ export class AnnotTablette {
       const newHeight = Math.max(50, startHeight + dy);
 
       // 🚀 DOM direct → instantané
-      this.topPanel.nativeElement.style.height = `${newHeight}px`;
+      this.topPanel().nativeElement.style.height = `${newHeight}px`;
     };
 
     const mouseUp = (e: MouseEvent) => {
@@ -228,8 +228,8 @@ export class AnnotTablette {
   //Le message de sauvegarde (obsolète)
   messageSauvegarde = false;
   buttonsauvegarde() {
-    this.txtAnnot.sauvegarderLocal()
-    //this.imgAnnot.sauvegarderAnnotationsLocal()
+    this.txtAnnot().sauvegarderLocal()
+    //this.imgAnnot().sauvegarderAnnotationsLocal()
     this.messageSauvegarde = true;
     setTimeout(() => {
       this.messageSauvegarde = false;
@@ -239,16 +239,16 @@ export class AnnotTablette {
 
   // Utilitaire
   hasAnnotations(): boolean {
-    if (!this.imgAnnot) return false;
-    if (!this.imgAnnot.anno) return false;
-    const annotations = this.imgAnnot.anno.getAnnotations();
+    if (!this.imgAnnot()) return false;
+    if (!this.imgAnnot().anno) return false;
+    const annotations = this.imgAnnot().anno.getAnnotations();
     return annotations && annotations.length > 0;
   }
 
     // Lorsque l'on exporte ou importe ou réinitialise des annotations
   exporterAnnotations() {
-    if (!this.imgAnnot) return;
-    this.imgAnnot.telechargerAnnotations();
+    if (!this.imgAnnot()) return;
+    this.imgAnnot().telechargerAnnotations();
   }
   importerAnnotations(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -262,8 +262,8 @@ export class AnnotTablette {
           console.error('Le fichier JSON ne contient pas une liste d’annotations');
           return;
         }
-        this.imgAnnot.chargerAnnotations(json)
-        this.txtAnnot.importerSignes(json.map((item: any) => ({id:item.id,value:item.value})))
+        this.imgAnnot().chargerAnnotations(json)
+        this.txtAnnot().importerSignes(json.map((item: any) => ({id:item.id,value:item.value})))
       } catch (e) {
         console.error('Erreur lors de la lecture du fichier JSON', e);
       }
@@ -279,8 +279,8 @@ export class AnnotTablette {
     );
     if (!confirmation) return;
     // Déclenche le reset
-    this.txtAnnot.resetSauvegarde();
-    this.imgAnnot.resetAnnotationsLocal();
+    this.txtAnnot().resetSauvegarde();
+    this.imgAnnot().resetAnnotationsLocal();
     this.undoStack=[]
     this.redoStack=[]
   }
@@ -293,7 +293,7 @@ export class AnnotTablette {
       if (!confirmation) return;
     }
     // Déclenche le file picker
-    this.inputFile.nativeElement.click();
+    this.inputFile()?.nativeElement.click();
     this.undoStack=[]
     this.redoStack=[]
   }
@@ -330,75 +330,75 @@ export class AnnotTablette {
         this.basculerModeAjout()
       }
       if (e.key === 'Backspace' || e.key === 'Delete') {
-        if (!this.imgAnnot.anno) return;
-        const selectedAnnotation = this.imgAnnot.anno.getSelected();
+        if (!this.imgAnnot().anno) return;
+        const selectedAnnotation = this.imgAnnot().anno.getSelected();
         if (!selectedAnnotation) return;
         const sel = Array.isArray(selectedAnnotation) ? selectedAnnotation[0] : selectedAnnotation;
         const id = sel.annotation?.id || sel.id;
         this.annotationSupprimee(id);
       }
       if (e.key === 'ArrowRight') {
-        if (this.txtAnnot.selectedSigne) {
-          let selec=this.txtAnnot.signesuivant(this.txtAnnot.selectedSigne)
-          this.txtAnnot.selectSigne(selec)
-          this.txtAnnot.pointToSigne(selec.id_signe)
+        if (this.txtAnnot().selectedSigne) {
+          let selec=this.txtAnnot().signesuivant(this.txtAnnot().selectedSigne!)
+          this.txtAnnot().selectSigne(selec)
+          this.txtAnnot().pointToSigne(selec.id_signe)
         }
       }
       if (e.key === 'ArrowLeft') {
-        if (this.txtAnnot && this.txtAnnot.selectedSigne) {
-          let selec=this.txtAnnot.signeprecedent(this.txtAnnot.selectedSigne)
-          this.txtAnnot.selectSigne(selec)
-          this.txtAnnot.pointToSigne(selec.id_signe)
+        if (this.txtAnnot() && this.txtAnnot().selectedSigne) {
+          let selec=this.txtAnnot().signeprecedent(this.txtAnnot().selectedSigne!)
+          this.txtAnnot().selectSigne(selec)
+          this.txtAnnot().pointToSigne(selec.id_signe)
         }
       }
       if (e.key === 'ArrowDown') {
-        if (this.txtAnnot.selectedSigne) {
-          let selec=this.txtAnnot.lignesuivante(this.txtAnnot.selectedSigne)
-          this.txtAnnot.selectSigne(selec)
-          this.txtAnnot.pointToSigne(selec.id_signe)
+        if (this.txtAnnot().selectedSigne) {
+          let selec=this.txtAnnot().lignesuivante(this.txtAnnot().selectedSigne!)
+          this.txtAnnot().selectSigne(selec)
+          this.txtAnnot().pointToSigne(selec.id_signe)
         }
       }
       if (e.key === 'ArrowUp') {
-        if (this.txtAnnot.selectedSigne) {
-          let selec=this.txtAnnot.ligneprecedente(this.txtAnnot.selectedSigne)
-          this.txtAnnot.selectSigne(selec)
-          this.txtAnnot.pointToSigne(selec.id_signe)
+        if (this.txtAnnot().selectedSigne) {
+          let selec=this.txtAnnot().ligneprecedente(this.txtAnnot().selectedSigne!)
+          this.txtAnnot().selectSigne(selec)
+          this.txtAnnot().pointToSigne(selec.id_signe)
         }
       }
       if (e.key.toLowerCase() === 's') {
-        if (this.txtAnnot.selectedSigne) {
-          this.txtAnnot.selectedSigne.semicasse = !this.txtAnnot.selectedSigne.semicasse; 
-          this.txtAnnot.updateValue(this.txtAnnot.selectedSigne)
+        if (this.txtAnnot().selectedSigne) {
+          this.txtAnnot().selectedSigne!.semicasse = !this.txtAnnot().selectedSigne!.semicasse; 
+          this.txtAnnot().updateValue(this.txtAnnot().selectedSigne!)
         }
       }
       if (e.key.toLowerCase() === 'b') {
-        if (this.txtAnnot.selectedSigne) {
-          this.txtAnnot.selectedSigne.enmarge = !this.txtAnnot.selectedSigne.enmarge; 
-          this.txtAnnot.updateValue(this.txtAnnot.selectedSigne)
+        if (this.txtAnnot().selectedSigne) {
+          this.txtAnnot().selectedSigne!.enmarge = !this.txtAnnot().selectedSigne!.enmarge; 
+          this.txtAnnot().updateValue(this.txtAnnot().selectedSigne!)
         }
       }
       if (e.key.toLowerCase() === 'e') {
-        if (this.txtAnnot.selectedSigne) {
-          this.txtAnnot.selectedSigne.efface = !this.txtAnnot.selectedSigne.efface; 
-          this.txtAnnot.updateValue(this.txtAnnot.selectedSigne)
+        if (this.txtAnnot().selectedSigne) {
+          this.txtAnnot().selectedSigne!.efface = !this.txtAnnot().selectedSigne!.efface; 
+          this.txtAnnot().updateValue(this.txtAnnot().selectedSigne!)
         }
       }
       if (e.key.toLowerCase() === 'g') {
-        if (this.txtAnnot.selectedSigne) {
-          this.txtAnnot.selectedSigne.bizarre = !this.txtAnnot.selectedSigne.bizarre; 
-          this.txtAnnot.updateValue(this.txtAnnot.selectedSigne)
+        if (this.txtAnnot().selectedSigne) {
+          this.txtAnnot().selectedSigne!.bizarre = !this.txtAnnot().selectedSigne!.bizarre; 
+          this.txtAnnot().updateValue(this.txtAnnot().selectedSigne!)
         }
       }
       if (e.key.toLowerCase() === 'd') {
-        if (this.txtAnnot.selectedSigne && !this.txtAnnot.selectedSigne.clonedsigne && !this.txtAnnot.selectedSigne.ligatureforce) {
-          if (this.txtAnnot.selectedSigne.clonesigne) {this.txtAnnot.supprimerSigneClone()}
-          else {this.txtAnnot.cloneSigne(this.txtAnnot.selectedSigne)}
+        if (this.txtAnnot().selectedSigne && !this.txtAnnot().selectedSigne!.clonedsigne && !this.txtAnnot().selectedSigne!.ligatureforce) {
+          if (this.txtAnnot().selectedSigne!.clonesigne) {this.txtAnnot().supprimerSigneClone()}
+          else {this.txtAnnot().cloneSigne(this.txtAnnot().selectedSigne!)}
         }
       }
       if (e.key.toLowerCase() === 'l') {
-        if (this.txtAnnot.selectedSigne && !this.txtAnnot.selectedSigne.clonedligne) {
-          if (this.txtAnnot.selectedSigne.cloneligne) {this.txtAnnot.supprimerLigneClone()}
-          else {this.txtAnnot.cloneLigne(this.txtAnnot.selectedSigne)}
+        if (this.txtAnnot().selectedSigne && !this.txtAnnot().selectedSigne!.clonedligne) {
+          if (this.txtAnnot().selectedSigne!.cloneligne) {this.txtAnnot().supprimerLigneClone()}
+          else {this.txtAnnot().cloneLigne(this.txtAnnot().selectedSigne!)}
         }
       }
      if (e.key.toLowerCase() === 'z') {
@@ -413,11 +413,11 @@ export class AnnotTablette {
   basculerModeAjout() {
     if (this.modeAjout) {
       this.modeAjout=false
-      this.imgAnnot.desactiverModeAjout()
+      this.imgAnnot().desactiverModeAjout()
     } else if (!this.disableChangeMode) {
       this.modeAjout=true
-      this.imgAnnot.activerModeAjout()
-      const ss = this.txtAnnot.cursorSigne
+      this.imgAnnot().activerModeAjout()
+      const ss = this.txtAnnot().cursorSigne
       if (ss) {
         this.annotationTxtSelect(ss.id_signe)
       }

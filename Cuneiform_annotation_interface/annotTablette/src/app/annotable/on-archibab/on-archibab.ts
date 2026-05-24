@@ -34,8 +34,8 @@ export class OnArchibab {
     if (this.storageService.isLoggedIn()) {// on est loggé : extraction username pour signer les annotations (creator)^
       const user: { [key: string]: string } = jwtDecode(this.storageService.getUser().access)
       return Promise.resolve({
-        id: `${user['first_name']} ${user['last_name']}`,
-        name: user['username']
+        id: user['user_id'],
+        name: `${user['first_name']} ${user['last_name']}`
       });
     }
     else {// loggé : pas accès à l'annotation
