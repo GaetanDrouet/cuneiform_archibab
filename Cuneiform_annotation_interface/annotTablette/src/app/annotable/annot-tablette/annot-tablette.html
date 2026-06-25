@@ -22,7 +22,7 @@
         <button (click)="openAnnotateurModal()">Changer d'annotateur 🖋️</button>
       }
       <button (click)="guideActive=true">Guide 💪</button>
-      @if(this.imgAnnot){
+      @if(this.imgAnnot()){
         <button 
           [disabled]="disableChangeMode"
           [class.mode-ajout]="this.modeAjout"

@@ -342,11 +342,20 @@ export class ImgAnnot implements OnInit {
     const index = all.findIndex((a: any) => a.id === id);
     if (index !== -1) {
       const annotation=all[index]
-      annotation[propriete] = contenu;// 🔁 remplacement
-      this.anno.updateAnnotation(annotation)
+      annotation[propriete] = contenu;// remplacement de la propriété
+      if (propriete!=='target'){ // remplacement de la target par celle en modification si besoin
+        const annotationimg = this.anno.getAnnotations()
+          .find((a: any) => a.id === id);
+        if (annotationimg) {
+          annotation['target']=annotationimg['target']
+        }else {
+          console.debug("Erreur : Tentative de modification d'un annotation pas sur l'image. Anormal.")
+        }
+      }
       if (annotation.target.updatedBy){
           annotation.target.updatedBy=this.selectedCreator()
       }
+      this.anno.updateAnnotation(annotation)
     } else {
       console.error("Il n'y a d'annotation avec cette id");// Si absent : erreur
     }

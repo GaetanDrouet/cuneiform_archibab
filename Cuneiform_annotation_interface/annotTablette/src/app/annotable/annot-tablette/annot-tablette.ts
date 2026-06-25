@@ -177,6 +177,7 @@ export class AnnotTablette {
       this.imgAnnot().selectAnnotationId(id)
       this.imgAnnot().pointToAnnotation(id)
     }
+    this.cd.detectChanges()
   }
   annotationTxtSelect(id:string) {
     if (id!="" && id.startsWith(this.selectedId)) {
@@ -422,5 +423,6 @@ export class AnnotTablette {
         this.annotationTxtSelect(ss.id_signe)
       }
     }
+    this.cd.detectChanges()
   }
 }
