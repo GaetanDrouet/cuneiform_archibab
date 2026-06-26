@@ -34,8 +34,10 @@ export class TxtAnnot {
   insertSpecialSignShow:boolean=false
   queryCorrection = '';
 
-  private storageKey(): string {
-    return `annot-tablette_${this.selectedId()}_${this.selectedImg()}_txt`;
+  storageKey(id?:string,img?:string): string {
+    id??=this.selectedId()
+    img??=this.selectedImg()
+    return `annot-tablette_${id}_${img}_txt`;
   }
 
   constructor(

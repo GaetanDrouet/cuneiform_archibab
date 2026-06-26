@@ -78,7 +78,7 @@
     <div class="modal">
       <div class="modal-header">
         <span>Annotateur</span>
-        <span class="close" (click)="closeAnnotateurModal()">✖</span>
+        <span class="close" (click)="this.showAnnotateurModal=false">✖</span>
       </div>
 
       <div class="modal-body">
@@ -95,8 +95,37 @@
 
       <div class="modal-footer">
         <button (click)="validerAnnotateur()">Valider</button>
-        <button (click)="closeAnnotateurModal()">Annuler</button>
+        <button (click)="this.showAnnotateurModal=false">Annuler</button>
       </div>
+    </div>
+  </div>
+}
+
+@if(showGestionsauvegarde){
+  <div class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <span>Trop de sauvegardes</span>
+        <span class="close" (click)="this.showGestionsauvegarde=false">✖</span>
+      </div>
+      Vous avez plus de 10 tablettes en cours d'annotation sauvegardées. <br>
+      Avoir trop de sauvegarde en cours pourrait empêcher de sauver vos futurs travaux. <br>
+      Nous vous conseillons d'en supprimer certaines dès maintenant.
+      <ul class="savelist">
+        @for(s of sauvegardes; track s.id + '_' + s.img) {
+          <li class="saveelem">
+            <div>tablette {{ s.id }} <br> <small>image {{ s.img }}</small></div>
+            <div class="saveelem">
+              <button (click)="supprimerSauvegarde(s,true)">
+                Télécharger et <br>supprimer 💾+💀
+              </button>
+              <button (click)="supprimerSauvegarde(s,false)">
+                Supprimer 💀
+              </button>
+            </div>
+          </li>
+        }
+      </ul>
     </div>
   </div>
 }

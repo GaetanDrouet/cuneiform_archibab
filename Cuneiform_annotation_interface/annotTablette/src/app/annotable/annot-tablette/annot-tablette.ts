@@ -28,6 +28,8 @@ export class AnnotTablette {
   creatorIsEditable:boolean=true;
   modeAjout: boolean = false
   disableChangeMode:boolean=false;
+  showGestionsauvegarde:boolean = false;
+  sauvegardes:{ id: string; img: string }[] = []
   undoStack:any[]=[]
   redoStack:any[]=[]
   screenHeight:number=1000; //Recalculée dans ngOnInit
@@ -43,9 +45,9 @@ export class AnnotTablette {
     private LOCALorARCHIBAB: OnLocal,
   ) {}
 
+  tabSelect = viewChild.required<TabSelect>('tabSelect');
   txtAnnot = viewChild.required<TxtAnnot>('txtAnnot');
   imgAnnot = viewChild.required<ImgAnnot>('imgAnnot');
-  tabSelect = viewChild.required<TabSelect>('tabSelect');
   inputFile = viewChild<ElementRef<HTMLInputElement>>('inputFile');
   topPanel = viewChild.required<ElementRef<HTMLDivElement>>('topPanel');
 
@@ -68,6 +70,7 @@ export class AnnotTablette {
     this.selectedId = id;
     this.undoStack=[]
     this.redoStack=[]
+    this.potentielleSurdoseSauvegarde()
   }
   onImageSelected(image: string) {
     this.selectedImage = image;
@@ -247,9 +250,11 @@ export class AnnotTablette {
   }
 
     // Lorsque l'on exporte ou importe ou réinitialise des annotations
-  exporterAnnotations() {
+  exporterAnnotations(id?: string, img?: string) {
+    id ??= this.selectedId;
+    img ??= this.selectedImage;
     if (!this.imgAnnot()) return;
-    this.imgAnnot().telechargerAnnotations();
+    this.imgAnnot().telechargerAnnotations(id,img);
   }
   importerAnnotations(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -280,6 +285,9 @@ export class AnnotTablette {
     );
     if (!confirmation) return;
     // Déclenche le reset
+    this.resetAnnotations()
+  }
+  resetAnnotations() {
     this.txtAnnot().resetSauvegarde();
     this.imgAnnot().resetAnnotationsLocal();
     this.undoStack=[]
@@ -303,9 +311,6 @@ export class AnnotTablette {
   openAnnotateurModal() {
     this.tempCreator = this.selectedCreator;
     this.showAnnotateurModal = true;
-  }
-  closeAnnotateurModal() {
-    this.showAnnotateurModal = false;
   }
   validerAnnotateur() {
     if (!this.tempCreator.name.trim() || !this.tempCreator.id.trim()) {
@@ -424,5 +429,39 @@ export class AnnotTablette {
       }
     }
     this.cd.detectChanges()
+  }
+
+    getSauvegardesFormateesObj() {
+    const map = new Map<string, { id: string; img: string }>();
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key) continue;
+      if (!key.endsWith("_txt")) continue;
+      const parts = key.split('_');
+      const value = `${parts[1]} : ${parts[2]}`;
+      map.set(value, { id: parts[1], img: parts[2] });
+    }
+    return Array.from(map.values());
+  }
+
+  potentielleSurdoseSauvegarde() {
+    this.sauvegardes=this.getSauvegardesFormateesObj()
+    if (this.sauvegardes.length>10) {
+      this.showGestionsauvegarde=true
+    }
+  }
+  supprimerSauvegarde(s:{id:string,img:string},telecharger:boolean=true) {
+    const id=s.id
+    const img=s.img
+    if (telecharger) {
+      this.exporterAnnotations(id,img)
+    }
+    if (id==this.selectedId){
+      this.resetAnnotations()
+    }else{
+      localStorage.removeItem(this.txtAnnot().storageKey(id,img))
+      localStorage.removeItem(this.imgAnnot().storageKey(id,img))
+    }
+    this.sauvegardes=[...this.getSauvegardesFormateesObj()]
   }
 }

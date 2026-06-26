@@ -35,8 +35,10 @@ export class ImgAnnot implements OnInit {
   listeIdAttribues:string[] = []
 
 
-  private storageKey(): string {
-    return `annot-tablette_${this.tab_id()}_${this.img_id()}_img`;
+  storageKey(id?:string,img?:string): string {
+    id??=this.tab_id()
+    img??=this.img_id()
+    return `annot-tablette_${id}_${img}_img`;
   }
 
   constructor(
@@ -295,7 +297,7 @@ export class ImgAnnot implements OnInit {
     
     this.listeIdAttribues.push(annotation.id)
   }
-  telechargerAnnotations() {
+  telechargerAnnotations(id: string, img: string) {
     const key = this.storageKey();
     const saved = localStorage.getItem(key);
     if (!saved) {
@@ -309,7 +311,7 @@ export class ImgAnnot implements OnInit {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${this.tab_id().toString().padStart(6, '0')}_${this.img_id()}.json`;
+    a.download = `${id.padStart(6, '0')}_${img}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }

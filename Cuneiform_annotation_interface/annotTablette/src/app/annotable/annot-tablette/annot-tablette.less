@@ -87,10 +87,11 @@ button:disabled {
 }
 
 .modal {
-  background: white;
+  background: hsl(0, 0%, 50%);
   padding: 20px;
   border-radius: 8px;
-  width: 300px;
+  min-width: 300px;
+  width: 500px;
 }
 .modal-header {
   display: flex;
@@ -110,6 +111,20 @@ button:disabled {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
+}
+.savelist {
+  padding: 4px;
+  margin: 2px;
+  left: 0;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  z-index: 10000;
+  list-style: none;
+  background-color: hsl(0, 0%, 48%);
+}
+.saveelem {
+  display: flex;
+  justify-content: space-between;
 }
 
 .guide-overlay {

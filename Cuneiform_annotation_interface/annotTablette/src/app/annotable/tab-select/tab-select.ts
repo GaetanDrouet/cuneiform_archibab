@@ -104,8 +104,8 @@ export class TabSelect {
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (!key) continue;
+      if (!key.endsWith("_txt")) continue;
       const parts = key.split('_');
-      if (parts.length < 3) continue;
       const value = `${parts[1]} : ${parts[2]}`;
       map.set(value, { id: parts[1], img: parts[2] });
     }
