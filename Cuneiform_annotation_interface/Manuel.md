@@ -104,8 +104,17 @@ Si vous appuyez sur ce bouton, toutes vos annotations sur l'image sélectionnée
 En exportant vos annotations, elles seront téléchargées en format json sur votre ordinateur. Elles pourront ainsi être partagées avec d'autres personnes au moyen du fichier que vous venez de télécharger.  
 En important des annotations, vous récupérez les annotation que quelqu'un d'autre ou vous même avez exportées. Attention, celles-ci remplacent toutes annotations que vous auriez déjà faites.  
  
-## 4.d Changer d'annotateur (seulement hors Archibab)  
+## 4.d Afficher tooltip 
+Vous pouvez désactiver et activer le tooltip au survol des annotations de signes dans l'image. Ces tooltips sont de la même sorte que ceux qui apparaitront sur Archibab.
+ 
+## 4.e Zoom sur le signe  
+Ce bouton vous permet de changer le mode de zoom sur l'annotation du signe dans l'image lorsque le signe est sélectionné.
+- 0 : l'image ne bouge pas lorsque l'annotation est sélectionné ;
+- 1 (par défaut) : l'image se centre verticalement sur le signe mais horizontalement sur le centre de l'image (utile si vous gardez en vue la totalité de la largeur de l'image) ;
+- 2 : l'image se centre verticalement et horizontalement sur le signe.
+
+## 4.f Changer d'annotateur (seulement hors Archibab)  
 Si vous n'êtes pas sur Archibab, ce bouton vous permet d'indiquer votre nom pour qu'il soit compris dans les annotations que vous faites.  
  
-## 4.e Guide  
+## 4.g Guide  
 Ce bouton vous permet d'ouvrir quelques explications rapide sur l'organisation de cette interface.  

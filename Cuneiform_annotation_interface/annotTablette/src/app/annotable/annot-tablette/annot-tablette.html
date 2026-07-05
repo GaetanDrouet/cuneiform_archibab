@@ -18,6 +18,8 @@
       <button (click)="confirmerImportAnnotations()"
         [disabled]="!selectedImage">Importer des annotations 📁</button>
         <input type="file" accept=".json" #inputFile style="display:none" (change)="importerAnnotations($event)" />
+      <button (click)="showTooltipFonction()">Afficher tooltip : {{show_tooltip ? "oui" : "non"}} 🙊</button>
+      <button (click)="zoomOnSelectFonction()">Zoom sur le signe : {{zoom_on_select}} 🔍️</button>
       @if(creatorIsEditable){
         <button (click)="openAnnotateurModal()">Changer d'annotateur 🖋️</button>
       }
@@ -28,7 +30,8 @@
           [class.mode-ajout]="this.modeAjout"
           [class.mode-edition]="!this.modeAjout"
           (click)="this.basculerModeAjout()">
-          {{ this.modeAjout ? "✍🏼Passer du mode Ajout au mode Edition📝" : "📝Passer du mode Edition au mode Ajout✍🏼" }}
+          {{ this.modeAjout ? "mode Ajout ✍🏼" : "mode Edition 📝" }}
+          Changer mode
         </button><!--Ne pas mettre this.imgAnnot?.modeAjout ? sinon warning-->
       }
     </div>
@@ -56,6 +59,7 @@
     [tab_id]="selectedId"
     [height]="bottomHeight"
     [selectedCreator]="selectedCreator"
+    [show_tooltip]="show_tooltip"
     (annotationCree)="annotationCree($event)"
     (annotationSupprimee)="annotationSupprimee($event)"
     (annotationSurvolee)="annotationSurvolee($event)"

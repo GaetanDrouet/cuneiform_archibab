@@ -23,6 +23,8 @@ export class AnnotTablette {
   selectedImage: string = "";
   selectedCreator:{id:string,name:string} = {id: "",name: ""}
   tempCreator:{id:string,name:string} = {id: "",name: ""}
+  show_tooltip:boolean=false
+  zoom_on_select:number=1
   guideActive:boolean=false;
   showAnnotateurModal:boolean = false; //montrer choix d'annotateur (que si on n'est pas déjà sur Acrhibab)
   creatorIsEditable:boolean=true;
@@ -63,6 +65,10 @@ export class AnnotTablette {
       this.showAnnotateurModal=true
     }
     this.initKeyboardShortcuts()
+    const st = localStorage.getItem('annot-tablette_showtooltip');
+    const zos = localStorage.getItem('annot-tablette_zoomonselect');
+    this.show_tooltip = st==="true";
+    if (zos !== null) this.zoom_on_select = Number(zos);
   }
 
 // Phase d'initialisation des annotateurs après sélection de la tablette dans tab-select
@@ -178,7 +184,9 @@ export class AnnotTablette {
       this.disableChangeMode=true
     } else {
       this.imgAnnot().selectAnnotationId(id)
-      this.imgAnnot().pointToAnnotation(id)
+      if (this.zoom_on_select!=0){
+        this.imgAnnot().pointToAnnotation(id,this.zoom_on_select==2)
+      }
     }
     this.cd.detectChanges()
   }
@@ -463,5 +471,21 @@ export class AnnotTablette {
       localStorage.removeItem(this.imgAnnot().storageKey(id,img))
     }
     this.sauvegardes=[...this.getSauvegardesFormateesObj()]
+  }
+
+  //changer les paramètres d'affichage du tooltip et du zoom sur les signes
+  showTooltipFonction() {
+    this.show_tooltip= !this.show_tooltip
+    localStorage.setItem(
+      `annot-tablette_showtooltip`,
+      String(this.show_tooltip)
+    );
+  }
+  zoomOnSelectFonction() {
+    this.zoom_on_select= (this.zoom_on_select+1)%3
+    localStorage.setItem(
+      `annot-tablette_zoomonselect`,
+      String(this.zoom_on_select)
+    );
   }
 }

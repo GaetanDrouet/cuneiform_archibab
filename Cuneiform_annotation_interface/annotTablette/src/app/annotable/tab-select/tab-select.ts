@@ -5,9 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { OnLocal } from '../on-local/on-local';
 
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabelModule } from 'primeng/floatlabel';
+
 @Component({
   selector: 'app-tabselect',
-  imports: [FormsModule],
+  imports: [FormsModule,InputTextModule,FloatLabelModule],
   templateUrl: './tab-select.html',
   styleUrl: './tab-select.less',
 })

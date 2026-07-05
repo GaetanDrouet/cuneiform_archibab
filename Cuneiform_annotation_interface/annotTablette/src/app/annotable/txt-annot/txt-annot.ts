@@ -8,6 +8,7 @@ import { Transliteration,Signe,Ligne } from '../data.model';
 import { TransliterationService } from '../transliteration-service/transliteration-service';
 import { OnLocal } from '../on-local/on-local';
 
+
 @Component({
   selector: 'app-txt-annot',
   imports: [FormsModule],

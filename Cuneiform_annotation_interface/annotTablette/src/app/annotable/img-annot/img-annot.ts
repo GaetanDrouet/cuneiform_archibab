@@ -28,6 +28,7 @@ export class ImgAnnot implements OnInit {
   tab_id = input("");
   height = input(100);
   selectedCreator = input({id:"0000",name:"PlaceHolder"});
+  show_tooltip = input(true);
   annotationCree = output<void>();
   annotationSupprimee = output<string>();
   annotationSurvolee = output<string>();
@@ -130,23 +131,27 @@ export class ImgAnnot implements OnInit {
   }
 
 
-  pointAnnotation(annotation:any){
+  pointAnnotation(annotation:any,horizontal:boolean=false){
     const item = this.viewer.world.getItemAt(0);
     let pointY = 0;
+    let pointX = 0.5;
     const bounds = annotation.target?.selector?.geometry?.bounds; //Etablissement de l'Y du dernier rectangle sur le viewer
     if (bounds){
         const centerX = (bounds.minX + bounds.maxX) / 2;
         const centerY = (bounds.minY + bounds.maxY) / 2;
         const viewportPoint = this.viewer.viewport.imageToViewportCoordinates(centerX, centerY);
         pointY=viewportPoint.y
+        if (horizontal) {
+          pointX=viewportPoint.x
+        }
     }
-    return new OpenSeadragon.Point(0.5, pointY);
+    return new OpenSeadragon.Point(pointX, pointY);
   }
-  pointToAnnotation(id:string){
+  pointToAnnotation(id:string,horizontal:boolean=false){
     const annotations = this.anno.getAnnotations(); // toutes les annotations sur l'image
     const annotation = annotations.find((a:any) => a.id === id);
     if (annotation){
-      this.viewer.viewport.panTo(this.pointAnnotation(annotation), false);
+      this.viewer.viewport.panTo(this.pointAnnotation(annotation,horizontal), false);
     }
   }
 
@@ -176,6 +181,7 @@ export class ImgAnnot implements OnInit {
 
   // Pour afficher une tooltip au survol (facultatif)
   showAnnotationValue(value: string, selector: any) {
+    if (this.show_tooltip()==false) return
     const tooltip = document.getElementById('annotation-tooltip');
     if (!tooltip || !this.viewer) return;
 
