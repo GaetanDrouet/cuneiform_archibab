@@ -92,12 +92,36 @@
       "350"
     ]
   },
+  "c596+024+121": {
+    "name": "UD-KA-BAR",
+    "unicode": "𒌓𒅗𒁇",
+    "compose": [
+      "596",
+      "350"
+    ]
+  },
   "c696+696": {
     "name": "SISKUR-SISKUR",
     "unicode": "𒀬𒀬",
     "compose": [
       "696",
       "696"
+    ]
+  },
+  "c724+379": {
+    "name": "IGI-GAG",
+    "unicode": "𒅆𒆕",
+    "compose": [
+      "724",
+      "379"
+    ]
+  },
+  "c724+437": {
+    "name": "IGI-IR",
+    "unicode": "𒅆𒅕",
+    "compose": [
+      "724",
+      "379"
     ]
   },
   "c750+755": {
