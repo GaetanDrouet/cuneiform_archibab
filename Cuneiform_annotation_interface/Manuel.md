@@ -54,7 +54,16 @@ Appuyez sur la maison pour afficher toute l'image dans le lecteur.
 Appuyez sur les flèches pour faire pivoter l'image vers la droite ou la gauche.  
  
 ### 2.f Changer la taille accordée à l'image et au texte  
-Vous pouvez faire glisser la barre grise qui délimite le texte et l'image pour accorder plus de place à l'un ou à l'autre.  
+Vous pouvez faire glisser la barre grise qui délimite le texte et l'image pour accorder plus de place à l'un ou à l'autre. 
+
+### 2.g Voyant d'erreur
+En haut du texte, à côté des préférences d'affichage, se trouve un cercle. Il indique la présence d'erreur reconnue. S'il est vert, il n'y en a pas. S'il est orange et qu'il clignote, il y en a.
+Deux types d'erreurs sont actuellement reconnues : 
+- Lorsqu'un signe cassé est annoté sur l'image. De fait, les signes cassés sont par définition illisible car placé dans un emplacement détruit de la tablette ;
+- Lorsque l'annotation d'un signe à choisir à été faite mais qu'il le signe n'a pas été choisi. De fait, s'il est visible dans l'image, il doit pouvoir être possible pour l'annotateur de savoir de quel signe il s'agit.
+Le détail des erreurs est affiché dans une bulle en laissant sa souris sur le voyant.
+
+Lorsqu'il y a des erreurs, appuyer sur le voyant clignotant permet d'amener directement aux erreurs reconnues. 
  
 ## 3 Modifier un signe  
 Quand vous cliquez sur un signe dans la translitération, il est sélectionné. Son fond apparaît avec une luminosité un peu différente.  
@@ -62,10 +71,11 @@ Les informations sur le signe sélectionné apparaissent à droite du texte : so
  
 ### 3.a Modifier les caractéristiques d'un signe  
 Les premiers boutons qui apparaissent permettent d'indiquer des caractéristiques pour le signe sélectionné :  
-- le bouton **semicassé** sert à indiquer que le signe est semicassé dans l'image. Le raccourci clavier est S.  
+- le bouton **atypique** sert à indiquer que la façon dont est tracé le signe sur la tablette est anormale, sa graphie n'est pas standard. Le raccourci clavier est G.  
 - le bouton **sur bord** sert à indiquer que le signe est déformé parce qu'il apparaît sur le bord de la tablette. Le raccourci clavier est B.  
 - le bouton **effacé** sert à indiquer que le signe est effacé sur la tablette. Le raccourci clavier est E.  
-- le bouton **graphie non-standard** sert à indiquer que la façon dont est tracé le signe sur la tablette est anormale. Le raccourci clavier est G.  
+- le bouton **cassé** sert à indiquer que le signe est cassé dans l'image. Il aparaîtra ainsi comme grisé. Le raccourci clavier est C.  
+- le bouton **semicassé** sert à indiquer que le signe est semicassé dans l'image. Le raccourci clavier est S.  
 Si le bouton a déjà cette caractéristique, le bouton apparaît rouge et ré-appuyer permettra d'enlever la caractéristique.  
  
 ### 3.b Cloner un signe  

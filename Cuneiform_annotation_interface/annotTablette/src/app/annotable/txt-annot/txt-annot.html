@@ -20,6 +20,12 @@
           <option value="valeurphon">Valeur phonétique</option>
         </select></label>
       </div>
+      <span 
+        class="voyant"
+        [class.vert]="!erreursquestion"
+        [class.orange]="erreursquestion"
+        [title]="'- '+erreurscasse+' signe(s) cassé(s) attribué(s). \n- '+erreurschoix+' signe(s) à définir attribué(s).'"
+        (click)="ameneAErreur()"></span>
     </div>
 
     <div class="lignes" [style.height.px]="height()-44">
@@ -82,9 +88,9 @@
       <li><strong>Mot :</strong> {{ selectedSigne.mot }}</li>
       <li class="buttons">  
         <button class="small" 
-        [class.activated]="selectedSigne.semicasse"
-        [class.active]="selectedSigne.semicasse" (click)="selectedSigne.semicasse = !selectedSigne.semicasse; updateValue(selectedSigne)">
-        ⸢semicassé⸣
+        [class.activated]="selectedSigne.bizarre"
+        [class.active]="selectedSigne.bizarre" (click)="selectedSigne.bizarre = !selectedSigne.bizarre; updateValue(selectedSigne)">
+          {{ '⧛atypique⧚' }}
         </button>
         <button class="small" 
         [class.activated]="selectedSigne.enmarge"
@@ -99,9 +105,19 @@
       </li>
       <li class="buttons">  
         <button class="small" 
-        [class.activated]="selectedSigne.bizarre"
-        [class.active]="selectedSigne.bizarre" (click)="selectedSigne.bizarre = !selectedSigne.bizarre; updateValue(selectedSigne)">
-          {{ '⧛graphie non-standard⧚' }}
+        [class.activated]="selectedSigne.casse"
+        [class.active]="selectedSigne.casse" (click)="changercasse('c')">
+        [cassé]
+        </button>
+        <button class="small" 
+        [class.activated]="selectedSigne.semicasse"
+        [class.active]="selectedSigne.semicasse" (click)="changercasse('s')">
+        ⸢semicassé⸣
+        </button>
+        <button class="small" 
+        [class.activated]="!selectedSigne.casse && !selectedSigne.semicasse"
+        [class.active]="!selectedSigne.casse && !selectedSigne.semicasse" (click)="changercasse('')">
+        pas cassé
         </button>
       </li>
       <!--<li><strong> Determinatif () :</strong> <input type="checkbox" [checked]="selectedSigne?.determinatif" disabled /></li>-->

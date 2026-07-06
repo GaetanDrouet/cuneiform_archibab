@@ -20,6 +20,27 @@
   display: flex;
   right:25%;
   margin-bottom: 0.5em;
+  align-items: center;
+}
+.voyant {
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  margin-left: 6px;
+  cursor: pointer;
+}
+.vert {
+  background: #2ecc71;
+}
+.orange {
+  background: #ffa500;
+  animation: clignote 1s infinite;
+}
+@keyframes clignote {
+  50% {
+    opacity: 0;
+  }
 }
 
 /* Lignes au centre */

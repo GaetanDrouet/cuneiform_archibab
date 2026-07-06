@@ -381,8 +381,12 @@ export class AnnotTablette {
       }
       if (e.key.toLowerCase() === 's') {
         if (this.txtAnnot().selectedSigne) {
-          this.txtAnnot().selectedSigne!.semicasse = !this.txtAnnot().selectedSigne!.semicasse; 
-          this.txtAnnot().updateValue(this.txtAnnot().selectedSigne!)
+          this.txtAnnot().changercasse("s")
+        }
+      }
+      if (e.key.toLowerCase() === 'c') {
+        if (this.txtAnnot().selectedSigne) {
+          this.txtAnnot().changercasse("c")
         }
       }
       if (e.key.toLowerCase() === 'b') {

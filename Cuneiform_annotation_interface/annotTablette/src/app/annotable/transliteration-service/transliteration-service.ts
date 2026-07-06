@@ -598,6 +598,7 @@ transcriptionVersTransliterationJSON(
   }
 
   lignesTranscription (lignesOriginales:any,idxTablette:string):Ligne[] {
+    //Ajouter un nouveau tri des lignes pour s'assurer de leur ordre
     const resultat: Ligne[] = [];
     for(let ligneOriginale of lignesOriginales) {
       let id_ligne=`${idxTablette}_${Number(ligneOriginale.enveloppe)}_${ligneOriginale.emplacement}_${ligneOriginale.colonne}_${ligneOriginale.colonne_prime.length}_${ligneOriginale.ligne}_${ligneOriginale.ligne_prime.length}`

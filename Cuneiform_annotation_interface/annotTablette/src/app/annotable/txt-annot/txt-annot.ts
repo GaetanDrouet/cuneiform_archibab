@@ -34,6 +34,9 @@ export class TxtAnnot {
   suggestionsCorrection: Signe[] = [];
   insertSpecialSignShow:boolean=false
   queryCorrection = '';
+  erreursquestion:boolean=false
+  erreurscasse:number=0
+  erreurschoix:number=0
 
   storageKey(id?:string,img?:string): string {
     id??=this.selectedId()
@@ -77,6 +80,7 @@ export class TxtAnnot {
       this.storageKey(),
       JSON.stringify(this.lignes)
     );
+    this.chercheErreur()
   }
   //Suppression de sauvegarde
   resetSauvegarde() {
@@ -154,6 +158,7 @@ export class TxtAnnot {
       this.selectSigne(premier);
       this.cd.detectChanges();
     }
+    this.chercheErreur()
   }
   chargerFichier() {
     const key = this.storageKey();
@@ -176,7 +181,6 @@ export class TxtAnnot {
     if (this.lignes.length) {
       this.selectSigne(this.premierSigneValide()!)
     }
-    return;
   }
 
   correctionCoupureMot(lignes:Ligne[]):Ligne[] { //Fonction pour corriger les précédentes sauvegarde
@@ -740,6 +744,46 @@ export class TxtAnnot {
   updateValue(signe:Transliteration) {
     this.sauvegarderLocal(); 
     this.annotationValueUpdate.emit(signe);
+  }
+
+  changercasse(statut:string) {
+    const signe = this.selectedSigne!
+    if (statut=="c") {
+      if (signe.casse) {
+        signe.casse=false
+      } else {
+        signe.casse=true
+        signe.semicasse=false
+      }
+    } else if (statut=="s") {
+      if (signe.semicasse) {
+        signe.semicasse=false
+      } else {
+        signe.semicasse=true
+        signe.casse=false
+      }
+    } else {
+      signe.semicasse=false
+      signe.casse=false
+    }
+    this.updateValue(signe)
+  }
+
+  chercheErreur() {
+    const tousSignes=this.lignes.flatMap(ligne=>ligne.transliteration)
+    this.erreurscasse=tousSignes.filter(t=> t.attributed && t.casse).length
+    this.erreurschoix=tousSignes.filter(t=> t.attributed && t.signe.includes("?")).length
+    this.erreursquestion=Boolean(this.erreurscasse+this.erreurschoix)
+  }
+  ameneAErreur() {
+    if (!this.erreursquestion) return
+    const tousSignes=this.lignes.flatMap(ligne=>ligne.transliteration)
+    const startslice= this.selectedSigne? tousSignes.findIndex(t=>t===this.selectedSigne)+1 : 0
+    const signesRecherches=[...tousSignes.slice(startslice),
+                          ...tousSignes.slice(0,startslice)]
+    const idErreur=signesRecherches.find(t=> (t.attributed && t.casse) || (t.attributed && t.signe.includes("?")))!.id_signe
+    const signe=this.signeDepuisId(idErreur)!
+     this.selectSigne(signe)
   }
 
   baliseDebutSigne(s: Transliteration): string {
