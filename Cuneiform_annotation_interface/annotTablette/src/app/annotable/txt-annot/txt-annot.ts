@@ -106,40 +106,44 @@ export class TxtAnnot {
         let idOriginale=this.incrementLastId(id,-1,-1)
         this.cloneSigne(this.signeDepuisId(idOriginale)!)
       }
-      let signe=this.signeDepuisId(id)!
-      signe.attributed=true
-      let value=newsigne.value.split("_")
-      let valphon=value[3]
-      if (valphon.includes("(!)")) {
-        signe.corrige=true
-        valphon=valphon.replace("(!)","")
-        if (!signe.signecorrige) {
-          signe.signecorrige=signe.signe
-          signe.signecorrige_Borger=signe.signe_Borger
-          signe.signecorrige_Unicode=signe.signe_Unicode
+      let signe=this.signeDepuisId(id)
+      if (signe) {
+        signe.attributed=true
+        let value=newsigne.value.split("_")
+        let valphon=value[3]
+        if (valphon.includes("(!)")) {
+          signe.corrige=true
+          valphon=valphon.replace("(!)","")
+          if (!signe.signecorrige) {
+            signe.signecorrige=signe.signe
+            signe.signecorrige_Borger=signe.signe_Borger
+            signe.signecorrige_Unicode=signe.signe_Unicode
+          }
         }
-      }
-      if (valphon.includes("}")) {
-        signe.efface=true
-        valphon=valphon.replace("}","").replace("{","")
-      }
-      if (valphon.includes("⧚")) {
-        signe.bizarre=true
-        valphon=valphon.replace("⧚","").replace("⧛","")
-      }
-      if (valphon.includes("⸣")) {
-        signe.semicasse=true
-        valphon=valphon.replace("⸣","").replace("⸢","")
-      }
-      if (valphon.includes("⟩")) {
-        signe.enmarge=true
-        valphon=valphon.replace("⟩","").replace("⟨","")
-      }
-      let borger=value[1]
-      if (borger!==signe.signe_Borger) {
-        signe.signe=value[0]
-        signe.signe_Unicode=value[2]
-        signe.signe_Borger=borger
+        if (valphon.includes("}")) {
+          signe.efface=true
+          valphon=valphon.replace("}","").replace("{","")
+        }
+        if (valphon.includes("⧚")) {
+          signe.bizarre=true
+          valphon=valphon.replace("⧚","").replace("⧛","")
+        }
+        if (valphon.includes("⸣")) {
+          signe.semicasse=true
+          valphon=valphon.replace("⸣","").replace("⸢","")
+        }
+        if (valphon.includes("⟩")) {
+          signe.enmarge=true
+          valphon=valphon.replace("⟩","").replace("⟨","")
+        }
+        let borger=value[1]
+        if (borger!==signe.signe_Borger) {
+          signe.signe=value[0]
+          signe.signe_Unicode=value[2]
+          signe.signe_Borger=borger
+        }
+      }else{
+        console.error(`Erreur d'import : signe avec l'id ${id} introuvable dans le texte`)
       }
     }
     this.initialiserSelection()
@@ -404,7 +408,8 @@ export class TxtAnnot {
     this.sauvegarderLocal();
   }
   signeprecedent(signe:Transliteration):Transliteration {
-    const ligne = this.lignes.find(l => l.transliteration.includes(signe!))!;
+    const ligne = this.lignes.find(l => l.transliteration.includes(signe!));
+    if (!ligne) {return signe} //cas anormal qui n'arrive que dans un moment de flou de l'import d'une tablette
     const i = ligne.transliteration.indexOf(signe);
     if (i > 0) {
       return ligne.transliteration[i - 1];
@@ -578,7 +583,7 @@ export class TxtAnnot {
     this.rechercherSignesCorrection()
   }
   ligaturableQuestion (signe:Transliteration):boolean {
-    const preced = this.signeprecedent(signe)
+    const preced = this.signeprecedent(signe) 
     return !signe.dansmot ||  
       preced.deligaturede!=signe.deligaturede || 
       signe.attributed || 

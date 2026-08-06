@@ -1,14 +1,16 @@
-export class OnArchibab {}
-/*import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+/*
 import { ApiService } from '../../../api.service';
 import { StorageService } from '../../../_services/storage.service'; 
 import { jwtDecode } from "jwt-decode";
 import { Router } from '@angular/router';
+*/ //Enlever les balises /* */ pour le vrai site
 
 @Injectable({
   providedIn: 'root',
 })
 export class OnArchibab {
+/*
   constructor(
     private apiService: ApiService,
     private storageService: StorageService,
@@ -51,4 +53,5 @@ export class OnArchibab {
 
   adjustScreen=70
   creatorIsEditable=false
-}*/
+*/
+}

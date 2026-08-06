@@ -121,7 +121,6 @@ export class ImgAnnot implements OnInit {
             this.anno.addAnnotation(annotation);
             this.sauvegarderAnnotationUnique(annotation);
           }
-          console.log(this.listeIdAttribues)
         } 
       });
       this.anno.on('updateAnnotation', (annotation: any, previous: any) => {

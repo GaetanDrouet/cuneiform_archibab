@@ -38,16 +38,12 @@ export class TabSelect {
     this.route.queryParams.subscribe(// lecture des id texte et images directement par l'URL
       params => {
         if (params['txt']) {
-          this.selectId(params['txt']);
-          const img = params['img']
-          if (img && this.images.includes(img)) {
-            this.selectImage(params['img']);
-          }
+          this.selectId(params['txt'],params['img']);
         }
       }
     );
   }
-  async selectId(id: string) {
+  async selectId(id: string, img:string|null=null) {
     this.texte = await this.LOCALorARCHIBAB.findId(id);
     if (this.texte !== null) {
       this.location.replaceState(
@@ -75,6 +71,8 @@ export class TabSelect {
 
           if (this.images.length == 1)
             this.selectImage(this.images[0]);
+          else if (img && this.images.includes(img))
+            this.selectImage(img);
           else if (!this.images.includes(this.selectedImageValue))
             this.selectImage("");
         } else {

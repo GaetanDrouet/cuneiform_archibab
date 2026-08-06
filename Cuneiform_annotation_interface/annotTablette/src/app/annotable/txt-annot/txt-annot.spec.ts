@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TransliterationService } from '../transliteration-service/transliteration-service';
+
+import { OnLocal } from '../on-local/on-local'; //À Modifier au passage à Archibab
 
 import { TxtAnnot } from './txt-annot';
 
@@ -8,13 +11,25 @@ describe('TxtAnnot', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TxtAnnot]
+      imports: [TxtAnnot],
+      providers: [
+        {
+          provide: TransliterationService,
+          useValue: {
+            loadDictionaries: () => {}
+          }
+        },
+        {
+          provide: OnLocal,
+          useValue: {}
+        }
+      ]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(TxtAnnot);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
