@@ -47,6 +47,7 @@
       (annotationSupprimee)="annotationSupprimee($event)"
       (annotationAttributedSelected)="annotationImgSelect($event)"
       (annotationValueUpdate)="annotationValueUpdate($event)"
+      (annotationsImportees)="concordanceAttribution()"
       #txtAnnot></app-txt-annot>
   </div>
   <div class="resizer"
@@ -54,6 +55,14 @@
        (mousedown)="startResize($event)">
   </div>
   <div class="panel bottom">
+    <div class="imgtools">   
+        
+      <span 
+        class="voyant"
+        [class.vert]="!annotationIsoleeQuestion"
+        [class.orange]="annotationIsoleeQuestion"
+        [title]="'- '+annotationIsolee.length+' annotation(s) sans signe correspondant.'"
+        (click)="ameneAAnnotationIsolee()"></span></div>
     <app-img-annot
     [img_id]="selectedImage"
     [tab_id]="selectedId"
@@ -64,6 +73,7 @@
     (annotationSupprimee)="annotationSupprimee($event)"
     (annotationSurvolee)="annotationSurvolee($event)"
     (annotationSelected)="annotationTxtSelect($event)"
+    (annotationsReinitialisees)="concordanceAttribution()"
     #imgAnnot>
     </app-img-annot>
   </div>

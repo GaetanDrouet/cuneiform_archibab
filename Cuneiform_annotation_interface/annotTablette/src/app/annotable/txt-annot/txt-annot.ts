@@ -24,6 +24,7 @@ export class TxtAnnot {
   annotationSupprimee = output<string>();
   annotationAttributedSelected = output<string>();
   annotationValueUpdate = output<Transliteration>();
+  annotationsImportees = output<void>();
   lignes: Ligne[] = [];
   selectedSigne: Transliteration | null = null;
   cursorSigne: Transliteration | null = null;
@@ -37,6 +38,7 @@ export class TxtAnnot {
   erreursquestion:boolean=false
   erreurscasse:number=0
   erreurschoix:number=0
+  listeIdAttribues:string[]=[]
 
   storageKey(id?:string,img?:string): string {
     id??=this.selectedId()
@@ -108,6 +110,7 @@ export class TxtAnnot {
       }
       let signe=this.signeDepuisId(id)
       if (signe) {
+        this.listeIdAttribues.push(id)
         signe.attributed=true
         let value=newsigne.value.split("_")
         let valphon=value[3]
@@ -146,6 +149,7 @@ export class TxtAnnot {
         console.error(`Erreur d'import : signe avec l'id ${id} introuvable dans le texte`)
       }
     }
+    this.annotationsImportees.emit();
     this.initialiserSelection()
     this.sauvegarderLocal()
   }
@@ -178,9 +182,14 @@ export class TxtAnnot {
         this.sauvegarderLocal()
       }
       this.initialiserSelection();
+      this.listeIdAttribues=this.lignes.flatMap(l =>l.transliteration
+        .filter(t => t.attributed)
+        .map(t => t.id_signe)
+      );
     } else if (this.receivedLignes()!==undefined) {
         this.lignes=structuredClone(this.receivedLignes())
         this.initialiserSelection();
+        this.listeIdAttribues=[]
     }
     if (this.lignes.length) {
       this.selectSigne(this.premierSigneValide()!)
@@ -447,6 +456,7 @@ export class TxtAnnot {
     if (!signeAttribue || signeAttribue.attributed) {
       return false
     } else {
+      this.listeIdAttribues.push(signeAttribue.id_signe)
       signeAttribue.attributed=true
       this.derniersignemodifie=signeAttribue
       if (this.cursorSigne==signeAttribue) {
@@ -459,6 +469,7 @@ export class TxtAnnot {
   }
   attribuerEtAvancer() {
     if (!this.cursorSigne) return; // rien à faire si aucun curseur
+    this.listeIdAttribues.push(this.cursorSigne.id_signe)
     this.cursorSigne.attributed = true;
     this.sauvegarderLocal();
     this.selectSigne(this.prochainSigneValide(this.cursorSigne),false)
@@ -469,6 +480,8 @@ export class TxtAnnot {
     if (!signe || !signe.attributed) {
       return false
     } else {
+      const index = this.listeIdAttribues.indexOf(signe.id_signe);
+      if (index >= 0) this.listeIdAttribues.splice(index, 1);
       signe.attributed=false
       this.derniersignemodifie=signe
       if (!librement) {

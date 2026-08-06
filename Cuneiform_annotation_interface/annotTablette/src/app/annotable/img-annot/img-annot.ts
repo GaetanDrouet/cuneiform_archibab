@@ -33,6 +33,7 @@ export class ImgAnnot implements OnInit {
   annotationSupprimee = output<string>();
   annotationSurvolee = output<string>();
   annotationSelected = output<string>();
+  annotationsReinitialisees = output<void>();
   listeIdAttribues:string[] = []
 
 
@@ -274,6 +275,7 @@ export class ImgAnnot implements OnInit {
       }
       
       this.listeIdAttribues=annotations.map((annot:{id:string}) => annot.id);
+      this.annotationsReinitialisees.emit();
       //Annotations chargées depuis localStorage
     }
   }
@@ -285,6 +287,7 @@ export class ImgAnnot implements OnInit {
       this.anno.clearAnnotations(); // supprime toutes les annotations affichées
 
       this.listeIdAttribues=[]
+      this.annotationsReinitialisees.emit();
     }
     //Annotations locales réinitialisées
   }

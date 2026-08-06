@@ -60,6 +60,32 @@ button:disabled {
   background-color: hsla(45, 100%, 50%, 50%);
 }
 
+.panel.bottom {
+  position: relative;
+}
+.imgtools {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  z-index: 10;
+}
+.voyant {
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  margin-left: 6px;
+}
+.vert {
+  cursor: not-allowed;
+  background: #2ecc71;
+}
+.orange {
+  cursor: pointer;
+  background: #ffa500;
+  animation: clignote 1s infinite;
+}
+
 /*Message de sauvegarde et de suppression */
 .toast {
   position: fixed;

@@ -23,6 +23,9 @@ export class AnnotTablette {
   selectedImage: string = "";
   selectedCreator:{id:string,name:string} = {id: "",name: ""}
   tempCreator:{id:string,name:string} = {id: "",name: ""}
+  annotationSelectionee:string=""
+  annotationIsolee:string[]=[];
+  annotationIsoleeQuestion:boolean=false;
   show_tooltip:boolean=false
   zoom_on_select:number=1
   guideActive:boolean=false;
@@ -93,6 +96,7 @@ export class AnnotTablette {
 
   // lorsque l'on crée, supprime une BB
   annotationCree(annotation:any) {
+    this.concordanceAttribution()
     if (!this.txtAnnot().cursorSigne) return;
     const id = this.txtAnnot().cursorSigne!.id_signe;
     if (this.txtAnnot().cursorSigne!.attributed || this.imgAnnot().listeIdAttribues.includes(id)) {
@@ -115,6 +119,7 @@ export class AnnotTablette {
     const annotSupprimee=this.imgAnnot().supprimerAnnotation(id)
     this.undoStack.push(annotSupprimee)
     this.redoStack=[]
+    this.concordanceAttribution()
   }
   annotationRecree(annotation: any, source:string) {
     const pasDejaCree = this.txtAnnot().attribuerLibrement(annotation.id)
@@ -127,6 +132,7 @@ export class AnnotTablette {
       this.imgAnnot().anno.addAnnotation(annotation)
       this.imgAnnot().sauvegarderAnnotationUnique(annotation);
     }
+    this.concordanceAttribution()
   }
   annotationResupprimee(id: string, source:string="") {
     const pasDejaSupprimee=this.txtAnnot().desattribuer(id,true)
@@ -138,6 +144,7 @@ export class AnnotTablette {
         this.undoStack.push(annotSupprimee)
       }
     }
+    this.concordanceAttribution()
   }
   undo () {
     const lastActivity= this.undoStack.pop()
@@ -187,6 +194,7 @@ export class AnnotTablette {
       if (this.zoom_on_select!=0){
         this.imgAnnot().pointToAnnotation(id,this.zoom_on_select==2)
       }
+      this.annotationSelectionee=id
     }
     this.cd.detectChanges()
   }
@@ -194,7 +202,28 @@ export class AnnotTablette {
     if (id!="" && id.startsWith(this.selectedId)) {
       this.txtAnnot().selectSigne(this.txtAnnot().signeDepuisId(id)!,false)
       this.txtAnnot().pointToSigne(id)
+      this.annotationSelectionee=id
     }
+  }
+
+  //Gestion des annotations isolées (sans élément associé dans le texte)
+  concordanceAttribution() {
+    const seulementAttribueEnImg = this.imgAnnot().listeIdAttribues .filter(id => !this.txtAnnot().listeIdAttribues .includes(id));
+    if (seulementAttribueEnImg.length) {
+      this.annotationIsolee=seulementAttribueEnImg
+      this.annotationIsoleeQuestion=true
+    }else{
+      this.annotationIsolee=[]
+      this.annotationIsoleeQuestion=false
+    }
+  }
+  ameneAAnnotationIsolee() {
+    if (!this.annotationIsoleeQuestion) return
+    const liste=this.annotationIsolee
+    let index=liste.findIndex(i => i===this.annotationSelectionee)+1
+    if (index>=liste.length) {index=0}
+    const id=liste[index]
+    this.imgAnnot().selectAnnotationId(id)
   }
 
   //Lorsque l'on modifie les tailles relatives des annotateurs
@@ -439,6 +468,7 @@ export class AnnotTablette {
       if (ss) {
         this.annotationTxtSelect(ss.id_signe)
       }
+      this.annotationSelectionee=""
     }
     this.cd.detectChanges()
   }
